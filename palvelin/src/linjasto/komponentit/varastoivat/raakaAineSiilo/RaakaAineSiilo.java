@@ -1,4 +1,7 @@
-package linjastonKomponentit;
+package linjasto.komponentit.varastoivat.raakaAineSiilo;
+
+import linjasto.komponentit.varastoivat.Varastoiva;
+import apumäärittelyt.RaakaAine;
 
 /**
  *  raaka-aineen tyyppi
@@ -6,7 +9,7 @@ package linjastonKomponentit;
  *  siiloa ei voi tyhjentää ja täyttää samaan aikaan
  *  Samasta siilosta voi ottaa raaka-ainetta vain yksi kuljetin kerrallaan
  */
-public class RaakaAineSiilo extends LinjastonKomponentti {
+public class RaakaAineSiilo extends Varastoiva {
     final int maksimiKoko = 10000;   // kiloa
     private RaakaAine raakaAine;
     private boolean täytetään = false;

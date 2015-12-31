@@ -1,19 +1,15 @@
-package linjastonKomponentit.Ruuvikuljetin;
+package linjasto.komponentit.siirtävät.ruuvikuljetin;
 
-import java.util.ArrayList;
-
-import linjastonKomponentit.LinjastonKomponentti;
-import linjastonKomponentit.RaakaAineSiilo;
-import omatVirheilmoitukset.Virheet.*;
+import linjasto.komponentit.siirtävät.Siirtävä;
 
 /**
  * Ruuvikuljetin raaka-ainesiilojen täyttöön.
  * Siirtää raaka-ainetta 200 kiloa sekunnissa
- * Kuljetin ei voi siirtää enempää kuin vastaanottavaan yksikköön mahtuu
+ * Täyttö ei voi siirtää enempää kuin vastaanottavaan yksikköön mahtuu
  * Raaka-ainetta tulee lisää tehtaaseen yhdessä erässä 40 tonnia
  * Siilo tai keitin ei saa ylitäyttyä
  */
-public class Ruuvikuljetin extends LinjastonKomponentti {
+public class Ruuvikuljetin extends Siirtävä {
     private final int SIIRTORAJA = 200;                 // per sekunti
     private final int ERÄNKOKO = 40000;                 // kiloa
 
