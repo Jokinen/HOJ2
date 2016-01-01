@@ -54,10 +54,20 @@ public class Siirtävä extends Osio {
             for (linjasto.komponentit.siirtävät.Siirtävä komponentti : komponentit) {
                 komponentti.vastaanota(raakaAine, jakauma);
                 jäljelläOlevaMäärä = jäljelläOlevaMäärä - jakauma;
-                komponentti.siirrä(raakaAine, jakauma);
             }
         }
+        siirrä(raakaAine, määrä);
     }
+
+    /**
+     * @see Osio#siirrä(RaakaAine, int)
+     *
+     * Siirtävillä komponenteilla siirtoa on aina kutsuttava vastaanoton yhteydessä,
+     * sillä siirtävälä komponentilla ei ole säilöntäominaisuutta. Tämä metodi
+     * olettaa vastaanota() ehtojen pätevän, mutta siirtävän metodin on myös
+     * varauduttava siihen, että sen siirtämä seuraava osa on ylitäyttymässä.
+     */
+    @Override public void siirrä(RaakaAine raakaAine, int määrä) {}
 
     /**
      * Palauttaa luokan kaikkien komponenttien yhteen lasketun VIRTAAMAN.
