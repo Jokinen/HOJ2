@@ -1,6 +1,8 @@
 package linjasto.komponentit;
 
-public class Komponentti {
+import linjasto.Linjasto;
+
+public class Komponentti extends Linjasto {
     public void vastaanota() {}
-    public void lähetä() {}
+    public void siirrä() {}
 }

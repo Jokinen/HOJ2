@@ -10,11 +10,19 @@ import linjasto.komponentit.siirtävät.Siirtävä;
  * Siilo tai keitin ei saa ylitäyttyä
  */
 public class Ruuvikuljetin extends Siirtävä {
-    private final int SIIRTORAJA = 200;                 // per sekunti
-    private final int ERÄNKOKO = 40000;                 // kiloa
+    private static final int VIRTAAMA = 200;                 // per sekunti
 
     // konstruktori
     public Ruuvikuljetin() {}
+
+    /**
+     * Hakumetodi luokan staattiselle ominaisuudelle VIRTAAMA.
+     *
+     * @return  VIRTAAMA
+     */
+    public int haeVirtaama() {
+        return VIRTAAMA;
+    }
 
 }
 

@@ -1,5 +1,8 @@
 package linjasto.osiot;
 
+import apumäärittelyt.RaakaAine;
+import linjasto.Linjasto;
+
 /**
  * Luokka joka simuloi yhtä linjaston askelta. Simuloi heikolla tasolla kahteen
  * suuntaan linkitettyä listaa. Osio:n on vain tiedettävä seuraajansa ja
@@ -41,7 +44,7 @@ public abstract class Osio {
 
     /**
      * @param arvo Java ei tue signatuurin lukoa tyyppiä pidemmälle, joten mikä tahansa
-     *             boolean arvo käy (true, false), mutta selkiyden vuoksi on suositeltavaa
+     *             boolean arvo käy (true, false), mutta selkeyden vuoksi on suositeltavaa
      *             käyttää arvoa "false".
      */
     public Osio(String tunnus, String edellinenOsa, boolean arvo) {
@@ -84,4 +87,24 @@ public abstract class Osio {
         // TODO: implement
         return false;
     }
+
+    /**
+     * Metodi, joka vastaanottaa osiolle raaka-ainetta, huolehtien sen tasaisesta
+     * jakautumisesta osion komponenteille.
+     *
+     * @param raakaAine vastaanotettava RaakaAine
+     * @param määrä     vastaanotettavan RaakaAineen määrä
+     */
+    public abstract void vastaanota(RaakaAine raakaAine, int määrä);
+
+    /**
+     * Metodi, joka siirtää seuraavalle osiolle raaka-ainetta.
+     *
+     * @param raakaAine vastaanotettava RaakaAine
+     * @param määrä     vastaanotettavan RaakaAineen määrä
+     */
+    public void siirrä(RaakaAine raakaAine, int määrä) {}
+
+
+
 }

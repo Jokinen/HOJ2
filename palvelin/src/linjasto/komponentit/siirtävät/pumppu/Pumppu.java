@@ -16,4 +16,14 @@ import linjasto.komponentit.siirtävät.Siirtävä;
  *       TODO Poista HUOM! ennen esittelyä
  */
 public class Pumppu extends Siirtävä {
+    private static final int VIRTAAMA = 500;    // litraa/sekunti
+
+    /**
+     * Hakumetodi luokan staattiselle ominaisuudelle VIRTAAMA.
+     *
+     * @return  VIRTAAMA
+     */
+    public int haeVirtaama() {
+        return VIRTAAMA;
+    }
 }
