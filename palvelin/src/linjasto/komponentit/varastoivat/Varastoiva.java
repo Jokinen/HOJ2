@@ -11,7 +11,7 @@ import omatVirheilmoitukset.LiianSuuriMääräException;
  * pois.
  */
 public abstract class Varastoiva extends Komponentti {
-    final int maksimiKoko;   // kiloa
+    private final int maksimiKoko;   // kiloa
     private boolean täytetään = false;
     private boolean tyhjennetään = false;
     private int täyttöAste;

@@ -21,15 +21,9 @@ import omatVirheilmoitukset.LiianSuuriMääräException;
 public class Pumppu extends Siirtävä {
     private static final int VIRTAAMA = 500;    // litraa/sekunti
 
-    /**
-     * Hakumetodi luokan staattiselle ominaisuudelle VIRTAAMA.
-     *
-     * @.post RETURN = VIRTAAMA
-     */
-    public int haeVirtaama() {
-        return VIRTAAMA;
+    public Pumppu() {
+        super(500);
     }
 
-    public void vastaanota(RaakaAine raakaAine, int määrä, Osio seuraavOsio) throws LiianSuuriMääräException {}
     public void ime() {}
 }
