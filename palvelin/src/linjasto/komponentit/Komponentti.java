@@ -1,8 +1,9 @@
 package linjasto.komponentit;
 
-import linjasto.Linjasto;
+import apumäärittelyt.RaakaAine;
+import linjasto.osiot.Osio;
+import omatVirheilmoitukset.LiianSuuriMääräException;
 
-public class Komponentti {
-    public void vastaanota() {}
-    public void siirrä() {}
+public abstract class Komponentti {
+    public abstract void vastaanota(RaakaAine raakaAine, int määrä, Osio seuraavOsio) throws LiianSuuriMääräException;
 }

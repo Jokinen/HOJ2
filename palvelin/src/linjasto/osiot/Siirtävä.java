@@ -1,6 +1,7 @@
 package linjasto.osiot;
 
 import apumäärittelyt.RaakaAine;
+import omatVirheilmoitukset.LiianSuuriMääräException;
 
 import java.util.ArrayList;
 
@@ -14,25 +15,25 @@ public class Siirtävä extends Osio {
     samanniminen kuin tämä luokka. Pakettien sisäisen selkeän nimeämisen
     säilyttämiseksi kumpaakaan luokkaa ei nimetty uudelleen.
     */
-    private ArrayList<linjasto.komponentit.siirtävät.Siirtävä> komponentit;
+    private final ArrayList<linjasto.komponentit.siirtävät.Siirtävä> komponentit;
 
-    public Siirtävä(String t, String e, String s, ArrayList<linjasto.komponentit.siirtävät.Siirtävä> k) {
+    public Siirtävä(String t, Osio e, Osio s, ArrayList<linjasto.komponentit.siirtävät.Siirtävä> k) {
         super(t, e, s);
         komponentit = k;
     }
 
     /**
-     * @see Osio#Osio(String, boolean, String)
+     * @see Osio#Osio(String, boolean, Osio)
      */
-    public Siirtävä(String t, boolean a, String s, ArrayList<linjasto.komponentit.siirtävät.Siirtävä> k) {
+    public Siirtävä(String t, boolean a, Osio s, ArrayList<linjasto.komponentit.siirtävät.Siirtävä> k) {
         super(t, a, s);
         komponentit = k;
     }
 
     /**
-     * @see Osio#Osio(String, String, boolean)
+     * @see Osio#Osio(String, Osio, boolean)
      */
-    public Siirtävä(String t, String e, boolean a, ArrayList<linjasto.komponentit.siirtävät.Siirtävä> k) {
+    public Siirtävä(String t, Osio e, boolean a, ArrayList<linjasto.komponentit.siirtävät.Siirtävä> k) {
         super(t, e, a);
         komponentit = k;
     }
@@ -44,6 +45,10 @@ public class Siirtävä extends Osio {
      * tehtävä on yrittää maksimoida tämän osan läpi virtaava raaka-aine. Ts. sen
      * on ainoastaan pyrittävä jakamaan siirrettävä raaka-aine eri komponenteille
      * tasaisesti, riippuen näiden komponenttien ominaisuuksista.
+     *
+     * Tämän tehtävän yhteydessä siirtäminen simuloi siis ajan käyttöä. Metodin
+     * on kuitenkin huolehdittava siitä, että seuraavalla linjaston osalla on vielä
+     * tarpeeksi tilaa.
      */
     @Override public void vastaanota(RaakaAine raakaAine, int määrä) {
         int jakauma;
@@ -52,22 +57,15 @@ public class Siirtävä extends Osio {
         for (int j = i; j == 0; j--) {
             jakauma = laskeJakauma(jäljelläOlevaMäärä);
             for (linjasto.komponentit.siirtävät.Siirtävä komponentti : komponentit) {
-                komponentti.vastaanota(raakaAine, jakauma);
+                try {
+                    komponentti.vastaanota(raakaAine, jakauma, super.haeSeuraavaOsio());
+                } catch(LiianSuuriMääräException e) {
+                    System.out.println(e);
+                }
                 jäljelläOlevaMäärä = jäljelläOlevaMäärä - jakauma;
             }
         }
-        siirrä(raakaAine, määrä);
     }
-
-    /**
-     * @see Osio#siirrä(RaakaAine, int)
-     *
-     * Siirtävillä komponenteilla siirtoa on aina kutsuttava vastaanoton yhteydessä,
-     * sillä siirtävälä komponentilla ei ole säilöntäominaisuutta. Tämä metodi
-     * olettaa vastaanota() ehtojen pätevän, mutta siirtävän metodin on myös
-     * varauduttava siihen, että sen siirtämä seuraava osa on ylitäyttymässä.
-     */
-    @Override public void siirrä(RaakaAine raakaAine, int määrä) {}
 
     /**
      * Palauttaa luokan kaikkien komponenttien yhteen lasketun VIRTAAMAN.

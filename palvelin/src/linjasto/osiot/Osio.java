@@ -1,7 +1,6 @@
 package linjasto.osiot;
 
 import apumäärittelyt.RaakaAine;
-import linjasto.Linjasto;
 
 /**
  * Luokka joka simuloi yhtä linjaston askelta. Simuloi heikolla tasolla kahteen
@@ -33,13 +32,13 @@ import linjasto.Linjasto;
  */
 public abstract class Osio {
     private final String TUNNUS;
-    private String edellinenOsa;
-    private String seuraavaOsa;
+    private Osio edellinen;
+    private Osio seuraava;
 
-    public Osio(String tunnus, String edellinenOsa, String seuraavaOsa) {
+    public Osio(String tunnus, Osio edellinenOsa, Osio seuraavaOsa) {
         this.TUNNUS = tunnus;
-        this.edellinenOsa = edellinenOsa;
-        this.seuraavaOsa = seuraavaOsa;
+        this.edellinen = edellinenOsa;
+        this.seuraava = seuraavaOsa;
     }
 
     /**
@@ -47,9 +46,9 @@ public abstract class Osio {
      *             boolean arvo käy (true, false), mutta selkeyden vuoksi on suositeltavaa
      *             käyttää arvoa "false".
      */
-    public Osio(String tunnus, String edellinenOsa, boolean arvo) {
+    public Osio(String tunnus, Osio edellinenOsa, boolean arvo) {
         this.TUNNUS = tunnus;
-        this.edellinenOsa = edellinenOsa;
+        this.edellinen = edellinenOsa;
     }
 
     /**
@@ -57,9 +56,9 @@ public abstract class Osio {
      *             boolean arvo käy (true, false), mutta selkiyden vuoksi on suositeltavaa
      *             käyttää arvoa "false".
      */
-    public Osio(String tunnus, boolean arvo, String seuraavaOsa) {
+    public Osio(String tunnus, boolean arvo, Osio seuraavaOsa) {
         this.TUNNUS = tunnus;
-        this.seuraavaOsa = seuraavaOsa;
+        this.seuraava = seuraavaOsa;
     }
 
     /**
@@ -89,6 +88,15 @@ public abstract class Osio {
     }
 
     /**
+     * Palauttaa tätä osiota seuraavan osion.
+     *
+     * @.post RETURN = seuraavaOsio
+     */
+    public Osio haeSeuraavaOsio() {
+        return seuraava;
+    }
+
+    /**
      * Metodi, joka vastaanottaa osiolle raaka-ainetta, huolehtien sen tasaisesta
      * jakautumisesta osion komponenteille.
      *
@@ -96,15 +104,6 @@ public abstract class Osio {
      * @param määrä     vastaanotettavan RaakaAineen määrä
      */
     public abstract void vastaanota(RaakaAine raakaAine, int määrä);
-
-    /**
-     * Metodi, joka siirtää seuraavalle osiolle raaka-ainetta.
-     *
-     * @param raakaAine vastaanotettava RaakaAine
-     * @param määrä     vastaanotettavan RaakaAineen määrä
-     */
-    public void siirrä(RaakaAine raakaAine, int määrä) {}
-
 
 
 }

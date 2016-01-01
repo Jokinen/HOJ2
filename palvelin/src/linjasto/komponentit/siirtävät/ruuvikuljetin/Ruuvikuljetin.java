@@ -1,6 +1,11 @@
 package linjasto.komponentit.siirtävät.ruuvikuljetin;
 
+import apumäärittelyt.RaakaAine;
 import linjasto.komponentit.siirtävät.Siirtävä;
+import linjasto.osiot.Osio;
+import omatVirheilmoitukset.LiianSuuriMääräException;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Ruuvikuljetin raaka-ainesiilojen täyttöön.
@@ -22,6 +27,28 @@ public class Ruuvikuljetin extends Siirtävä {
      */
     public int haeVirtaama() {
         return VIRTAAMA;
+    }
+
+    /**
+     * Luokka simuloi virtausnopeutta odottamalla jokaisen vastaanotetun
+     * raaka-aine-erän yhteydessä.
+     *
+     * @param raakaAine siirrettävä raaka-aine
+     * @param määrä     siirrettävän raaka-aineen määrä
+     *                  määrä <= haeVirtaama()
+     * @param osio      osio, jolle halutaan siirtää raakaAinetta
+     * @throws  LiianSuuriMääräException
+     *          when(määrä > haeVirtaama())
+     */
+    public void vastaanota(RaakaAine raakaAine, int määrä, Osio osio) throws LiianSuuriMääräException {
+        if (määrä > haeVirtaama())
+            throw new LiianSuuriMääräException();
+        try {
+            TimeUnit.SECONDS.sleep(1);
+            osio.vastaanota(raakaAine, määrä);
+        } catch(java.lang.InterruptedException e) {
+            System.out.println(e);
+        }
     }
 
 }

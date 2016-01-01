@@ -11,4 +11,7 @@ import linjasto.komponentit.varastoivat.Varastoiva;
  * yhtä keitintä voi täyttää samanaikaisesti vain yksi kuljetin ja sitä voi tyhjentää vain yksi pumppu
  */
 public class Juomakeitin extends Varastoiva {
+    public Juomakeitin() {
+        super(2000);
+    }
 }

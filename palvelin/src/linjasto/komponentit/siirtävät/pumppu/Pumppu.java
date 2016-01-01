@@ -1,6 +1,9 @@
 package linjasto.komponentit.siirtävät.pumppu;
 
+import apumäärittelyt.RaakaAine;
 import linjasto.komponentit.siirtävät.Siirtävä;
+import linjasto.osiot.Osio;
+import omatVirheilmoitukset.LiianSuuriMääräException;
 
 /**
  * Siirtää juomaa 500 litraa sekunnissa
@@ -21,9 +24,12 @@ public class Pumppu extends Siirtävä {
     /**
      * Hakumetodi luokan staattiselle ominaisuudelle VIRTAAMA.
      *
-     * @return  VIRTAAMA
+     * @.post RETURN = VIRTAAMA
      */
     public int haeVirtaama() {
         return VIRTAAMA;
     }
+
+    public void vastaanota(RaakaAine raakaAine, int määrä, Osio seuraavOsio) throws LiianSuuriMääräException {}
+    public void ime() {}
 }
