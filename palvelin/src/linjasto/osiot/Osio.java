@@ -1,6 +1,9 @@
 package linjasto.osiot;
 
 import apumäärittelyt.RaakaAine;
+import linjasto.komponentit.Komponentti;
+
+import java.util.ArrayList;
 
 /**
  * Luokka joka simuloi yhtä linjaston askelta. Simuloi heikolla tasolla kahteen
@@ -34,31 +37,20 @@ public abstract class Osio {
     private final String TUNNUS;
     private Osio edellinen;
     private Osio seuraava;
+    protected final ArrayList<Komponentti> komponentit;
 
-    public Osio(String tunnus, Osio edellinenOsa, Osio seuraavaOsa) {
+
+    public Osio(String tunnus, ArrayList<Komponentti> k) {
         this.TUNNUS = tunnus;
-        this.edellinen = edellinenOsa;
-        this.seuraava = seuraavaOsa;
+        komponentit = k;
     }
 
-    /**
-     * @param arvo Java ei tue signatuurin lukoa tyyppiä pidemmälle, joten mikä tahansa
-     *             boolean arvo käy (true, false), mutta selkeyden vuoksi on suositeltavaa
-     *             käyttää arvoa "false".
-     */
-    public Osio(String tunnus, Osio edellinenOsa, boolean arvo) {
-        this.TUNNUS = tunnus;
-        this.edellinen = edellinenOsa;
+    public void setEdellinen(Osio o) {
+        edellinen = o;
     }
 
-    /**
-     * @param arvo Java ei tue signatuurin lukoa tyyppiä pidemmälle, joten mikä tahansa
-     *             boolean arvo käy (true, false), mutta selkiyden vuoksi on suositeltavaa
-     *             käyttää arvoa "false".
-     */
-    public Osio(String tunnus, boolean arvo, Osio seuraavaOsa) {
-        this.TUNNUS = tunnus;
-        this.seuraava = seuraavaOsa;
+    public void setOsio(Osio s) {
+        seuraava = s;
     }
 
     /**

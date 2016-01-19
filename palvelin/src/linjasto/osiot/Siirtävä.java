@@ -1,6 +1,7 @@
 package linjasto.osiot;
 
 import apumäärittelyt.RaakaAine;
+import linjasto.komponentit.Komponentti;
 import omatVirheilmoitukset.LiianSuuriMääräException;
 
 import java.util.ArrayList;
@@ -15,27 +16,9 @@ public class Siirtävä extends Osio {
     samanniminen kuin tämä luokka. Pakettien sisäisen selkeän nimeämisen
     säilyttämiseksi kumpaakaan luokkaa ei nimetty uudelleen.
     */
-    private final ArrayList<linjasto.komponentit.siirtävät.Siirtävä> komponentit;
 
-    public Siirtävä(String t, Osio e, Osio s, ArrayList<linjasto.komponentit.siirtävät.Siirtävä> k) {
-        super(t, e, s);
-        komponentit = k;
-    }
-
-    /**
-     * @see Osio#Osio(String, boolean, Osio)
-     */
-    public Siirtävä(String t, boolean a, Osio s, ArrayList<linjasto.komponentit.siirtävät.Siirtävä> k) {
-        super(t, a, s);
-        komponentit = k;
-    }
-
-    /**
-     * @see Osio#Osio(String, Osio, boolean)
-     */
-    public Siirtävä(String t, Osio e, boolean a, ArrayList<linjasto.komponentit.siirtävät.Siirtävä> k) {
-        super(t, e, a);
-        komponentit = k;
+    public Siirtävä(String tunnus, ArrayList<Komponentti> k) {
+        super(tunnus, k);
     }
 
     /**
@@ -56,8 +39,9 @@ public class Siirtävä extends Osio {
         int jäljelläOlevaMäärä = määrä;
         for (int j = i; j == 0; j--) {
             jakauma = laskeJakauma(jäljelläOlevaMäärä);
-            for (linjasto.komponentit.siirtävät.Siirtävä komponentti : komponentit) {
+            for (linjasto.komponentit.Komponentti komponentti : komponentit) {
                 try {
+                    linjasto.komponentit.siirtävät.Siirtävä siirtäväKomponentti = (linjasto.komponentit.siirtävät.Siirtävä) komponentti;
                     komponentti.vastaanota(raakaAine, jakauma, super.haeSeuraavaOsio());
                 } catch(LiianSuuriMääräException e) {
                     System.out.println(e);
