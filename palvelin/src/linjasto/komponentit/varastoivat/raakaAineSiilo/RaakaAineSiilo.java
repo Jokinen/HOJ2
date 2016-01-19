@@ -9,7 +9,7 @@ import linjasto.komponentit.varastoivat.Varastoiva;
  *  Samasta siilosta voi ottaa raaka-ainetta vain yksi kuljetin kerrallaan
  */
 public class RaakaAineSiilo extends Varastoiva {
-    public RaakaAineSiilo(int m) {
+    public RaakaAineSiilo() {
         super(10000);
     }
 }

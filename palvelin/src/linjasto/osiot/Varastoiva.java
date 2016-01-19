@@ -1,6 +1,7 @@
 package linjasto.osiot;
 
 import apumäärittelyt.RaakaAine;
+import linjasto.komponentit.Komponentti;
 
 import java.util.ArrayList;
 
@@ -15,27 +16,8 @@ public class Varastoiva extends Osio {
     samanniminen kuin tämä luokka. Pakettien sisäisen selkeän nimeämisen
     säilyttämiseksi kumpaakaan luokkaa ei nimetty uudelleen.
     */
-    private final ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit;
-
-    public Varastoiva(String t, Osio e, Osio s, ArrayList<linjasto.komponentit.varastoivat.Varastoiva> k) {
-        super(t, e, s);
-        komponentit = k;
-    }
-
-    /**
-     * @see Osio (String, boolean, String)
-     */
-    public Varastoiva(String t, boolean a, Osio s, ArrayList<linjasto.komponentit.varastoivat.Varastoiva> k) {
-        super(t, a, s);
-        komponentit = k;
-    }
-
-    /**
-     * @see Osio (String, String, boolean)
-     */
-    public Varastoiva(String t, Osio e, boolean a, ArrayList<linjasto.komponentit.varastoivat.Varastoiva> k) {
-        super(t, e, a);
-        komponentit = k;
+    public Varastoiva(String tunnus, ArrayList<Komponentti> k) {
+        super(tunnus, k);
     }
 
     /**
