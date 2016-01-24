@@ -10,8 +10,14 @@ import linjasto.komponentit.varastoivat.Varastoiva;
  *  maksimitilavuuteen kun prosessin käynnistää
  * yhtä keitintä voi täyttää samanaikaisesti vain yksi kuljetin ja sitä voi tyhjentää vain yksi pumppu
  */
+
+public boolean juomakeitinVarattu;
+public String juomakeittimenVaraaja;
+
 public class Juomakeitin extends Varastoiva {
     public Juomakeitin() {
         super(2000);
     }
+
+
 }

@@ -5,6 +5,8 @@ import linjasto.komponentit.siirtävät.Siirtävä;
 import linjasto.osiot.Osio;
 import omatVirheilmoitukset.LiianSuuriMääräException;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Siirtää juomaa 500 litraa sekunnissa
  * Pumpulle annetaan parametrina siirrettävä määrä tai se voidaan asettaa tyhjentämään koko yksikkö
@@ -25,5 +27,15 @@ public class Pumppu extends Siirtävä {
         super(500);
     }
 
-    public void ime() {}
+    public void ime(int siirrettäväMäärä) {
+        if (siirrettäväMäärä > 500) {
+            // siirron toteutus tähän
+            TimeUnit.SECONDS.sleep(1);
+            int jäljelläOlevaMäärä = siirrettäväMäärä - 500;
+            ime(jäljelläOlevaMäärä);
+        } else {
+            // siirron toteutus tähän
+        }
+
+    }
 }
