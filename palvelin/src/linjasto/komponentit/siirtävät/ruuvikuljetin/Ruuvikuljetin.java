@@ -11,7 +11,8 @@ import java.util.concurrent.TimeUnit;
  * Raaka-ainetta tulee lisää tehtaaseen yhdessä erässä 40 tonnia
  * Siilo tai keitin ei saa ylitäyttyä
  */
-public class Ruuvikuljetin extends Siirtävä {
+public class Ruuvikuljetin extends Siirtävä, Thread {
+    protected boolean ruuvikuljetinKaynnissa;
 
     public Ruuvikuljetin() {
         super(200);
@@ -19,13 +20,17 @@ public class Ruuvikuljetin extends Siirtävä {
 
     public void siirrä(int siirrettäväMäärä) {
         if (siirrettäväMäärä > 200) {
-            // siirron toteutus tähän
+            // 200 kilon siirron toteutus tähän
             TimeUnit.SECONDS.sleep(1);
             int jäljelläOlevaMäärä = siirrettäväMäärä - 200;
             siirrä(jäljelläOlevaMäärä);
         } else {
             // siirron toteutus tähän
         }
+    }
+
+    public boolean ruuvikuljetinKaynnissa() {
+        return ruuvikuljetinKaynnissa;
     }
 
 }

@@ -20,8 +20,9 @@ import java.util.concurrent.TimeUnit;
  *       omat luokkansa niin tästä luokasta kannattaa tehdä abstrakti)
  *       TODO Poista HUOM! ennen esittelyä
  */
-public class Pumppu extends Siirtävä {
+public class Pumppu extends Siirtävä, Thread {
     private static final int VIRTAAMA = 500;    // litraa/sekunti
+    protected boolean pumppuKaynnissa;
 
     public Pumppu() {
         super(500);
@@ -29,13 +30,16 @@ public class Pumppu extends Siirtävä {
 
     public void ime(int siirrettäväMäärä) {
         if (siirrettäväMäärä > 500) {
-            // siirron toteutus tähän
+            // 500l siirron toteutus tähän
             TimeUnit.SECONDS.sleep(1);
             int jäljelläOlevaMäärä = siirrettäväMäärä - 500;
             ime(jäljelläOlevaMäärä);
         } else {
             // siirron toteutus tähän
         }
+    }
 
+    public boolean pumppuKaynnissa() {
+        return pumppuKaynnissa;
     }
 }

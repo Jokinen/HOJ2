@@ -11,13 +11,21 @@ import linjasto.komponentit.varastoivat.Varastoiva;
  * yhtä keitintä voi täyttää samanaikaisesti vain yksi kuljetin ja sitä voi tyhjentää vain yksi pumppu
  */
 
-public boolean juomakeitinVarattu;
-public String juomakeittimenVaraaja;
 
-public class Juomakeitin extends Varastoiva {
+public class Juomakeitin extends Varastoiva, Thread {
+    protected boolean juomakeitinVarattu;
+    protected boolean juomakeitinKaynnissa;
+    public String juomakeittimenVaraaja; // toteutus UUID:llä ja Stringillä nimi?
+
     public Juomakeitin() {
         super(2000);
     }
 
+    public boolean onkoJuomakeitinVarattu() {
+        return juomakeitinVarattu;
+    }
 
+    public boolean juomakeitinKaynnissa() {
+        return juomakeitinKaynnissa;
+    }
 }
