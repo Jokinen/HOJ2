@@ -5,6 +5,8 @@ import linjasto.komponentit.Komponentti;
 import linjasto.osiot.Osio;
 import omatVirheilmoitukset.LiianSuuriMääräException;
 
+import java.util.UUID;
+
 /**
  * Varastoiviin komponentteihin jää vastaanoton jälkeen raaka-ainetta, joten niille
  * on toteutettava siirrä-metodi, jonka avulla säiliöstä saa sirrettyä sen sisältöä
@@ -16,10 +18,20 @@ public abstract class Varastoiva extends Komponentti {
     private boolean tyhjennetään = false;
     private int täyttöAste;
     private RaakaAine raakaAine;
+    private boolean varattu = false;
+    private UUID käyttäjä;
 
     public Varastoiva(String t, int m) {
         super(t);
         maksimiKoko = m;
+    }
+
+    public boolean haeVarattu() {
+        return varattu;
+    }
+
+    public UUID haeKäyttäjä() {
+        return käyttäjä;
     }
 
     /**
@@ -40,6 +52,18 @@ public abstract class Varastoiva extends Komponentti {
 
     public void siirrä(RaakaAine raakaAine, int määrä, Osio seuraavaOsio) throws LiianSuuriMääräException {
         // TODO
+    }
+
+    public boolean varaa(UUID käyttäjäId) {
+        boolean bol = true;
+        if (!varattu) {
+            varattu = true;
+            käyttäjä = käyttäjäId;
+        } else {
+            bol = false;
+            System.err.println("Jo varattua siiloa yritettiin varata uudelleen.");
+        }
+        return bol;
     }
 
     /**

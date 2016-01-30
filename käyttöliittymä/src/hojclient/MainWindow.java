@@ -13,7 +13,6 @@ import linjasto.osiot.Siirtävä;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.HashMap;
 import java.util.UUID;
 
 
@@ -26,6 +25,7 @@ public class MainWindow extends javax.swing.JFrame {
     private LinjastoInterface linjasto;
     private String käyttäjäNimi = null;
     private UUID käyttäjäId = null;
+    private Päivittäjä päivittäjä;
 
     /**
      * Creates new form MainWindow
@@ -33,13 +33,15 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         // for devving purposes, we initiate here
         try {
-            rekisteri = LocateRegistry.getRegistry("localhost", 8080);
+            rekisteri = LocateRegistry.getRegistry("localhost", 8081);
             linjasto = (LinjastoInterface) rekisteri.lookup("linjasto");
         } catch (Exception e){
             e.printStackTrace();
         }
 
         initComponents();
+        new Päivittäjä(this).käynnistä();
+        //päivittäjä.käynnistä();
     }
 
     /**
@@ -1294,6 +1296,26 @@ public class MainWindow extends javax.swing.JFrame {
     private void procLoadAmount1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procLoadAmount1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_procLoadAmount1ActionPerformed
+
+    public void päivitäTiedot() {
+        // TODO Kutsu jokaista käyttöliittymässä olevaa kenttää varten tuoreet tiedot palvelimelta.
+        // Tätä varten täytyy tehdä joitakin puuttuvia metodeja alla esimerkki siitä, miten
+        // varastoivien komponenttien tila päivitetään.
+        //
+        // Näiden metodien yhteydessä tulee huomioida se, että objektit castataan oikean tyyppiseksi,
+        // koska kaikki komponentit haetaan komponentteina. OOM:ista tuttu polyformismi on
+        // tärkeä ymmärtää. En sitä yritä selittää, Google auttaa paremmin.
+        //
+        // Muuta tärkeää tiedettävää on swinging eri komponenttien päivitysmetodit -
+        // nämä tulee etsiä Java api:sta. Luokan nimen haku Googlesta yleensä
+        // antaa linkin API:iin.
+
+        try {
+            reserveSilo1.setSelected(linjasto.onkoKomponenttiVarattu("Siilot", "Siilo1")); // tai minkä niminen komponentista ikinä tuleekaan TODO nimeä komponentti oikein
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * @param args the command line arguments

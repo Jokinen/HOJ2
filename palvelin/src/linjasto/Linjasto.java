@@ -4,6 +4,7 @@ import linjasto.komponentit.Komponentti;
 import linjasto.komponentit.siirtävät.pumppu.Pumppu;
 import linjasto.komponentit.siirtävät.ruuvikuljetin.Ruuvikuljetin;
 
+import linjasto.komponentit.varastoivat.Varastoiva;
 import linjasto.komponentit.varastoivat.juomakeitin.Juomakeitin;
 import linjasto.komponentit.varastoivat.kypsytyssäiliö.Kypsytyssäiliö;
 import linjasto.komponentit.varastoivat.raakaAineSiilo.RaakaAineSiilo;
@@ -30,25 +31,6 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         osiot = new ArrayList<>();
         käyttäjät = new HashMap<>();
         rakennaLinjasto();
-    }
-
-    /**
-     * Metodi jolla linjaston osioista saa haettua tietyn osion, joka mahdollista
-     * käskyjen kohdistuksen halutuille osioille.
-     *
-     * @.pre    EXISTS(
-     *              FOREACH(osio in osiot; osio.haeTunnus() == tunnus)
-     *          )
-     * @.post   RETURN = FOREACH(osio in osiot;
-     *                          osio.haeTunnus() == tunnus)
-     */
-    public Osio haeOsio(String tunnus) {
-        Osio palautettavaOsio = null;
-        for (Osio osio : osiot) {
-            if (osio.haeTunnus().equals(tunnus))
-                palautettavaOsio = osio;
-        }
-        return palautettavaOsio;
     }
 
     public void testiMetodi() throws RemoteException {
@@ -86,10 +68,50 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         return käyttäjät.containsValue(käyttäjäNimi);
     }
 
+    /**
+     * Metodi jolla linjaston osioista saa haettua tietyn osion, joka mahdollista
+     * käskyjen kohdistuksen halutuille osioille.
+     *
+     * @.pre    EXISTS(
+     *              FOREACH(osio in osiot; osio.haeTunnus() == tunnus)
+     *          )
+     * @.post   RETURN = FOREACH(osio in osiot;
+     *                          osio.haeTunnus() == tunnus)
+     */
+    public Osio haeOsio(String tunnus) {
+        Osio palautettavaOsio = null;
+        for (Osio osio : osiot) {
+            if (osio.haeTunnus().equals(tunnus))
+                palautettavaOsio = osio;
+        }
+        return palautettavaOsio;
+    }
+
+    public Komponentti haeKomponentti(String osionTunnus, String komponentinTunnus) {
+        return haeOsio(osionTunnus)
+                .haeKomponentti(komponentinTunnus);
+    }
+
     public void käynnistäKomponentti(String osionTunnnus, String komponentinTunnus) {
-        haeOsio(osionTunnnus)
-                .haeKomponentti(komponentinTunnus)
+        haeKomponentti(osionTunnnus, komponentinTunnus)
                 .käynnistä();
+    }
+
+    /**
+     * @.pre    typeof haeKomponentti(osionTunnus, komponentinTunnus) = Varastoiva
+     */
+    public boolean onkoKomponenttiVarattu(String osionTunnus, String komponentinTunnus) {
+        Varastoiva komponentti = (Varastoiva) haeKomponentti(osionTunnus, komponentinTunnus);
+        return komponentti.haeVarattu();
+    }
+
+    /**
+     * @.pre    onkoKomponenttiVarattu(osionTunnus, komponentinTunnus) = true
+     *          typeof haeKomponentti(osionTunnus, komponentinTunnus) = Juomakeitin
+     */
+    public UUID kukaOnVarannutKomponentin(String osionTunnus, String komponentinTunnus) {
+        Varastoiva komponentti = (Varastoiva) haeKomponentti(osionTunnus, komponentinTunnus);
+        return komponentti.haeKäyttäjä();
     }
 
     /**
@@ -113,25 +135,25 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         osiot.add(tulo);
 
         // Raaka-ainesiilot
-        /*ArrayList<Komponentti> raakaAinesiiloKomponentit = new ArrayList<Komponentti>();
+        ArrayList<Komponentti> raakaAinesiiloKomponentit = new ArrayList<Komponentti>();
 
-        RaakaAineSiilo siilo1 = new RaakaAineSiilo();
+        RaakaAineSiilo siilo1 = new RaakaAineSiilo("Siilo1");
         raakaAinesiiloKomponentit.add(siilo1);
 
-        RaakaAineSiilo siilo2 = new RaakaAineSiilo();
+        RaakaAineSiilo siilo2 = new RaakaAineSiilo("Siilo2");
         raakaAinesiiloKomponentit.add(siilo2);
 
-        RaakaAineSiilo siilo3 = new RaakaAineSiilo();
+        RaakaAineSiilo siilo3 = new RaakaAineSiilo("Siilo3");
         raakaAinesiiloKomponentit.add(siilo3);
 
-        RaakaAineSiilo siilo4 = new RaakaAineSiilo();
+        RaakaAineSiilo siilo4 = new RaakaAineSiilo("Siilo4");
         raakaAinesiiloKomponentit.add(siilo4);
 
         linjasto.osiot.Varastoiva siilosäiliö = new linjasto.osiot.Varastoiva("Siilot", raakaAinesiiloKomponentit);
         osiot.add(siilosäiliö);
 
         // Raaka-ainekuljettimet juomakeittimeen
-        ArrayList<Komponentti> raakaAinekuljetinKomponentit = new ArrayList<Komponentti>();
+        /*ArrayList<Komponentti> raakaAinekuljetinKomponentit = new ArrayList<Komponentti>();
 
         Ruuvikuljetin raakaAinekuljetin1 = new Ruuvikuljetin();
         raakaAinekuljetinKomponentit.add(raakaAinekuljetin1);

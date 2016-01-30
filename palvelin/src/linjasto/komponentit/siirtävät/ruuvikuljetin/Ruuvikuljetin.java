@@ -12,15 +12,14 @@ import java.util.concurrent.TimeUnit;
  * Siilo tai keitin ei saa ylitäyttyä
  */
 public class Ruuvikuljetin extends Siirtävä {
-    protected boolean ruuvikuljetinKaynnissa;
 
     public Ruuvikuljetin(String tunnus) {
         super(tunnus, 200);
     }
 
-    public boolean ruuvikuljetinKaynnissa() {
-        return ruuvikuljetinKaynnissa;
-    }
+    @Override
+    public void run() {
 
+    }
 }
 
