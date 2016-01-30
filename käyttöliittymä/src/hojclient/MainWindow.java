@@ -1310,29 +1310,148 @@ public class MainWindow extends javax.swing.JFrame {
         // nämä tulee etsiä Java api:sta. Luokan nimen haku Googlesta yleensä
         // antaa linkin API:iin.
 
+        // Tulon tilan päivitys
+        // TODO onko käynnissä
+        siloLoadConvStatus.setText("käynnissä tai ei");
+
+        // Siilojen reserve-napin päivitys
         try {
             reserveSilo1.setSelected(linjasto.onkoKomponenttiVarattu("Siilo", "Siilo1"));
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        try {
             reserveSilo2.setSelected(linjasto.onkoKomponenttiVarattu("Siilo", "Siilo2"));
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        try {
             reserveSilo3.setSelected(linjasto.onkoKomponenttiVarattu("Siilo", "Siilo3"));
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        try {
             reserveSilo4.setSelected(linjasto.onkoKomponenttiVarattu("Siilo", "Siilo4"));
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+
+        // Siilojen tilavuuden päivitys
+        // TODO getterit ja tsillain että saadaan tilavuudet jne
+        silo1Status.setText(siilo1.annaTilavuus());
+        silo2Status.setText(siilo2.annaTilavuus());
+        silo3Status.setText(siilo3.annaTilavuus());
+        silo4Status.setText(siilo4.annaTilavuus());
+
+        // "Raaka-ainekuljettimet juomakeittimeen" tilan päivitys
+        // TODO getterit ja tsillain että voidaan todeta onko raaka-ainekuljetin käynnissä jne
+        if (raakaAinekuljetin1.onkoKaynnissa()) {
+            ProcLoadConvStatus1.setText("Running");
+        } else {
+            ProcLoadConvStatus1.setText("Off");
+        }
+
+        if (raakaAinekuljetin2.onkoKaynnissa()) {
+            ProcLoadConvStatus2.setText("Running");
+        } else {
+            ProcLoadConvStatus2.setText("Off");
+        }
+
+
+        // Keitinten reserve-napin päivitys
+        try {
+            reserveProc1.setSelected(linjasto.onkoKomponenttiVarattu("Juomakeitin", "Juomakeitin1"));
+            reserveProc2.setSelected(linjasto.onkoKomponenttiVarattu("Juomakeitin", "Juomakeitin2"));
+            reserveProc3.setSelected(linjasto.onkoKomponenttiVarattu("Juomakeitin", "Juomakeitin3"));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        // Keitinten käyttäjän päivitys
+        // TODO getterit ja tsillain että voidaan todeta onko keittimet varattu jne
+        if (juomakeitin1.onkoVarattu()) {
+            proc1User.setText(juomakeitin1.varaajanNimi());
+        } else {
+            proc1User.setText("No user");
+        }
+
+        if (juomakeitin2.onkoVarattu()) {
+            proc2User.setText(juomakeitin2.varaajanNimi());
+        } else {
+            proc2User.setText("No user");
+        }
+
+        if (juomakeitin3.onkoVarattu()) {
+            proc3User.setText(juomakeitin3.varaajanNimi());
+        } else {
+            proc3User.setText("No user");
+        }
+
+        // Keitinten tilan päivitys
+        // TODO getterit ja tsillain että voidaan todeta onko keittimet käynnissä jne
+        if (juomakeitin1.onkoKaynnissa()) {
+            proc1Status.setText("Running");
+        } else {
+            proc1Status.setText("Off");
+        }
+
+        if (juomakeitin2.onkoKaynnissa()) {
+            proc2Status.setText("Running");
+        } else {
+            proc2Status.setText("Off");
+        }
+
+        if (juomakeitin3.onkoKaynnissa()) {
+            proc3Status.setText("Running");
+        } else {
+            proc3Status.setText("Off");
+        }
+
+        // "Pumput kypsytyssäiliöihin" tilan päivitys
+        // TODO getterit ja tsillain että voidaan todeta onko kypsytyssäiliöpumput käynnissä jne
+        if (kypsytyssäiliöpumppu1.onkoKäynnissä()) {
+            pump1Status.setText("Running");
+        } else {
+            pump1Status.setText("Off");
+        }
+
+        if (kypsytyssäiliöpumppu2.onkoKäynnissä()) {
+            pump2Status.setText("Running");
+        } else {
+            pump2Status.setText("Off");
+        }
+
+        // Kypsytyssäiliöiden reserve-napin päivitys
+        try {
+            reserveTank1.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö1"));
+            reserveTank2.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö2"));
+            reserveTank3.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö3"));
+            reserveTank4.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö4"));
+            reserveTank5.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö5"));
+            reserveTank6.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö6"));
+            reserveTank7.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö7"));
+            reserveTank8.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö8"));
+            reserveTank9.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö9"));
+            reserveTank10.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö10"));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        // Kypsytyssäiliöiden tilavuuden päivitys
+        // saisi tehtyä for-loopillakin, mutta pitäisi tehdä tankeista lista/taulukko ja tsillain
+        tank1Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank1 tilavuuden getterillä
+        tank2Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank2 tilavuuden getterillä
+        tank3Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank3 tilavuuden getterillä
+        tank4Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank4 tilavuuden getterillä
+        tank5Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank5 tilavuuden getterillä
+        tank6Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank6 tilavuuden getterillä
+        tank7Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank7 tilavuuden getterillä
+        tank8Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank8 tilavuuden getterillä
+        tank9Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank9 tilavuuden getterillä
+        tank10Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank10 tilavuuden getterillä
+
+        // "Pumput pullotukseen" tilan päivitys
+        // TODO getterit ja tsillain että voidaan todeta onko pullotuspumput käynnissä jne
+        if (pullotuspumppu1.onkoKaynnissa()) {
+            bpump1Status.setText("Running");
+        } else {
+            bpump1Status.setText("Off");
+        }
+
+        if (pullotuspumppu2.onkoKaynnissa()) {
+            bpump2Status.setText("Running");
+        } else {
+            bpump2Status.setText("Off");
+        }
+
     }
 
     /**

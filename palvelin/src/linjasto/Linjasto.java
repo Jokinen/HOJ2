@@ -173,6 +173,9 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         Juomakeitin juomakeitin2 = new Juomakeitin("Juomakeitin2");
         juomakeitinKomponentit.add(juomakeitin2);
 
+        Juomakeitin juomakeitin3 = new Juomakeitin("Juomakeitin3");
+        juomakeitinKomponentit.add(juomakeitin3);
+
         linjasto.osiot.Varastoiva juomakeittimet = new linjasto.osiot.Varastoiva("Juomakeitin", juomakeitinKomponentit);
         osiot.add(juomakeittimet);
 
