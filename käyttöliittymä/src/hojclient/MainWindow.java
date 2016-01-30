@@ -1169,7 +1169,7 @@ public class MainWindow extends javax.swing.JFrame {
                 if (tarkistaKäyttäjäNimi(käyttäjäNimi)) {
                     UUID käyttäjäId = linjasto.kirjauduSisään(käyttäjäNimi);
                     if (käyttäjäId == null) {
-                        System.err.println("Käyttäjän sisäänkirjaus epäonnistui odottottamattomasti");
+                        System.err.println("Käyttäjän sisäänkirjaus epäonnistui odottamattomasti");
                     } else {
                         this.käyttäjäNimi = käyttäjäNimi;
                         this.käyttäjäId = käyttäjäId;
@@ -1311,7 +1311,25 @@ public class MainWindow extends javax.swing.JFrame {
         // antaa linkin API:iin.
 
         try {
-            reserveSilo1.setSelected(linjasto.onkoKomponenttiVarattu("Siilot", "Siilo1")); // tai minkä niminen komponentista ikinä tuleekaan TODO nimeä komponentti oikein
+            reserveSilo1.setSelected(linjasto.onkoKomponenttiVarattu("Siilo", "Siilo1"));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            reserveSilo2.setSelected(linjasto.onkoKomponenttiVarattu("Siilo", "Siilo2"));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            reserveSilo3.setSelected(linjasto.onkoKomponenttiVarattu("Siilo", "Siilo3"));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            reserveSilo4.setSelected(linjasto.onkoKomponenttiVarattu("Siilo", "Siilo4"));
         } catch (RemoteException e) {
             e.printStackTrace();
         }

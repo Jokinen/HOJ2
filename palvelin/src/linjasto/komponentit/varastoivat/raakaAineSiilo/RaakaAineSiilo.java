@@ -1,5 +1,6 @@
 package linjasto.komponentit.varastoivat.raakaAineSiilo;
 
+import linjasto.komponentit.Komponentti;
 import linjasto.komponentit.varastoivat.Varastoiva;
 
 /**
@@ -11,5 +12,10 @@ import linjasto.komponentit.varastoivat.Varastoiva;
 public class RaakaAineSiilo extends Varastoiva {
     public RaakaAineSiilo(String tunnus) {
         super(tunnus, 10000);
+    }
+
+    public void käynnistä() {
+        // TODO
+
     }
 }

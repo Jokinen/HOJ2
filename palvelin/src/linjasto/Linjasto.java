@@ -129,7 +129,7 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
     private void rakennaLinjasto() {
         // Sillojen täyttöosio
         ArrayList<Komponentti> komponentit1 = new ArrayList<Komponentti>();
-        Ruuvikuljetin täyttöKuljetin = new Ruuvikuljetin("Täytön_ruuvikuljetin");
+        Ruuvikuljetin täyttöKuljetin = new Ruuvikuljetin("TäytönRuuvikuljetin");
         komponentit1.add(täyttöKuljetin);
         linjasto.osiot.Siirtävä tulo = new linjasto.osiot.Siirtävä("Tulo", komponentit1);
         osiot.add(tulo);
@@ -149,91 +149,91 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         RaakaAineSiilo siilo4 = new RaakaAineSiilo("Siilo4");
         raakaAinesiiloKomponentit.add(siilo4);
 
-        linjasto.osiot.Varastoiva siilosäiliö = new linjasto.osiot.Varastoiva("Siilot", raakaAinesiiloKomponentit);
+        linjasto.osiot.Varastoiva siilosäiliö = new linjasto.osiot.Varastoiva("Siilo", raakaAinesiiloKomponentit);
         osiot.add(siilosäiliö);
 
         // Raaka-ainekuljettimet juomakeittimeen
-        /*ArrayList<Komponentti> raakaAinekuljetinKomponentit = new ArrayList<Komponentti>();
+        ArrayList<Komponentti> raakaAinekuljetinKomponentit = new ArrayList<Komponentti>();
 
-        Ruuvikuljetin raakaAinekuljetin1 = new Ruuvikuljetin();
+        Ruuvikuljetin raakaAinekuljetin1 = new Ruuvikuljetin("KeittimenTäytönRuuvikuljetin1");
         raakaAinekuljetinKomponentit.add(raakaAinekuljetin1);
 
-        Ruuvikuljetin raakaAinekuljetin2 = new Ruuvikuljetin();
+        Ruuvikuljetin raakaAinekuljetin2 = new Ruuvikuljetin("KeittimenTäytönRuuvikuljetin2");
         raakaAinekuljetinKomponentit.add(raakaAinekuljetin2);
 
-        linjasto.osiot.Siirtävä kuljettimetJuomakeittimeen = new linjasto.osiot.Siirtävä("Kuljettimet juomakeittimeen", raakaAinekuljetinKomponentit);
+        linjasto.osiot.Siirtävä kuljettimetJuomakeittimeen = new linjasto.osiot.Siirtävä("KeittimenTäytönRuuvikuljetin", raakaAinekuljetinKomponentit);
         osiot.add(kuljettimetJuomakeittimeen);
 
         // Juomakeittimet
         ArrayList<Komponentti> juomakeitinKomponentit = new ArrayList<Komponentti>();
 
-        Juomakeitin juomakeitin1 = new Juomakeitin();
+        Juomakeitin juomakeitin1 = new Juomakeitin("Juomakeitin1");
         juomakeitinKomponentit.add(juomakeitin1);
 
-        Juomakeitin juomakeitin2 = new Juomakeitin();
+        Juomakeitin juomakeitin2 = new Juomakeitin("Juomakeitin2");
         juomakeitinKomponentit.add(juomakeitin2);
 
-        linjasto.osiot.Varastoiva juomakeittimet = new linjasto.osiot.Varastoiva("Juomakeittimet", juomakeitinKomponentit);
+        linjasto.osiot.Varastoiva juomakeittimet = new linjasto.osiot.Varastoiva("Juomakeitin", juomakeitinKomponentit);
         osiot.add(juomakeittimet);
 
         // Pumput kypsytyssäiliöihin
         ArrayList<Komponentti> kypsytyssäiliöPumppuKomponentit = new ArrayList<Komponentti>();
 
-        Pumppu kypsytyssäiliöpumppu1 = new Pumppu();
+        Pumppu kypsytyssäiliöpumppu1 = new Pumppu("PumppuKypsytykseen1");
         kypsytyssäiliöPumppuKomponentit.add(kypsytyssäiliöpumppu1);
 
-        Pumppu kypsytyssäiliöpumppu2 = new Pumppu();
+        Pumppu kypsytyssäiliöpumppu2 = new Pumppu("PumppuKypsytykseen2");
         kypsytyssäiliöPumppuKomponentit.add(kypsytyssäiliöpumppu2);
 
-        linjasto.osiot.Siirtävä pumppaus = new linjasto.osiot.Siirtävä("Kypsytyssäiliöille menevät pumput", kypsytyssäiliöPumppuKomponentit);
+        linjasto.osiot.Siirtävä pumppaus = new linjasto.osiot.Siirtävä("PumppuKypsytykseen", kypsytyssäiliöPumppuKomponentit);
         osiot.add(pumppaus);
 
         // Kypsytyssäiliöt
         ArrayList<Komponentti> kypsytyssäiliöKomponentit = new ArrayList<Komponentti>();
 
-        Kypsytyssäiliö kypsytyssäiliö1 = new Kypsytyssäiliö();
+        Kypsytyssäiliö kypsytyssäiliö1 = new Kypsytyssäiliö("Kypsytyssäiliö1");
         kypsytyssäiliöKomponentit.add(kypsytyssäiliö1);
 
-        Kypsytyssäiliö kypsytyssäiliö2 = new Kypsytyssäiliö();
+        Kypsytyssäiliö kypsytyssäiliö2 = new Kypsytyssäiliö("Kypsytyssäiliö2");
         kypsytyssäiliöKomponentit.add(kypsytyssäiliö2);
 
-        Kypsytyssäiliö kypsytyssäiliö3 = new Kypsytyssäiliö();
+        Kypsytyssäiliö kypsytyssäiliö3 = new Kypsytyssäiliö("Kypsytyssäiliö3");
         kypsytyssäiliöKomponentit.add(kypsytyssäiliö3);
 
-        Kypsytyssäiliö kypsytyssäiliö4 = new Kypsytyssäiliö();
+        Kypsytyssäiliö kypsytyssäiliö4 = new Kypsytyssäiliö("Kypsytyssäiliö4");
         kypsytyssäiliöKomponentit.add(kypsytyssäiliö4);
 
-        Kypsytyssäiliö kypsytyssäiliö5 = new Kypsytyssäiliö();
+        Kypsytyssäiliö kypsytyssäiliö5 = new Kypsytyssäiliö("Kypsytyssäiliö5");
         kypsytyssäiliöKomponentit.add(kypsytyssäiliö5);
 
-        Kypsytyssäiliö kypsytyssäiliö6 = new Kypsytyssäiliö();
+        Kypsytyssäiliö kypsytyssäiliö6 = new Kypsytyssäiliö("Kypsytyssäiliö6");
         kypsytyssäiliöKomponentit.add(kypsytyssäiliö6);
 
-        Kypsytyssäiliö kypsytyssäiliö7 = new Kypsytyssäiliö();
+        Kypsytyssäiliö kypsytyssäiliö7 = new Kypsytyssäiliö("Kypsytyssäiliö7");
         kypsytyssäiliöKomponentit.add(kypsytyssäiliö7);
 
-        Kypsytyssäiliö kypsytyssäiliö8 = new Kypsytyssäiliö();
+        Kypsytyssäiliö kypsytyssäiliö8 = new Kypsytyssäiliö("Kypsytyssäiliö8");
         kypsytyssäiliöKomponentit.add(kypsytyssäiliö8);
 
-        Kypsytyssäiliö kypsytyssäiliö9 = new Kypsytyssäiliö();
+        Kypsytyssäiliö kypsytyssäiliö9 = new Kypsytyssäiliö("Kypsytyssäiliö9");
         kypsytyssäiliöKomponentit.add(kypsytyssäiliö9);
 
-        Kypsytyssäiliö kypsytyssäiliö10 = new Kypsytyssäiliö();
+        Kypsytyssäiliö kypsytyssäiliö10 = new Kypsytyssäiliö("Kypsytyssäiliö10");
         kypsytyssäiliöKomponentit.add(kypsytyssäiliö10);
 
-        linjasto.osiot.Varastoiva kypsytys = new linjasto.osiot.Varastoiva("Kypsytyssäiliöt", kypsytyssäiliöKomponentit);
+        linjasto.osiot.Varastoiva kypsytys = new linjasto.osiot.Varastoiva("Kypsytyssäiliö", kypsytyssäiliöKomponentit);
         osiot.add(kypsytys);
 
         // Pumput pullotukseen
         ArrayList<Komponentti> pullotusPumppuKomponentit = new ArrayList<Komponentti>();
 
-        Pumppu pullotuspumppu1 = new Pumppu();
+        Pumppu pullotuspumppu1 = new Pumppu("PumppuPullotukseen1");
         pullotusPumppuKomponentit.add(pullotuspumppu1);
 
-        Pumppu pullotuspumppu2 = new Pumppu();
+        Pumppu pullotuspumppu2 = new Pumppu("PumppuPullotukseen2");
         pullotusPumppuKomponentit.add(pullotuspumppu2);
 
-        linjasto.osiot.Siirtävä pullotus = new linjasto.osiot.Siirtävä("Pullotuspumput", pullotusPumppuKomponentit);
-        osiot.add(pullotus);*/
+        linjasto.osiot.Siirtävä pullotus = new linjasto.osiot.Siirtävä("PumppuPullotukseen", pullotusPumppuKomponentit);
+        osiot.add(pullotus);
     }
 }
