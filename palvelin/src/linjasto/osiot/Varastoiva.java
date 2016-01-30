@@ -3,6 +3,7 @@ package linjasto.osiot;
 import apumäärittelyt.RaakaAine;
 import linjasto.komponentit.Komponentti;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
@@ -11,11 +12,7 @@ import java.util.ArrayList;
  * jonkinlaisen stabiilin tilan.
  */
 public class Varastoiva extends Osio {
-    /*
-    ArrayListin kohdeluokkaan viitataan tässä pakettipolulla, sillä luokka
-    samanniminen kuin tämä luokka. Pakettien sisäisen selkeän nimeämisen
-    säilyttämiseksi kumpaakaan luokkaa ei nimetty uudelleen.
-    */
+
     public Varastoiva(String tunnus, ArrayList<Komponentti> k) {
         super(tunnus, k);
     }

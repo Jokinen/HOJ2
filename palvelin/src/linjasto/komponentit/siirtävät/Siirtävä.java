@@ -13,7 +13,8 @@ import java.util.concurrent.TimeUnit;
 public abstract class Siirtävä extends Komponentti {
     private final int VIRTAAMA;
 
-    public Siirtävä(int v) {
+    public Siirtävä(String tunnus, int v) {
+        super(tunnus);
         VIRTAAMA = v;
     }
 

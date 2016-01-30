@@ -17,7 +17,8 @@ public abstract class Varastoiva extends Komponentti {
     private int täyttöAste;
     private RaakaAine raakaAine;
 
-    public Varastoiva(int m) {
+    public Varastoiva(String t, int m) {
+        super(t);
         maksimiKoko = m;
     }
 

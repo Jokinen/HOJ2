@@ -3,6 +3,8 @@ package linjasto.osiot;
 import apumäärittelyt.RaakaAine;
 import linjasto.komponentit.Komponentti;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 /**
@@ -51,6 +53,33 @@ public abstract class Osio {
 
     public void setOsio(Osio s) {
         seuraava = s;
+    }
+
+    /**
+     * Palauttaa tämän osin tunnuksen.
+     *
+     * @.post   RETURN = String tunnus
+     */
+    public String haeTunnus() {
+        return TUNNUS;
+    }
+
+    /**
+     * Palauttaa komponentin haetulla tunnuksella.
+     *
+     * @.pre    EXISTS(
+     *              FOREACH(komponentti in komponentit; komponentti.haeTunnus() == tunnus)
+     *          )
+     * @.post   RETURN = FOREACH(komponentti in komponentit;
+     *                          komponentti.haeTunnus() == tunnus)
+     */
+    public Komponentti haeKomponentti(String tunnus) throws RemoteException {
+        Komponentti palautettavaKomponentti = null;
+        for (Komponentti komponentti : komponentit) {
+            if (komponentti.haeTunnus().equals(tunnus))
+                palautettavaKomponentti = komponentti;
+        }
+        return palautettavaKomponentti;
     }
 
     /**

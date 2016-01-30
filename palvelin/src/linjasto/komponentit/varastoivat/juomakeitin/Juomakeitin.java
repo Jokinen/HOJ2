@@ -17,8 +17,8 @@ public class Juomakeitin extends Varastoiva {
     protected boolean juomakeitinKaynnissa;
     public String juomakeittimenVaraaja; // toteutus UUID:llä ja Stringillä nimi?
 
-    public Juomakeitin() {
-        super(2000);
+    public Juomakeitin(String tunnus) {
+        super(tunnus, 2000);
     }
 
     public boolean onkoJuomakeitinVarattu() {

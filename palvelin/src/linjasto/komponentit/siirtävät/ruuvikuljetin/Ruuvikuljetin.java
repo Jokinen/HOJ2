@@ -14,8 +14,8 @@ import java.util.concurrent.TimeUnit;
 public class Ruuvikuljetin extends Siirtävä {
     protected boolean ruuvikuljetinKaynnissa;
 
-    public Ruuvikuljetin() {
-        super(200);
+    public Ruuvikuljetin(String tunnus) {
+        super(tunnus, 200);
     }
 
     public boolean ruuvikuljetinKaynnissa() {

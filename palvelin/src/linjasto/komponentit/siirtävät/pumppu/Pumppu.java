@@ -24,8 +24,8 @@ public class Pumppu extends Siirtävä {
     private static final int VIRTAAMA = 500;    // litraa/sekunti
     protected boolean pumppuKaynnissa;
 
-    public Pumppu() {
-        super(500);
+    public Pumppu(String tunnus) {
+        super(tunnus, 500);
     }
 
     public void ime(int siirrettäväMäärä) {

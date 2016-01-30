@@ -13,11 +13,16 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+/**
+ * @.publicClassInvariant   FOREACH(osa in osiot;
+ *                                  osa.haeTunnus() unique in osiot)
+ */
 public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
-    private ArrayList<Osio> linjastonOsat;
+    private ArrayList<Osio> osiot;
 
     public Linjasto() throws RemoteException {
         super();
+        osiot = new ArrayList<Osio>();
         rakennaLinjasto();
     }
 
@@ -25,25 +30,51 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
      * Metodi jolla linjaston osioista saa haettua tietyn osion, joka mahdollista
      * käskyjen kohdistuksen halutuille osioille.
      *
-     * @.post   RETURN = Linjasto
+     * @.pre    EXISTS(
+     *              FOREACH(osio in osiot; osio.haeTunnus() == tunnus)
+     *          )
+     * @.post   RETURN = FOREACH(osio in osiot;
+     *                          osio.haeTunnus() == tunnus)
      */
+    public Osio haeOsio(String tunnus) throws RemoteException {
+        Osio palautettavaOsio = null;
+        for (Osio osio : osiot) {
+            if (osio.haeTunnus().equals(tunnus))
+                palautettavaOsio = osio;
+        }
+        return palautettavaOsio;
+    }
 
     public void testiMetodi() throws RemoteException {
         System.out.println("Pöö");
     }
 
+    public void käynnistäKomponentti(String tunnus) {
+
+    }
+
     /**
      * Rakennetaan halutunlaisista komponenteista koostuva linjasto.
+     *
+     * Osiot:
+     * 1. Tulo
+     * 2. Siilot
+     * 3. Kuljettimet juomakeittimeen
+     * 4. Juomakeittimet
+     * 5. Kypsytyssäiliöille menevät pumput
+     * 6. Kypsytyssäiliöt
+     * 7. Pullotuspumput
      */
     private void rakennaLinjasto() {
         // Sillojen täyttöosio
         ArrayList<Komponentti> komponentit1 = new ArrayList<Komponentti>();
-        Ruuvikuljetin täyttöKuljetin = new Ruuvikuljetin();
+        Ruuvikuljetin täyttöKuljetin = new Ruuvikuljetin("Täytön ruuvikuljetin");
         komponentit1.add(täyttöKuljetin);
         linjasto.osiot.Siirtävä tulo = new linjasto.osiot.Siirtävä("Tulo", komponentit1);
+        osiot.add(tulo);
 
         // Raaka-ainesiilot
-        ArrayList<Komponentti> raakaAinesiiloKomponentit = new ArrayList<Komponentti>();
+        /*ArrayList<Komponentti> raakaAinesiiloKomponentit = new ArrayList<Komponentti>();
 
         RaakaAineSiilo siilo1 = new RaakaAineSiilo();
         raakaAinesiiloKomponentit.add(siilo1);
@@ -57,7 +88,8 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         RaakaAineSiilo siilo4 = new RaakaAineSiilo();
         raakaAinesiiloKomponentit.add(siilo4);
 
-        linjasto.osiot.Varastoiva siilosäilö = new linjasto.osiot.Varastoiva("Siilosäilö", raakaAinesiiloKomponentit);
+        linjasto.osiot.Varastoiva siilosäiliö = new linjasto.osiot.Varastoiva("Siilot", raakaAinesiiloKomponentit);
+        osiot.add(siilosäiliö);
 
         // Raaka-ainekuljettimet juomakeittimeen
         ArrayList<Komponentti> raakaAinekuljetinKomponentit = new ArrayList<Komponentti>();
@@ -69,6 +101,7 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         raakaAinekuljetinKomponentit.add(raakaAinekuljetin2);
 
         linjasto.osiot.Siirtävä kuljettimetJuomakeittimeen = new linjasto.osiot.Siirtävä("Kuljettimet juomakeittimeen", raakaAinekuljetinKomponentit);
+        osiot.add(kuljettimetJuomakeittimeen);
 
         // Juomakeittimet
         ArrayList<Komponentti> juomakeitinKomponentit = new ArrayList<Komponentti>();
@@ -80,6 +113,7 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         juomakeitinKomponentit.add(juomakeitin2);
 
         linjasto.osiot.Varastoiva juomakeittimet = new linjasto.osiot.Varastoiva("Juomakeittimet", juomakeitinKomponentit);
+        osiot.add(juomakeittimet);
 
         // Pumput kypsytyssäiliöihin
         ArrayList<Komponentti> kypsytyssäiliöPumppuKomponentit = new ArrayList<Komponentti>();
@@ -91,6 +125,7 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         kypsytyssäiliöPumppuKomponentit.add(kypsytyssäiliöpumppu2);
 
         linjasto.osiot.Siirtävä pumppaus = new linjasto.osiot.Siirtävä("Kypsytyssäiliöille menevät pumput", kypsytyssäiliöPumppuKomponentit);
+        osiot.add(pumppaus);
 
         // Kypsytyssäiliöt
         ArrayList<Komponentti> kypsytyssäiliöKomponentit = new ArrayList<Komponentti>();
@@ -126,6 +161,7 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         kypsytyssäiliöKomponentit.add(kypsytyssäiliö10);
 
         linjasto.osiot.Varastoiva kypsytys = new linjasto.osiot.Varastoiva("Kypsytyssäiliöt", kypsytyssäiliöKomponentit);
+        osiot.add(kypsytys);
 
         // Pumput pullotukseen
         ArrayList<Komponentti> pullotusPumppuKomponentit = new ArrayList<Komponentti>();
@@ -137,5 +173,6 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         pullotusPumppuKomponentit.add(pullotuspumppu2);
 
         linjasto.osiot.Siirtävä pullotus = new linjasto.osiot.Siirtävä("Pullotuspumput", pullotusPumppuKomponentit);
+        osiot.add(pullotus);*/
     }
 }

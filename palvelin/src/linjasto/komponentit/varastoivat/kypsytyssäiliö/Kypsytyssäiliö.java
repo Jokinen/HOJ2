@@ -8,7 +8,7 @@ import linjasto.komponentit.varastoivat.Varastoiva;
  * vain yksi pumppu voi täyttää tai tyhjentää säiliötä kerrallaan
  */
 public class Kypsytyssäiliö extends Varastoiva {
-    public Kypsytyssäiliö() {
-        super(10000);
+    public Kypsytyssäiliö(String tunnus) {
+        super(tunnus, 10000);
     }
 }

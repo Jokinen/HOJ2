@@ -6,6 +6,9 @@
 package hojclient;
 
 import linjasto.LinjastoInterface;
+import linjasto.komponentit.Komponentti;
+import linjasto.osiot.Osio;
+import linjasto.osiot.Siirtävä;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;

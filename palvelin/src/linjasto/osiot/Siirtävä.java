@@ -4,6 +4,7 @@ import apumäärittelyt.RaakaAine;
 import linjasto.komponentit.Komponentti;
 import omatVirheilmoitukset.LiianSuuriMääräException;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
@@ -11,11 +12,6 @@ import java.util.ArrayList;
  * sitä muuten prosessoida.
  */
 public class Siirtävä extends Osio {
-    /*
-    ArrayListin kohdeluokkaan viitataan tässä pakettipolulla, sillä luokka
-    samanniminen kuin tämä luokka. Pakettien sisäisen selkeän nimeämisen
-    säilyttämiseksi kumpaakaan luokkaa ei nimetty uudelleen.
-    */
 
     public Siirtävä(String tunnus, ArrayList<Komponentti> k) {
         super(tunnus, k);
