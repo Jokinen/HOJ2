@@ -1104,7 +1104,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void startSiloLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSiloLoadActionPerformed
         // TODO Mitä tehdään, kun siilojen täytön ruuvikuljetin käynnistetään?
         try {
-            linjasto.testiMetodi();
+            linjasto.käynnistäKomponentti("Tulo", "Täytön_ruuvikuljetin");
         } catch (RemoteException e) {
             System.out.println(e);
         }

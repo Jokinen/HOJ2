@@ -73,7 +73,7 @@ public abstract class Osio {
      * @.post   RETURN = FOREACH(komponentti in komponentit;
      *                          komponentti.haeTunnus() == tunnus)
      */
-    public Komponentti haeKomponentti(String tunnus) throws RemoteException {
+    public Komponentti haeKomponentti(String tunnus) {
         Komponentti palautettavaKomponentti = null;
         for (Komponentti komponentti : komponentit) {
             if (komponentti.haeTunnus().equals(tunnus))

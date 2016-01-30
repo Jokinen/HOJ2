@@ -36,7 +36,7 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
      * @.post   RETURN = FOREACH(osio in osiot;
      *                          osio.haeTunnus() == tunnus)
      */
-    public Osio haeOsio(String tunnus) throws RemoteException {
+    public Osio haeOsio(String tunnus) {
         Osio palautettavaOsio = null;
         for (Osio osio : osiot) {
             if (osio.haeTunnus().equals(tunnus))
@@ -49,8 +49,10 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         System.out.println("Pöö");
     }
 
-    public void käynnistäKomponentti(String tunnus) {
-
+    public void käynnistäKomponentti(String osionTunnnus, String komponentinTunnus) {
+        haeOsio(osionTunnnus)
+                .haeKomponentti(komponentinTunnus)
+                .käynnistä();
     }
 
     /**
@@ -68,7 +70,7 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
     private void rakennaLinjasto() {
         // Sillojen täyttöosio
         ArrayList<Komponentti> komponentit1 = new ArrayList<Komponentti>();
-        Ruuvikuljetin täyttöKuljetin = new Ruuvikuljetin("Täytön ruuvikuljetin");
+        Ruuvikuljetin täyttöKuljetin = new Ruuvikuljetin("Täytön_ruuvikuljetin");
         komponentit1.add(täyttöKuljetin);
         linjasto.osiot.Siirtävä tulo = new linjasto.osiot.Siirtävä("Tulo", komponentit1);
         osiot.add(tulo);
