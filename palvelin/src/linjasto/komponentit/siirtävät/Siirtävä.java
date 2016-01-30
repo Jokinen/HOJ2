@@ -25,12 +25,8 @@ public abstract class Siirtävä extends Komponentti {
      * @param määrä     siirrettävän raaka-aineen määrä
      *                  määrä <= haeVirtaama()
      * @param osio      osio, jolle halutaan siirtää raakaAinetta
-     * @throws LiianSuuriMääräException
-     *          when(määrä > haeVirtaama())
      */
-    public void vastaanota(RaakaAine raakaAine, int määrä, Osio osio) throws LiianSuuriMääräException {
-        if (määrä > haeVirtaama())
-            throw new LiianSuuriMääräException();
+    public void vastaanota(RaakaAine raakaAine, int määrä, Osio osio) {
         try {
             TimeUnit.SECONDS.sleep(1);
             osio.vastaanota(raakaAine, määrä);

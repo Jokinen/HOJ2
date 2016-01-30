@@ -5,16 +5,33 @@
  */
 package hojclient;
 
+import linjasto.LinjastoInterface;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+
 /**
  *
  * @author jaanle
  */
 public class MainWindow extends javax.swing.JFrame {
+    private Registry rekisteri;
+    private LinjastoInterface linjasto;
 
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
+        // for devving purposes, we initiate here
+        try {
+            rekisteri = LocateRegistry.getRegistry("localhost", 8080);
+            linjasto = (LinjastoInterface) rekisteri.lookup("linjasto");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
         initComponents();
     }
 
@@ -1083,6 +1100,11 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void startSiloLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSiloLoadActionPerformed
         // TODO Mitä tehdään, kun siilojen täytön ruuvikuljetin käynnistetään?
+        try {
+            linjasto.testiMetodi();
+        } catch (RemoteException e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_startSiloLoadActionPerformed
 
     private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed

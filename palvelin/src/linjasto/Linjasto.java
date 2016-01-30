@@ -13,13 +13,28 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class Linjasto extends UnicastRemoteObject {
+public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
     private ArrayList<Osio> linjastonOsat;
 
     public Linjasto() throws RemoteException {
+        super();
         rakennaLinjasto();
     }
 
+    /**
+     * Metodi jolla linjaston osioista saa haettua tietyn osion, joka mahdollista
+     * käskyjen kohdistuksen halutuille osioille.
+     *
+     * @.post   RETURN = Linjasto
+     */
+
+    public void testiMetodi() throws RemoteException {
+        System.out.println("Pöö");
+    }
+
+    /**
+     * Rakennetaan halutunlaisista komponenteista koostuva linjasto.
+     */
     private void rakennaLinjasto() {
         // Sillojen täyttöosio
         ArrayList<Komponentti> komponentit1 = new ArrayList<Komponentti>();

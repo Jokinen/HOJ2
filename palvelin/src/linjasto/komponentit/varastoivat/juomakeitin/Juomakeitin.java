@@ -12,7 +12,7 @@ import linjasto.komponentit.varastoivat.Varastoiva;
  */
 
 
-public class Juomakeitin extends Varastoiva, Thread {
+public class Juomakeitin extends Varastoiva {
     protected boolean juomakeitinVarattu;
     protected boolean juomakeitinKaynnissa;
     public String juomakeittimenVaraaja; // toteutus UUID:llä ja Stringillä nimi?
