@@ -13,6 +13,8 @@ import linjasto.osiot.Siirtävä;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.HashMap;
+import java.util.UUID;
 
 
 /**
@@ -22,6 +24,8 @@ import java.rmi.registry.Registry;
 public class MainWindow extends javax.swing.JFrame {
     private Registry rekisteri;
     private LinjastoInterface linjasto;
+    private String käyttäjäNimi = null;
+    private UUID käyttäjäId = null;
 
     /**
      * Creates new form MainWindow
@@ -1101,6 +1105,44 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean jokuKirjautuneena() {
+        return !(käyttäjäNimi == null && käyttäjäId == null);
+    }
+
+    /**
+     *
+     */
+    private boolean tarkistaKäyttäjäNimi(String käyttäjäNimi) {
+        boolean bol = true;
+
+        if (käyttäjäNimi == null) {
+            bol = false;
+            System.err.println("Käyttäjänimeä ei ole annettu");
+        }
+
+        if (käyttäjäNimi.length() < 1) {
+            bol = false;
+            System.err.println("Käyttäjänimen täytää olla vähintään yhden merkin pituinen");
+        }
+
+        if (käyttäjäNimiVarattu(käyttäjäNimi)) {
+            bol = false;
+            System.err.println("Käyttäjänimi on varattu");
+        }
+
+        return bol;
+    }
+
+    private boolean käyttäjäNimiVarattu(String käyttäjäNimi) {
+        boolean bol = false;
+        try {
+            bol = linjasto.käyttäjäNimiVarattu(käyttäjäNimi);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return bol;
+    }
+
     private void startSiloLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSiloLoadActionPerformed
         // TODO Mitä tehdään, kun siilojen täytön ruuvikuljetin käynnistetään?
         try {
@@ -1111,7 +1153,34 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_startSiloLoadActionPerformed
 
     private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
-        // TODO Mitä tehdään kun käyttäjä kirjautuu
+        try {
+            boolean onnistuikoUloskirjautuminen = true;
+
+            // Jos tästä ikkunasta on jo joku kirjautuneena, kirjataan heidät ensin ulos
+            if (jokuKirjautuneena()) {
+                onnistuikoUloskirjautuminen = linjasto.kirjauduUlos(käyttäjäId);
+            }
+
+            // Uloskirjautumisen onnistuessa kirjataan sisään uusi käyttäjä
+            if (onnistuikoUloskirjautuminen) {
+                String käyttäjäNimi = userName.getText();
+                if (tarkistaKäyttäjäNimi(käyttäjäNimi)) {
+                    UUID käyttäjäId = linjasto.kirjauduSisään(käyttäjäNimi);
+                    if (käyttäjäId == null) {
+                        System.err.println("Käyttäjän sisäänkirjaus epäonnistui odottottamattomasti");
+                    } else {
+                        this.käyttäjäNimi = käyttäjäNimi;
+                        this.käyttäjäId = käyttäjäId;
+                        System.out.println("Käyttäjän " + käyttäjäNimi + " (" + käyttäjäId + ") sisään kirjaaminen onnistui");
+                    }
+                }
+            } else {
+                System.err.println("Käyttäjän " + this.käyttäjäNimi + " (" + this.käyttäjäId + ") uloskirjautuminen epäonnistui, joten uutta käyttäjää ei voitu kirjata sisään.");
+            }
+
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_signInActionPerformed
 
     private void startProcLoad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad1ActionPerformed

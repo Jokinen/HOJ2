@@ -12,17 +12,23 @@ import linjasto.osiot.Osio;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * @.publicClassInvariant   FOREACH(osa in osiot;
  *                                  osa.haeTunnus() unique in osiot)
+ *                          FOREACH(käyttäjä in käyttäjät;
+ *                                  käyttäjä unique in käyttäjät)
  */
 public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
     private ArrayList<Osio> osiot;
+    private HashMap<UUID, String> käyttäjät;
 
     public Linjasto() throws RemoteException {
         super();
-        osiot = new ArrayList<Osio>();
+        osiot = new ArrayList<>();
+        käyttäjät = new HashMap<>();
         rakennaLinjasto();
     }
 
@@ -47,6 +53,37 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
 
     public void testiMetodi() throws RemoteException {
         System.out.println("Pöö");
+    }
+
+    public UUID kirjauduSisään(String käyttäjäNimi) throws RemoteException {
+        UUID käyttäjäId = null;
+        if (käyttäjäNimi != null && käyttäjäNimi.length() > 0 && !käyttäjät.containsValue(käyttäjäNimi)) {
+            käyttäjäId = UUID.randomUUID();
+            käyttäjät.put(käyttäjäId, käyttäjäNimi);
+            System.out.println("Käyttäjä: " + käyttäjäNimi + " (" + käyttäjäId + ") kirjattu sisään");
+        } else {
+            System.err.println("Käyttäjä yritetiin kirjata sisääsn, mutta yritys epäonnistui.");
+        }
+        return käyttäjäId;
+    }
+
+    /**
+     *
+     * @.post   RETURN = IF(käyttäjät.containsKey(käyttäjäId); true)
+     *                   ELSE(false)
+     */
+    public boolean kirjauduUlos(UUID käyttäjäId) throws RemoteException {
+        boolean bol = false;
+        if (käyttäjät.containsKey(käyttäjäId)) {
+            bol = true;
+            System.out.println("Käyttäjä: " + käyttäjät.get(käyttäjäId) + " (" + käyttäjäId + ") kirjattu ulos");
+            käyttäjät.remove(käyttäjäId);
+        }
+        return bol;
+    }
+
+    public boolean käyttäjäNimiVarattu(String käyttäjäNimi) {
+        return käyttäjät.containsValue(käyttäjäNimi);
     }
 
     public void käynnistäKomponentti(String osionTunnnus, String komponentinTunnus) {
