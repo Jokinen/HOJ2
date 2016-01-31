@@ -1312,7 +1312,16 @@ public class MainWindow extends javax.swing.JFrame {
 
         // Tulon tilan päivitys
         // TODO onko käynnissä
-        siloLoadConvStatus.setText("käynnissä tai ei");
+        try {
+            startSiloLoad.setSelected(linjasto.onkoKaynnissa("Tulo", "TäytönRuuvikuljetin"));
+            if (linjasto.onkoKaynnissa("Tulo", "TäytönRuuvikuljetin")) {
+                siloLoadConvStatus.setText("Running");
+            } else {
+                siloLoadConvStatus.setText("Off");
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
 
         // Siilojen reserve-napin päivitys
         try {
