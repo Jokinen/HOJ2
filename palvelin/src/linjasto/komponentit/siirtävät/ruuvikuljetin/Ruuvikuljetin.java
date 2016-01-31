@@ -1,6 +1,8 @@
 package linjasto.komponentit.siirtävät.ruuvikuljetin;
 
+import apumäärittelyt.RaakaAine;
 import linjasto.komponentit.siirtävät.Siirtävä;
+import linjasto.osiot.Varastoiva;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +21,27 @@ public class Ruuvikuljetin extends Siirtävä {
 
     @Override
     public void run() {
-
+        int erä = 40000;
+        Varastoiva osio = (Varastoiva) this.seuraavaOsio;
+        while (super.käynnissä) {
+            // Imitoidaan, että kuljetus kestää sekunnin
+            try {
+                Thread.sleep(10);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            int määrä = 0;
+            if (erä >= VIRTAAMA) {
+                määrä = VIRTAAMA;
+            } else {
+                määrä = erä;
+            }
+            int siirrettyMäärä = osio.vastaanota(määrä);
+            erä = erä - siirrettyMäärä;
+            if (erä == 0) {
+                super.sammuta();
+            }
+        }
     }
 }
 

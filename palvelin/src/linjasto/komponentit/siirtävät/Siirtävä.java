@@ -11,36 +11,19 @@ import java.util.concurrent.TimeUnit;
  * Komponentti, joka siirtää.
  */
 public abstract class Siirtävä extends Komponentti {
-    private final int VIRTAAMA;
+    protected final int VIRTAAMA;
+    protected Osio seuraavaOsio;
 
     public Siirtävä(String tunnus, int v) {
         super(tunnus);
         VIRTAAMA = v;
     }
 
-    /**
-     * Luokka simuloi virtausnopeutta odottamalla jokaisen vastaanotetun
-     * raaka-aine-erän yhteydessä.
-     *
-     * @param raakaAine siirrettävä raaka-aine
-     * @param määrä     siirrettävän raaka-aineen määrä
-     *                  määrä <= haeVirtaama()
-     * @param osio      osio, jolle halutaan siirtää raakaAinetta
-     */
-    public void vastaanota(RaakaAine raakaAine, int määrä, Osio osio) {
-        try {
-            TimeUnit.SECONDS.sleep(1);
-            osio.vastaanota(raakaAine, määrä);
-        } catch(java.lang.InterruptedException e) {
-            System.out.println(e);
-        }
+    public void käynnistä(Osio osio) {
+        this.seuraavaOsio = osio;
+        super.käynnistä();
     }
 
-    /**
-     * Hakumetodi luokan ominaisuudelle VIRTAAMA.
-     *
-     * @.post RETURN = VIRTAAMA
-     */
     public int haeVirtaama() {
         return VIRTAAMA;
     }

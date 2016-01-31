@@ -8,20 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 /**
- * Luokka joka simuloi yhtä linjaston askelta. Simuloi heikolla tasolla kahteen
- * suuntaan linkitettyä listaa. Osio:n on vain tiedettävä seuraajansa ja
- * edeltäjänsä sillä linjastolla siirtymiä tapahtuu ainoastaan eteenpäin, ja
- * ainoastaan heti seuraavalle linjaston osalle (ts. linjaston osia ei voi ohittaa).
- *
- * HUOM! Jos Osio:n edellinenOsa kentän jättää tyhjäksi, pidetään tätä
- *       objektia silloin "aloitusalkiona".
- *
- *       TODO: Kirjoita luokkainvariantiksi
- *
- * HUOM! Jos Osio:n seuraavaOsa kentän jättää tyhjäksi, pidetään tätä
- *       objektia silloin "lopetusalkiona".
- *
- *       TODO: Kirjoita luokkainvariantiksi
+ * Luokka joka simuloi yhtä linjaston askelta.
  *
  * HUOM! LinjastoOsa on ABSTRAKTI luokka, jolloin siitä ei voi luoda olioita,
  *       mutta sen perivistä luokista voi. Tässä tapauksessa luokalla on kaksi perijää:
@@ -37,22 +24,11 @@ import java.util.ArrayList;
  */
 public abstract class Osio {
     private final String TUNNUS;
-    private Osio edellinen;
-    private Osio seuraava;
     protected final ArrayList<Komponentti> komponentit;
-
 
     public Osio(String tunnus, ArrayList<Komponentti> k) {
         this.TUNNUS = tunnus;
         komponentit = k;
-    }
-
-    public void setEdellinen(Osio o) {
-        edellinen = o;
-    }
-
-    public void setOsio(Osio s) {
-        seuraava = s;
     }
 
     /**
@@ -81,50 +57,5 @@ public abstract class Osio {
         }
         return palautettavaKomponentti;
     }
-
-    /**
-     * Tarkistaako, että onko linjaston osa ensimmäinen linjaston osa.
-     *
-     * @return if (edellinenOsa === null)
-     *              return true
-     *         else
-     *              return false
-     */
-    public boolean onEnsimmäinen() {
-        // TODO: implement
-        return true;
-    }
-
-    /**
-     * Tarkistaako, että onko linjaston osa viimeinen linjaston osa.
-     *
-     * @return if (seuraavaOsa === null)
-     *              return true
-     *         else
-     *              return false
-     */
-    public boolean onViimeinen() {
-        // TODO: implement
-        return false;
-    }
-
-    /**
-     * Palauttaa tätä osiota seuraavan osion.
-     *
-     * @.post RETURN = seuraavaOsio
-     */
-    public Osio haeSeuraavaOsio() {
-        return seuraava;
-    }
-
-    /**
-     * Metodi, joka vastaanottaa osiolle raaka-ainetta, huolehtien sen tasaisesta
-     * jakautumisesta osion komponenteille.
-     *
-     * @param raakaAine vastaanotettava RaakaAine
-     * @param määrä     vastaanotettavan RaakaAineen määrä
-     */
-    public abstract void vastaanota(RaakaAine raakaAine, int määrä);
-
 
 }

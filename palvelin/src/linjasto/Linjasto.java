@@ -1,6 +1,7 @@
 package linjasto;
 
 import linjasto.komponentit.Komponentti;
+import linjasto.komponentit.siirtävät.Siirtävä;
 import linjasto.komponentit.siirtävät.pumppu.Pumppu;
 import linjasto.komponentit.siirtävät.ruuvikuljetin.Ruuvikuljetin;
 
@@ -35,6 +36,14 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
 
     public void testiMetodi() throws RemoteException {
         System.out.println("Pöö");
+    }
+
+    /**
+     * TODO Sopimus joka sanoo että osiolla on oltava seuraava sio, ja että osion on löydyttävä osiot listasta
+     */
+    private Osio haeSeuraavaOsio(Osio osio) {
+        int index = osiot.indexOf(osio) + 1;
+        return osiot.get(index);
     }
 
     public UUID kirjauduSisään(String käyttäjäNimi) throws RemoteException {
@@ -93,8 +102,14 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
     }
 
     public void käynnistäKomponentti(String osionTunnus, String komponentinTunnus) {
-        haeKomponentti(osionTunnus, komponentinTunnus)
-                .käynnistä();
+        Osio osio = haeOsio(osionTunnus);
+        Komponentti komponentti = osio.haeKomponentti(komponentinTunnus);
+        if (komponentti instanceof linjasto.komponentit.siirtävät.Siirtävä) {
+            Siirtävä komp = (Siirtävä) komponentti;
+            komp.käynnistä(haeSeuraavaOsio(osio));
+        } else {
+            komponentti.käynnistä();
+        }
     }
 
     public boolean onkoKomponenttiKäynnissä(String osionTunnus, String komponentinTunnus) {

@@ -5,14 +5,11 @@ import linjasto.osiot.Osio;
 import omatVirheilmoitukset.LiianSuuriMääräException;
 
 public abstract class Komponentti implements Runnable {
-    private Thread säie;
+    protected Thread säie;
     private final String TUNNUS;
-    private boolean käynnissä = false;
-
-    public abstract void vastaanota(RaakaAine raakaAine, int määrä, Osio seuraavaOsio) throws LiianSuuriMääräException;
+    protected volatile boolean käynnissä = false;
 
     public Komponentti(String t) {
-        säie = new Thread(this);
         TUNNUS = t;
     }
 
@@ -21,22 +18,20 @@ public abstract class Komponentti implements Runnable {
     }
 
     public void käynnistä() {
+        käynnissä = true;
+        säie = new Thread(this);
         säie.start();
-        run();
-
     }
 
     public void sammuta() {
         käynnissä = false;
-        säie.interrupt();
     }
 
     public boolean onkoKäynnissä() {
-        return  käynnissä;
+        return käynnissä;
     }
 
     public void run() {
-        käynnissä = true;
-        System.out.println("Komponentti käynnistetty");
+        System.out.println("Komponentti '" + TUNNUS +"' käynnistetty");
     }
 }

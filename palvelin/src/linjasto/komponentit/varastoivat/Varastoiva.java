@@ -38,17 +38,14 @@ public abstract class Varastoiva extends Komponentti {
     /**
      * Lisää Varastoiva-komponenttin raaka-ainetta jonkin määrän.
      *
-     * @param raakaAine siiloon siirrettävä raaka-aine;
-     *                  raakaAine.getClass().equals(haeRaakaAine().getClass()) ||
-     *                  raakaAine == null
      * @param määrä     siirrettävän raaka-aineen määrä;
      *                  määrä < maksimiKoko &&
      *                  määrä + täyttöAste < maksimiKoko
      *
      * @.postPrivate täyttöAste = täyttöAste + määrä
      */
-    public void vastaanota(RaakaAine raakaAine, int määrä, Osio seuraavOsio) throws LiianSuuriMääräException {
-        // TODO
+    public void vastaanota(int määrä) {
+        täyttöAste = täyttöAste + määrä;
     }
 
     public void siirrä(RaakaAine raakaAine, int määrä, Osio seuraavaOsio) throws LiianSuuriMääräException {
@@ -93,6 +90,10 @@ public abstract class Varastoiva extends Komponentti {
      */
     public boolean onTyhjä() {
         return täyttöAste == 0;
+    }
+
+    public boolean onTilaa(int määrä) {
+        return (täyttöAste + määrä) <= maksimiKoko;
     }
 
     /**
