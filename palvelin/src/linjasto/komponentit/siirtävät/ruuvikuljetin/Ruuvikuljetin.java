@@ -36,7 +36,7 @@ public class Ruuvikuljetin extends Siirtävä {
             } else {
                 määrä = erä;
             }
-            int siirrettyMäärä = osio.vastaanota(määrä);
+            int siirrettyMäärä = osio.vastaanota(määrä, super.käyttäjä);
             erä = erä - siirrettyMäärä;
             if (erä == 0) {
                 super.sammuta();

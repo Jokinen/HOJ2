@@ -17,7 +17,7 @@ public interface LinjastoInterface extends Remote {
 
     // Komponenttien hallinta
 
-    void käynnistäKomponentti(String osionTunnus, String komponentinTunnus) throws RemoteException;
+    void käynnistäKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) throws RemoteException;
     boolean onkoKomponenttiKäynnissä(String osionTunnus, String komponentinTunnus) throws RemoteException;
 
     //-- Varastoiva spesifit

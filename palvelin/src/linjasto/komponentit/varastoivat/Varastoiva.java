@@ -35,6 +35,8 @@ public abstract class Varastoiva extends Komponentti {
         return käyttäjä;
     }
 
+    public void käynnistä(UUID käyttäjäId) {}
+
     /**
      * Lisää Varastoiva-komponenttin raaka-ainetta jonkin määrän.
      *
