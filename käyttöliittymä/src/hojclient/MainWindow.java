@@ -1423,29 +1423,29 @@ public class MainWindow extends javax.swing.JFrame {
 
             // "Pumput kypsytyssäiliöihin" start-napin päivitys
             try {
-                startPump1.setSelected(linjasto.onkoKomponenttiKäynnissä("PumputKypsytykseen", "PumputKypsytykseen1"));
+                startPump1.setSelected(linjasto.onkoKomponenttiKäynnissä("PumputKypsytykseen", "PumppuKypsytykseen1"));
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
 
             try {
-                startPump2.setSelected(linjasto.onkoKomponenttiKäynnissä("PumputKypsytykseen", "PumputKypsytykseen2"));
+                startPump2.setSelected(linjasto.onkoKomponenttiKäynnissä("PumputKypsytykseen", "PumppuKypsytykseen2"));
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
 
             // Kypsytyssäiliöiden reserve-napin päivitys
             try {
-                reserveTank1.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö1"));
-                reserveTank2.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö2"));
-                reserveTank3.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö3"));
-                reserveTank4.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö4"));
-                reserveTank5.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö5"));
-                reserveTank6.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö6"));
-                reserveTank7.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö7"));
-                reserveTank8.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö8"));
-                reserveTank9.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö9"));
-                reserveTank10.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö10"));
+                reserveTank1.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö1"));
+                reserveTank2.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö2"));
+                reserveTank3.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö3"));
+                reserveTank4.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö4"));
+                reserveTank5.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö5"));
+                reserveTank6.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö6"));
+                reserveTank7.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö7"));
+                reserveTank8.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö8"));
+                reserveTank9.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö9"));
+                reserveTank10.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö10"));
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -1477,13 +1477,13 @@ public class MainWindow extends javax.swing.JFrame {
 
             // "Pumput pullotukseen" start-napin päivitys
             try {
-                startBpump1.setSelected(linjasto.onkoKomponenttiKäynnissä("PumputPullotukseen", "PumputPullotukseen1"));
+                startBpump1.setSelected(linjasto.onkoKomponenttiKäynnissä("PumputPullotukseen", "PumppuPullotukseen1"));
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
 
             try {
-                startBpump2.setSelected(linjasto.onkoKomponenttiKäynnissä("PumputPullotukseen", "PumputPullotukseen2"));
+                startBpump2.setSelected(linjasto.onkoKomponenttiKäynnissä("PumputPullotukseen", "PumppuPullotukseen2"));
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
