@@ -67,6 +67,10 @@ public abstract class Varastoiva extends Komponentti {
         return bol;
     }
 
+    public int haeTäyttöaste() {
+        return täyttöAste;
+    }
+
     /**
      * RaakaAineSiilon ollessa täynnä palauttaa true.
      *

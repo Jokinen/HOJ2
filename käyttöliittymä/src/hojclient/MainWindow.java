@@ -40,8 +40,8 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
         initComponents();
-        new Päivittäjä(this).käynnistä();
-        //päivittäjä.käynnistä();
+        päivittäjä = new Päivittäjä(this);
+        päivittäjä.käynnistä();
     }
 
     /**
@@ -1298,26 +1298,13 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_procLoadAmount1ActionPerformed
 
     public void päivitäTiedot() {
-        // TODO Kutsu jokaista käyttöliittymässä olevaa kenttää varten tuoreet tiedot palvelimelta.
-        // Tätä varten täytyy tehdä joitakin puuttuvia metodeja alla esimerkki siitä, miten
-        // varastoivien komponenttien tila päivitetään.
-        //
-        // Näiden metodien yhteydessä tulee huomioida se, että objektit castataan oikean tyyppiseksi,
-        // koska kaikki komponentit haetaan komponentteina. OOM:ista tuttu polyformismi on
-        // tärkeä ymmärtää. En sitä yritä selittää, Google auttaa paremmin.
-        //
-        // Muuta tärkeää tiedettävää on swinging eri komponenttien päivitysmetodit -
-        // nämä tulee etsiä Java api:sta. Luokan nimen haku Googlesta yleensä
-        // antaa linkin API:iin.
-
-        // Tulon tilan päivitys
-        // TODO onko käynnissä
         try {
-            startSiloLoad.setSelected(linjasto.onkoKaynnissa("Tulo", "TäytönRuuvikuljetin"));
-            if (linjasto.onkoKaynnissa("Tulo", "TäytönRuuvikuljetin")) {
+            if (linjasto.onkoKomponenttiKäynnissä("Tulo", "TäytönRuuvikuljetin")) {
                 siloLoadConvStatus.setText("Running");
+                startSiloLoad.setSelected(true);
             } else {
                 siloLoadConvStatus.setText("Off");
+                startSiloLoad.setSelected(false);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -1334,131 +1321,129 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
         // Siilojen tilavuuden päivitys
-        // TODO getterit ja tsillain että saadaan tilavuudet jne
-        silo1Status.setText(siilo1.annaTilavuus());
-        silo2Status.setText(siilo2.annaTilavuus());
-        silo3Status.setText(siilo3.annaTilavuus());
-        silo4Status.setText(siilo4.annaTilavuus());
-
-        // "Raaka-ainekuljettimet juomakeittimeen" tilan päivitys
-        // TODO getterit ja tsillain että voidaan todeta onko raaka-ainekuljetin käynnissä jne
-        if (raakaAinekuljetin1.onkoKaynnissa()) {
-            ProcLoadConvStatus1.setText("Running");
-        } else {
-            ProcLoadConvStatus1.setText("Off");
-        }
-
-        if (raakaAinekuljetin2.onkoKaynnissa()) {
-            ProcLoadConvStatus2.setText("Running");
-        } else {
-            ProcLoadConvStatus2.setText("Off");
-        }
-
-
-        // Keitinten reserve-napin päivitys
         try {
-            reserveProc1.setSelected(linjasto.onkoKomponenttiVarattu("Juomakeitin", "Juomakeitin1"));
-            reserveProc2.setSelected(linjasto.onkoKomponenttiVarattu("Juomakeitin", "Juomakeitin2"));
-            reserveProc3.setSelected(linjasto.onkoKomponenttiVarattu("Juomakeitin", "Juomakeitin3"));
+            silo1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Siilo", "Siilo1")));
+            silo2Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Siilo", "Siilo2")));
+            silo3Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Siilo", "Siilo3")));
+            silo4Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Siilo", "Siilo4")));
         } catch (RemoteException e) {
             e.printStackTrace();
         }
 
-        // Keitinten käyttäjän päivitys
-        // TODO getterit ja tsillain että voidaan todeta onko keittimet varattu jne
-        if (juomakeitin1.onkoVarattu()) {
-            proc1User.setText(juomakeitin1.varaajanNimi());
-        } else {
-            proc1User.setText("No user");
-        }
-
-        if (juomakeitin2.onkoVarattu()) {
-            proc2User.setText(juomakeitin2.varaajanNimi());
-        } else {
-            proc2User.setText("No user");
-        }
-
-        if (juomakeitin3.onkoVarattu()) {
-            proc3User.setText(juomakeitin3.varaajanNimi());
-        } else {
-            proc3User.setText("No user");
-        }
-
-        // Keitinten tilan päivitys
-        // TODO getterit ja tsillain että voidaan todeta onko keittimet käynnissä jne
-        if (juomakeitin1.onkoKaynnissa()) {
-            proc1Status.setText("Running");
-        } else {
-            proc1Status.setText("Off");
-        }
-
-        if (juomakeitin2.onkoKaynnissa()) {
-            proc2Status.setText("Running");
-        } else {
-            proc2Status.setText("Off");
-        }
-
-        if (juomakeitin3.onkoKaynnissa()) {
-            proc3Status.setText("Running");
-        } else {
-            proc3Status.setText("Off");
-        }
-
-        // "Pumput kypsytyssäiliöihin" tilan päivitys
-        // TODO getterit ja tsillain että voidaan todeta onko kypsytyssäiliöpumput käynnissä jne
-        if (kypsytyssäiliöpumppu1.onkoKäynnissä()) {
-            pump1Status.setText("Running");
-        } else {
-            pump1Status.setText("Off");
-        }
-
-        if (kypsytyssäiliöpumppu2.onkoKäynnissä()) {
-            pump2Status.setText("Running");
-        } else {
-            pump2Status.setText("Off");
-        }
-
-        // Kypsytyssäiliöiden reserve-napin päivitys
         try {
-            reserveTank1.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö1"));
-            reserveTank2.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö2"));
-            reserveTank3.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö3"));
-            reserveTank4.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö4"));
-            reserveTank5.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö5"));
-            reserveTank6.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö6"));
-            reserveTank7.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö7"));
-            reserveTank8.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö8"));
-            reserveTank9.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö9"));
-            reserveTank10.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö10"));
+            // "Raaka-ainekuljettimet juomakeittimeen" tilan päivitys
+            // ProcLoadConvStatus1 isolla alkukirjaimella syystä X
+            if (linjasto.onkoKomponenttiKäynnissä("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin1")) {
+                ProcLoadConvStatus1.setText("Running");
+            } else {
+                ProcLoadConvStatus1.setText("Off");
+            }
+
+            if (linjasto.onkoKomponenttiKäynnissä("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin2")) {
+                procLoadConvStatus2.setText("Running");
+            } else {
+                procLoadConvStatus2.setText("Off");
+            }
+
+
+            // Keitinten reserve-napin päivitys
+            reserveProc1.setSelected(linjasto.onkoKomponenttiVarattu("Juomakeittimet", "Juomakeitin1"));
+            reserveProc2.setSelected(linjasto.onkoKomponenttiVarattu("Juomakeittimet", "Juomakeitin2"));
+            reserveProc3.setSelected(linjasto.onkoKomponenttiVarattu("Juomakeittimet", "Juomakeitin3"));
+
+            // Keitinten käyttäjän päivitys
+            if (linjasto.onkoKomponenttiVarattu("Juomakeittimet", "Juomakeitin1")) {
+                proc1User.setText(linjasto.kukaOnVarannutKomponentin("Juomakeittimet", "Juomakeitin1"));
+            } else {
+                proc1User.setText("No user");
+            }
+
+            if (linjasto.onkoKomponenttiVarattu("Juomakeittimet", "Juomakeitin2")) {
+                proc2User.setText(linjasto.kukaOnVarannutKomponentin("Juomakeittimet", "Juomakeitin2"));
+            } else {
+                proc2User.setText("No user");
+            }
+
+            if (linjasto.onkoKomponenttiVarattu("Juomakeittimet", "Juomakeitin3")) {
+                proc3User.setText(linjasto.kukaOnVarannutKomponentin("Juomakeittimet", "Juomakeitin3"));
+            } else {
+                proc3User.setText("No user");
+            }
+
+            // Keitinten tilan päivitys
+            if (linjasto.onkoKomponenttiKäynnissä("Juomakeittimet", "Juomakeitin1")) {
+                proc1Status.setText("Running");
+            } else {
+                proc1Status.setText("Off");
+            }
+
+            if (linjasto.onkoKomponenttiKäynnissä("Juomakeittimet", "Juomakeitin2")) {
+                proc2Status.setText("Running");
+            } else {
+                proc2Status.setText("Off");
+            }
+
+            if (linjasto.onkoKomponenttiKäynnissä("Juomakeittimet", "Juomakeitin3")) {
+                proc3Status.setText("Running");
+            } else {
+                proc3Status.setText("Off");
+            }
+
+            // "Pumput kypsytyssäiliöihin" tilan päivitys
+            if (linjasto.onkoKomponenttiKäynnissä("PumputKypsytykseen", "PumppuKypsytykseen1")) {
+                pump1Status.setText("Running");
+            } else {
+                pump1Status.setText("Off");
+            }
+
+            if (linjasto.onkoKomponenttiKäynnissä("PumputKypsytykseen", "PumppuKypsytykseen2")) {
+                pump2Status.setText("Running");
+            } else {
+                pump2Status.setText("Off");
+            }
+
+            // Kypsytyssäiliöiden reserve-napin päivitys
+            try {
+                reserveTank1.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö1"));
+                reserveTank2.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö2"));
+                reserveTank3.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö3"));
+                reserveTank4.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö4"));
+                reserveTank5.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö5"));
+                reserveTank6.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö6"));
+                reserveTank7.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö7"));
+                reserveTank8.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö8"));
+                reserveTank9.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö9"));
+                reserveTank10.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö10"));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
+            // Kypsytyssäiliöiden tilavuuden päivitys
+            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö1")));
+            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö2")));
+            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö3")));
+            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö4")));
+            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö5")));
+            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö6")));
+            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö7")));
+            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö8")));
+            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö9")));
+            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö10")));
+
+            // "Pumput pullotukseen" tilan päivitys
+            if (linjasto.onkoKomponenttiKäynnissä("PumputPullotukseen", "PumppuPullotukseen1")) {
+                bpump1Status.setText("Running");
+            } else {
+                bpump1Status.setText("Off");
+            }
+
+            if (linjasto.onkoKomponenttiKäynnissä("PumputPullotukseen", "PumppuPullotukseen1")) {
+                bpump2Status.setText("Running");
+            } else {
+                bpump2Status.setText("Off");
+            }
         } catch (RemoteException e) {
             e.printStackTrace();
-        }
-
-        // Kypsytyssäiliöiden tilavuuden päivitys
-        // saisi tehtyä for-loopillakin, mutta pitäisi tehdä tankeista lista/taulukko ja tsillain
-        tank1Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank1 tilavuuden getterillä
-        tank2Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank2 tilavuuden getterillä
-        tank3Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank3 tilavuuden getterillä
-        tank4Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank4 tilavuuden getterillä
-        tank5Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank5 tilavuuden getterillä
-        tank6Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank6 tilavuuden getterillä
-        tank7Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank7 tilavuuden getterillä
-        tank8Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank8 tilavuuden getterillä
-        tank9Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank9 tilavuuden getterillä
-        tank10Status.setText("abrakadabra"); // TODO korvaa "abrakadabra" tank10 tilavuuden getterillä
-
-        // "Pumput pullotukseen" tilan päivitys
-        // TODO getterit ja tsillain että voidaan todeta onko pullotuspumput käynnissä jne
-        if (pullotuspumppu1.onkoKaynnissa()) {
-            bpump1Status.setText("Running");
-        } else {
-            bpump1Status.setText("Off");
-        }
-
-        if (pullotuspumppu2.onkoKaynnissa()) {
-            bpump2Status.setText("Running");
-        } else {
-            bpump2Status.setText("Off");
         }
 
     }

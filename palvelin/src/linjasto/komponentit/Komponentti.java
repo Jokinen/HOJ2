@@ -31,6 +31,10 @@ public abstract class Komponentti implements Runnable {
         säie.interrupt();
     }
 
+    public boolean onkoKäynnissä() {
+        return  käynnissä;
+    }
+
     public void run() {
         käynnissä = true;
         System.out.println("Komponentti käynnistetty");

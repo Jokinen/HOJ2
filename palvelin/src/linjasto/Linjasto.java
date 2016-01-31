@@ -97,6 +97,19 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
                 .käynnistä();
     }
 
+    public boolean onkoKomponenttiKäynnissä(String osionTunnus, String komponentinTunnus) {
+        return haeKomponentti(osionTunnus, komponentinTunnus)
+                .onkoKäynnissä();
+    }
+
+    /**
+     * @.pre    typeof haeKomponentti(osionTunnus, komponentinTunnus) = Varastoiva
+     */
+    public int haeKomponentinTäyttöaste(String osionTunnus, String komponentinTunnus) {
+        Varastoiva komponentti = (Varastoiva) haeKomponentti(osionTunnus, komponentinTunnus);
+        return komponentti.haeTäyttöaste();
+    }
+
     /**
      * @.pre    typeof haeKomponentti(osionTunnus, komponentinTunnus) = Varastoiva
      */
@@ -117,9 +130,9 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
      * @.pre    onkoKomponenttiVarattu(osionTunnus, komponentinTunnus) = true
      *          typeof haeKomponentti(osionTunnus, komponentinTunnus) = Juomakeitin
      */
-    public UUID kukaOnVarannutKomponentin(String osionTunnus, String komponentinTunnus) {
+    public String kukaOnVarannutKomponentin(String osionTunnus, String komponentinTunnus) {
         Varastoiva komponentti = (Varastoiva) haeKomponentti(osionTunnus, komponentinTunnus);
-        return komponentti.haeKäyttäjä();
+        return käyttäjät.get(komponentti.haeKäyttäjä());
     }
 
     /**
@@ -190,7 +203,7 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         Juomakeitin juomakeitin3 = new Juomakeitin("Juomakeitin3");
         juomakeitinKomponentit.add(juomakeitin3);
 
-        linjasto.osiot.Varastoiva juomakeittimet = new linjasto.osiot.Varastoiva("Juomakeitin", juomakeitinKomponentit);
+        linjasto.osiot.Varastoiva juomakeittimet = new linjasto.osiot.Varastoiva("Juomakeittimet", juomakeitinKomponentit);
         osiot.add(juomakeittimet);
 
         // Pumput kypsytyssäiliöihin
@@ -202,7 +215,7 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         Pumppu kypsytyssäiliöpumppu2 = new Pumppu("PumppuKypsytykseen2");
         kypsytyssäiliöPumppuKomponentit.add(kypsytyssäiliöpumppu2);
 
-        linjasto.osiot.Siirtävä pumppaus = new linjasto.osiot.Siirtävä("PumppuKypsytykseen", kypsytyssäiliöPumppuKomponentit);
+        linjasto.osiot.Siirtävä pumppaus = new linjasto.osiot.Siirtävä("PumputKypsytykseen", kypsytyssäiliöPumppuKomponentit);
         osiot.add(pumppaus);
 
         // Kypsytyssäiliöt
@@ -238,7 +251,7 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         Kypsytyssäiliö kypsytyssäiliö10 = new Kypsytyssäiliö("Kypsytyssäiliö10");
         kypsytyssäiliöKomponentit.add(kypsytyssäiliö10);
 
-        linjasto.osiot.Varastoiva kypsytys = new linjasto.osiot.Varastoiva("Kypsytyssäiliö", kypsytyssäiliöKomponentit);
+        linjasto.osiot.Varastoiva kypsytys = new linjasto.osiot.Varastoiva("Kypsytyssäiliöt", kypsytyssäiliöKomponentit);
         osiot.add(kypsytys);
 
         // Pumput pullotukseen
@@ -250,7 +263,7 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         Pumppu pullotuspumppu2 = new Pumppu("PumppuPullotukseen2");
         pullotusPumppuKomponentit.add(pullotuspumppu2);
 
-        linjasto.osiot.Siirtävä pullotus = new linjasto.osiot.Siirtävä("PumppuPullotukseen", pullotusPumppuKomponentit);
+        linjasto.osiot.Siirtävä pullotus = new linjasto.osiot.Siirtävä("PumputPullotukseen", pullotusPumppuKomponentit);
         osiot.add(pullotus);
     }
 }

@@ -11,19 +11,22 @@ public interface LinjastoInterface extends Remote {
     // Käyttäjän hallinta
 
     UUID kirjauduSisään(String käyttäjäNimi) throws RemoteException;
-
     boolean kirjauduUlos(UUID käyttäjäId) throws RemoteException;
-
     boolean käyttäjäNimiVarattu(String käyttäjäNimi) throws RemoteException;
 
 
     // Komponenttien hallinta
 
     void käynnistäKomponentti(String osionTunnus, String komponentinTunnus) throws RemoteException;
+    boolean onkoKomponenttiKäynnissä(String osionTunnus, String komponentinTunnus) throws RemoteException;
+
+    //-- Varastoiva spesifit
 
     boolean varaaKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) throws RemoteException;
-
     boolean onkoKomponenttiVarattu(String osionTunnus, String komponentinTunnus) throws RemoteException;
+    int haeKomponentinTäyttöaste(String osionTunnus, String komponentinTunnus) throws RemoteException;
 
-    UUID kukaOnVarannutKomponentin(String osionTunnus, String komponentinTunnus) throws RemoteException;
+    //---- Juomakeitin spesifi
+
+    String kukaOnVarannutKomponentin(String osionTunnus, String komponentinTunnus) throws RemoteException;
 }
