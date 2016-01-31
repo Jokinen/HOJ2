@@ -1185,107 +1185,237 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_signInActionPerformed
 
     private void startProcLoad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad1ActionPerformed
-        // TODO Mitä tehdään kun keittimen täytön ruuvikuljetin 1 käynnistetään
+        // Mitä tehdään kun keittimen täytön ruuvikuljetin 1 käynnistetään
+        try {
+            linjasto.käynnistäKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin1");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_startProcLoad1ActionPerformed
 
     private void startProcLoad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad2ActionPerformed
-        // TODO Mitä tehdään kun keittimen täytön ruuvikuljetin 1 käynnistetään
+        // Mitä tehdään kun keittimen täytön ruuvikuljetin 2 käynnistetään
+        try {
+            linjasto.käynnistäKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin2");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_startProcLoad2ActionPerformed
 
     private void reserveSilo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo1ActionPerformed
-        // TODO Mitä tehdään kun siilo1 varataan?
+        // Mitä tehdään kun siilo1 varataan?
+        try {
+            linjasto.varaaKomponentti("Siilo", "Siilo1", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveSilo1ActionPerformed
 
     private void reserveSilo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo2ActionPerformed
-        // TODO Mitä tehdään kun siilo2 varataan?
+        // Mitä tehdään kun siilo2 varataan?
+        try {
+            linjasto.varaaKomponentti("Siilo", "Siilo2", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveSilo2ActionPerformed
 
     private void reserveSilo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo3ActionPerformed
-        // TODO Mitä tehdään kun siilo3 varataan?
+        // Mitä tehdään kun siilo3 varataan?
+        try {
+            linjasto.varaaKomponentti("Siilo", "Siilo3", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveSilo3ActionPerformed
 
     private void reserveSilo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo4ActionPerformed
-        // TODO Mitä tehdään kun siilo4 varataan?
+        // Mitä tehdään kun siilo4 varataan?
+        try {
+            linjasto.varaaKomponentti("Siilo", "Siilo4", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveSilo4ActionPerformed
 
     private void reserveProc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveProc1ActionPerformed
-        // TODO Mitä tehdään kun keitin1 varataan?
+        // Mitä tehdään kun keitin1 varataan?
+        try {
+            linjasto.varaaKomponentti("Juomakeittimet", "Juomakeitin1", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveProc1ActionPerformed
 
     private void startProc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc1ActionPerformed
-        // TODO Mitä tehdään kun keitin1 käynnistetään?
+        //  Mitä tehdään kun keitin1 käynnistetään?
+        try {
+            linjasto.käynnistäKomponentti("Juomakeittimet", "Juomakeitin1");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_startProc1ActionPerformed
 
     private void reserveProc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveProc2ActionPerformed
-        // TODO Mitä tehdään kun keitin2 varataan?
+        // Mitä tehdään kun keitin2 varataan?
+        try {
+            linjasto.varaaKomponentti("Juomakeittimet", "Juomakeitin2", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveProc2ActionPerformed
 
     private void startProc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc2ActionPerformed
-        // TODO Mitä tehdään kun keitin2 käynnistetään?
+        // Mitä tehdään kun keitin2 käynnistetään?
+        try {
+            linjasto.käynnistäKomponentti("Juomakeittimet", "Juomakeitin2");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_startProc2ActionPerformed
 
     private void reserveProc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveProc3ActionPerformed
-        // TODO Mitä tehdään kun keitin3 varataan?
+        // Mitä tehdään kun keitin3 varataan?
+        try {
+            linjasto.varaaKomponentti("Juomakeittimet", "Juomakeitin3", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveProc3ActionPerformed
 
     private void startProc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc3ActionPerformed
-        // TODO Mitä tehdään kun keitin3 käynnistetään?
+        // Mitä tehdään kun keitin3 käynnistetään?
+        try {
+            linjasto.käynnistäKomponentti("Juomakeittimet", "Juomakeitin3");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_startProc3ActionPerformed
 
     private void startPump1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startPump1ActionPerformed
-        // TODO Mitä tehdään kun pumppu1 käynnistetään?
+        // Mitä tehdään kun pumppu1 käynnistetään?
+        try {
+            linjasto.käynnistäKomponentti("PumputKypsytykseen", "PumppuKypsytykseen1");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_startPump1ActionPerformed
 
     private void startPump2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startPump2ActionPerformed
-        // TODO Mitä tehdään kun pumppu2 käynnistetään?
+        // Mitä tehdään kun pumppu2 käynnistetään?
+        try {
+            linjasto.käynnistäKomponentti("PumputKypsytykseen", "PumppuKypsytykseen2");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_startPump2ActionPerformed
 
     private void startBpump1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBpump1ActionPerformed
-        // TODO Mitä tehdään kun pumppu1 pullotukseen käynnistetään?
+        // Mitä tehdään kun pumppu1 pullotukseen käynnistetään?
+        try {
+            linjasto.käynnistäKomponentti("PumputPullotukseen", "PumppuPullotukseen1");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_startBpump1ActionPerformed
 
     private void startBpump2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBpump2ActionPerformed
-        // TODO Mitä tehdään kun pumppu2 pullotukseen käynnistetään?
+        // Mitä tehdään kun pumppu2 pullotukseen käynnistetään?
+        try {
+            linjasto.käynnistäKomponentti("PumputPullotukseen", "PumppuPullotukseen2");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_startBpump2ActionPerformed
 
     private void reserveTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank1ActionPerformed
-        // TODO Mitä tehdään kun säiliö1 varataan?
+        // Mitä tehdään kun säiliö1 varataan?
+        try {
+            linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö1", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveTank1ActionPerformed
 
     private void reserveTank2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank2ActionPerformed
-        // TODO Mitä tehdään kun säiliö2 varataan?
+        // Mitä tehdään kun säiliö2 varataan?
+        try {
+            linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö2", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveTank2ActionPerformed
 
     private void reserveTank3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank3ActionPerformed
-        // TODO Mitä tehdään kun säiliö3 varataan?
+        // Mitä tehdään kun säiliö3 varataan?
+        try {
+            linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö3", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveTank3ActionPerformed
 
     private void reserveTank4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank4ActionPerformed
-        // TODO Mitä tehdään kun säiliö4 varataan?
+        // Mitä tehdään kun säiliö4 varataan?
+        try {
+            linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö4", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveTank4ActionPerformed
 
     private void reserveTank5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank5ActionPerformed
-        // TODO Mitä tehdään kun säiliö5 varataan?
+        // Mitä tehdään kun säiliö5 varataan?
+        try {
+            linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö5", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveTank5ActionPerformed
 
     private void reserveTank6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank6ActionPerformed
-        // TODO Mitä tehdään kun säiliö6 varataan?
+        // Mitä tehdään kun säiliö6 varataan?
+        try {
+            linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö6", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveTank6ActionPerformed
 
     private void reserveTank7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank7ActionPerformed
-        // TODO Mitä tehdään kun säiliö7 varataan?
+        // Mitä tehdään kun säiliö7 varataan?
+        try {
+            linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö7", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveTank7ActionPerformed
 
     private void reserveTank8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank8ActionPerformed
-        // TODO Mitä tehdään kun säiliö8 varataan?
+        // Mitä tehdään kun säiliö8 varataan?
+        try {
+            linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö8", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveTank8ActionPerformed
 
     private void reserveTank9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank9ActionPerformed
-        // TODO Mitä tehdään kun säiliö9 varataan?
+        // Mitä tehdään kun säiliö9 varataan?
+        try {
+            linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö9", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveTank9ActionPerformed
 
     private void reserveTank10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank10ActionPerformed
-        // TODO Mitä tehdään kun säiliö10 varataan?
+        // Mitä tehdään kun säiliö10 varataan?
+        try {
+            linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö10", käyttäjäId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reserveTank10ActionPerformed
 
     private void procLoadAmount2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procLoadAmount2ActionPerformed
