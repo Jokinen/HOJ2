@@ -68,7 +68,7 @@ public abstract class Varastoiva extends Komponentti {
 
     public boolean vapauta(UUID käyttäjäId) {
         boolean bol = true;
-        if (varattu && käyttäjäId.equals(this.käyttäjä)) {
+        if (varattu && käyttäjäId == this.käyttäjä) {
             varattu = false;
             käyttäjä = null;
         } else {
