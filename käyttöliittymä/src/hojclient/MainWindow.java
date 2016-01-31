@@ -1190,7 +1190,7 @@ public class MainWindow extends javax.swing.JFrame {
         // Mitä tehdään kun keittimen täytön ruuvikuljetin 1 käynnistetään
         if (signIn.isSelected()) {
             try {
-                linjasto.käynnistäSiirtäväKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin1", käyttäjäId, Integer.parseInt(procLoadAmount1.getText())));
+                linjasto.käynnistäSiirtäväKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin1", käyttäjäId, Integer.parseInt(procLoadAmount1.getText()));
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -1201,7 +1201,7 @@ public class MainWindow extends javax.swing.JFrame {
         // Mitä tehdään kun keittimen täytön ruuvikuljetin 2 käynnistetään
         if (signIn.isSelected()) {
             try {
-                linjasto.käynnistäSiirtäväKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin2", käyttäjäId, Integer.parseInt(procLoadAmount2.getText())));
+                linjasto.käynnistäSiirtäväKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin2", käyttäjäId, Integer.parseInt(procLoadAmount2.getText()));
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
