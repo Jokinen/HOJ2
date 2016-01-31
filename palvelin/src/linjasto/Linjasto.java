@@ -97,9 +97,12 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
                 .käynnistä();
     }
 
-    public void varaaKomponentti(String osionTunnus, String komponentinTunnus) {
-        // TODO varaa-toiminto
-        haeKomponentti(osionTunnus, komponentinTunnus).varaaKomponentti(osionTunnus, komponentinTunnus);
+    /**
+     * @.pre    typeof haeKomponentti(osionTunnus, komponentinTunnus) = Varastoiva
+     */
+    public boolean varaaKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) {
+        Varastoiva komponentti = (Varastoiva) haeKomponentti(osionTunnus, komponentinTunnus);
+        return komponentti.varaa(käyttäjäId);
     }
 
     /**
