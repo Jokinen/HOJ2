@@ -94,12 +94,12 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
 
     public void käynnistäKomponentti(String osionTunnus, String komponentinTunnus) {
         haeKomponentti(osionTunnus, komponentinTunnus)
-                .käynnistä(osionTunnus, komponentinTunnus);
+                .käynnistä();
     }
 
     public void varaaKomponentti(String osionTunnus, String komponentinTunnus) {
         // TODO varaa-toiminto
-        haeKomponentti(osionTunnus, komponentinTunnus).varaa(osionTunnus, komponentinTunnus);
+        haeKomponentti(osionTunnus, komponentinTunnus).varaaKomponentti(osionTunnus, komponentinTunnus);
     }
 
     /**
@@ -156,6 +156,12 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
 
         linjasto.osiot.Varastoiva siilosäiliö = new linjasto.osiot.Varastoiva("Siilo", raakaAinesiiloKomponentit);
         osiot.add(siilosäiliö);
+
+        // Raaka-ainesiilojen "käynnistys"
+        siilo1.käynnistä();
+        siilo2.käynnistä();
+        siilo3.käynnistä();
+        siilo4.käynnistä();
 
         // Raaka-ainekuljettimet juomakeittimeen
         ArrayList<Komponentti> raakaAinekuljetinKomponentit = new ArrayList<Komponentti>();

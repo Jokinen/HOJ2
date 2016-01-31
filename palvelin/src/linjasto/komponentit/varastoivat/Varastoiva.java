@@ -3,6 +3,7 @@ package linjasto.komponentit.varastoivat;
 import apumäärittelyt.RaakaAine;
 import linjasto.komponentit.Komponentti;
 import linjasto.osiot.Osio;
+import linjasto.Linjasto;
 import omatVirheilmoitukset.LiianSuuriMääräException;
 
 import java.util.UUID;
