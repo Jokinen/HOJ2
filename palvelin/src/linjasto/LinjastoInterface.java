@@ -23,6 +23,7 @@ public interface LinjastoInterface extends Remote {
     //-- Varastoiva spesifit
 
     boolean varaaKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) throws RemoteException;
+    boolean vapautaKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) throws RemoteException;
     boolean onkoKomponenttiVarattu(String osionTunnus, String komponentinTunnus) throws RemoteException;
     int haeKomponentinTäyttöaste(String osionTunnus, String komponentinTunnus) throws RemoteException;
 

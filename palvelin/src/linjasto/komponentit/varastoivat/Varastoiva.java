@@ -66,6 +66,18 @@ public abstract class Varastoiva extends Komponentti {
         return bol;
     }
 
+    public boolean vapauta(UUID käyttäjäId) {
+        boolean bol = true;
+        if (varattu && käyttäjäId.equals(this.käyttäjä)) {
+            varattu = false;
+            käyttäjä = null;
+        } else {
+            bol = false;
+            System.err.println("Komponentti '" + super.haeTunnus() + "' yritettiin vapauttaa, mutta vapautus epäonnistui.");
+        }
+        return bol;
+    }
+
     public int haeTäyttöaste() {
         return täyttöAste;
     }

@@ -136,6 +136,14 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
     /**
      * @.pre    typeof haeKomponentti(osionTunnus, komponentinTunnus) = Varastoiva
      */
+    public boolean vapautaKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) {
+        Varastoiva komponentti = (Varastoiva) haeKomponentti(osionTunnus, komponentinTunnus);
+        return komponentti.vapauta(käyttäjäId);
+    }
+
+    /**
+     * @.pre    typeof haeKomponentti(osionTunnus, komponentinTunnus) = Varastoiva
+     */
     public boolean onkoKomponenttiVarattu(String osionTunnus, String komponentinTunnus) {
         Varastoiva komponentti = (Varastoiva) haeKomponentti(osionTunnus, komponentinTunnus);
         return komponentti.haeVarattu();
