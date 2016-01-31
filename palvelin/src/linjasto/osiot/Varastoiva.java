@@ -26,7 +26,7 @@ public class Varastoiva extends Osio {
      */
     public int vastaanota(int määrä, UUID käyttäjäId) {
         int siirretty = 0;
-        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVapaat(määrä, käyttäjäId);
+        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVastaanottavat(määrä, käyttäjäId);
         for (linjasto.komponentit.varastoivat.Varastoiva komponentti : komponentit) {
             komponentti.vastaanota(määrä/komponentit.size());
             siirretty = siirretty + määrä/komponentit.size();
@@ -34,18 +34,26 @@ public class Varastoiva extends Osio {
         return siirretty;
     }
 
-    private ArrayList<linjasto.komponentit.varastoivat.Varastoiva> haeVapaat(int määrä, UUID käyttäjäId) {
-        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = new ArrayList<>();
-        for (Komponentti komp : this.komponentit) {
-            linjasto.komponentit.varastoivat.Varastoiva komponentti = (linjasto.komponentit.varastoivat.Varastoiva) komp;
-            if (!komponentti.onTäynnä()) {
-                if (komponentti.haeVarattu() && käyttäjäId == komponentti.haeKäyttäjä()) {
-                    komponentit.add(komponentti);
-                }
-            } else if (komponentti.haeVarattu() && käyttäjäId == komponentti.haeKäyttäjä()) {
-                komponentti.vapauta(käyttäjäId);
+    public int siirrä(int määrä, UUID käyttäjäId) {
+        int siirretty = 0;
+        linjasto.komponentit.varastoivat.Varastoiva komponentti = haeSiirtävä(määrä, käyttäjäId);
+        if (komponentti != null) {
+            if (komponentti.tilaaJäljellä() < määrä) {
+                komponentti.siirrä(komponentti.tilaaJäljellä());
+                siirretty += komponentti.tilaaJäljellä();
+                määrä = määrä - komponentti.tilaaJäljellä();
+                siirretty += siirrä(määrä, käyttäjäId);
+            } else {
+                komponentti.siirrä(määrä);
+                siirretty += määrä;
             }
         }
+        return siirretty;
+    }
+
+    private ArrayList<linjasto.komponentit.varastoivat.Varastoiva> haeVastaanottavat(int määrä, UUID käyttäjäId) {
+        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVaratut(määrä, käyttäjäId);
+
         int määräYhdelle;
         if (komponentit.size() > 0)
             määräYhdelle = määrä / komponentit.size();
@@ -59,10 +67,34 @@ public class Varastoiva extends Osio {
         return komp;
     }
 
+    private linjasto.komponentit.varastoivat.Varastoiva haeSiirtävä(int määrä, UUID käyttäjäId) {
+        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVaratut(määrä, käyttäjäId);
+
+        linjasto.komponentit.varastoivat.Varastoiva komp = null;
+        for (linjasto.komponentit.varastoivat.Varastoiva komponentti : komponentit) {
+            if (!komponentti.onTyhjä()) {
+                komp = komponentti;
+                break;
+            }
+        }
+        return komp;
+    }
+
+    private ArrayList<linjasto.komponentit.varastoivat.Varastoiva> haeVaratut(int määrä, UUID käyttäjäId) {
+        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = new ArrayList<>();
+        for (Komponentti komp : this.komponentit) {
+            linjasto.komponentit.varastoivat.Varastoiva komponentti = (linjasto.komponentit.varastoivat.Varastoiva) komp;
+            if (komponentti.haeVarattu() && käyttäjäId.equals(komponentti.haeKäyttäjä())) {
+                komponentit.add(komponentti);
+            }
+        }
+        return komponentit;
+    }
+
     public void valmis(UUID käyttäjäId) {
         for (Komponentti komp : komponentit) {
             linjasto.komponentit.varastoivat.Varastoiva komponentti = (linjasto.komponentit.varastoivat.Varastoiva) komp;
-            if (komponentti.haeVarattu() && komponentti.haeKäyttäjä() == käyttäjäId) {
+            if (komponentti.haeVarattu() && komponentti.haeKäyttäjä().equals(käyttäjäId)) {
                 komponentti.vapauta(käyttäjäId);
             }
         }

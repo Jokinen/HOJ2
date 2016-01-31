@@ -23,7 +23,6 @@ public class Ruuvikuljetin extends Siirtävä {
     public void run() {
         if (super.edellinenOsio == null) {
             // Edellinen osio on null, niin silloin tämä kuljetin on aloittava kuljetin
-            int erä = 40000;
             Varastoiva osio = (Varastoiva) this.seuraavaOsio;
             while (super.käynnissä) {
                 // Imitoidaan, että kuljetus kestää sekunnin
@@ -33,15 +32,45 @@ public class Ruuvikuljetin extends Siirtävä {
                     e.printStackTrace();
                 }
                 int määrä = 0;
-                if (erä >= VIRTAAMA) {
+                if (super.erä >= VIRTAAMA) {
                     määrä = VIRTAAMA;
                 } else {
                     määrä = erä;
                 }
                 int siirrettyMäärä = osio.vastaanota(määrä, super.käyttäjä);
-                erä = erä - siirrettyMäärä;
-                if (erä == 0) {
+                super.erä = super.erä - siirrettyMäärä;
+                if (super.erä == 0) {
                     osio.valmis(käyttäjä);
+                    super.sammuta();
+                }
+            }
+        } else {
+            Varastoiva edellinenOsio = (Varastoiva) super.edellinenOsio;
+            Varastoiva seuraavaOsio = (Varastoiva) super.seuraavaOsio;
+            while (super.käynnissä) {
+
+                // Imitoidaan, että kuljetus kestää sekunnin
+                try {
+                    Thread.sleep(10);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                int määrä = 0;
+                if (super.erä >= VIRTAAMA) {
+                    määrä = VIRTAAMA;
+                } else {
+                    määrä = erä;
+                }
+
+                int haettuMäärä = edellinenOsio.siirrä(määrä, super.käyttäjä);
+                int siirrettyMäärä = edellinenOsio.vastaanota(haettuMäärä, super.käyttäjä);
+
+                super.erä = super.erä - siirrettyMäärä;
+
+                if (super.erä == 0) {
+                    edellinenOsio.valmis(käyttäjä);
+                    seuraavaOsio.valmis(käyttäjä);
                     super.sammuta();
                 }
             }

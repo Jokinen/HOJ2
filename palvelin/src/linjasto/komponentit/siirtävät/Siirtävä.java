@@ -16,7 +16,7 @@ public abstract class Siirtävä extends Komponentti {
     protected Osio edellinenOsio;
     protected Osio seuraavaOsio;
     protected UUID käyttäjä;
-    protected int määrä;
+    protected int erä;
 
     public Siirtävä(String tunnus, int v) {
         super(tunnus);
@@ -27,7 +27,7 @@ public abstract class Siirtävä extends Komponentti {
         this.edellinenOsio = edellinenOsio;
         this.seuraavaOsio = seuraavaOsio;
         this.käyttäjä = käyttäjäId;
-        this.määrä = määrä;
+        this.erä = määrä;
         super.käynnistä();
     }
 
