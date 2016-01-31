@@ -21,25 +21,29 @@ public class Ruuvikuljetin extends Siirtävä {
 
     @Override
     public void run() {
-        int erä = 40000;
-        Varastoiva osio = (Varastoiva) this.seuraavaOsio;
-        while (super.käynnissä) {
-            // Imitoidaan, että kuljetus kestää sekunnin
-            try {
-                Thread.sleep(10);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            int määrä = 0;
-            if (erä >= VIRTAAMA) {
-                määrä = VIRTAAMA;
-            } else {
-                määrä = erä;
-            }
-            int siirrettyMäärä = osio.vastaanota(määrä, super.käyttäjä);
-            erä = erä - siirrettyMäärä;
-            if (erä == 0) {
-                super.sammuta();
+        if (super.edellinenOsio == null) {
+            // Edellinen osio on null, niin silloin tämä kuljetin on aloittava kuljetin
+            int erä = 40000;
+            Varastoiva osio = (Varastoiva) this.seuraavaOsio;
+            while (super.käynnissä) {
+                // Imitoidaan, että kuljetus kestää sekunnin
+                try {
+                    Thread.sleep(10);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                int määrä = 0;
+                if (erä >= VIRTAAMA) {
+                    määrä = VIRTAAMA;
+                } else {
+                    määrä = erä;
+                }
+                int siirrettyMäärä = osio.vastaanota(määrä, super.käyttäjä);
+                erä = erä - siirrettyMäärä;
+                if (erä == 0) {
+                    osio.valmis(käyttäjä);
+                    super.sammuta();
+                }
             }
         }
     }

@@ -50,8 +50,8 @@ public abstract class Varastoiva extends Komponentti {
         täyttöAste = täyttöAste + määrä;
     }
 
-    public void siirrä(RaakaAine raakaAine, int määrä, Osio seuraavaOsio) throws LiianSuuriMääräException {
-        // TODO
+    public void siirrä(int määrä) {
+        täyttöAste = täyttöAste - määrä;
     }
 
     public boolean varaa(UUID käyttäjäId) {

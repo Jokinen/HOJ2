@@ -39,12 +39,11 @@ public class Varastoiva extends Osio {
         for (Komponentti komp : this.komponentit) {
             linjasto.komponentit.varastoivat.Varastoiva komponentti = (linjasto.komponentit.varastoivat.Varastoiva) komp;
             if (!komponentti.onTäynnä()) {
-                if (!komponentti.haeVarattu()) {
-                    komponentit.add(komponentti);
-                    komponentti.varaa(käyttäjäId);
-                } else if (käyttäjäId == komponentti.haeKäyttäjä()) {
+                if (komponentti.haeVarattu() && käyttäjäId == komponentti.haeKäyttäjä()) {
                     komponentit.add(komponentti);
                 }
+            } else if (komponentti.haeVarattu() && käyttäjäId == komponentti.haeKäyttäjä()) {
+                komponentti.vapauta(käyttäjäId);
             }
         }
         int määräYhdelle;
@@ -58,5 +57,14 @@ public class Varastoiva extends Osio {
                 komp.add(komponentti);
         }
         return komp;
+    }
+
+    public void valmis(UUID käyttäjäId) {
+        for (Komponentti komp : komponentit) {
+            linjasto.komponentit.varastoivat.Varastoiva komponentti = (linjasto.komponentit.varastoivat.Varastoiva) komp;
+            if (komponentti.haeVarattu() && komponentti.haeKäyttäjä() == käyttäjäId) {
+                komponentti.vapauta(käyttäjäId);
+            }
+        }
     }
 }

@@ -119,26 +119,30 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
                 .haeKomponentti(komponentinTunnus);
     }
 
-    public void käynnistäKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) {
+    public void käynnistäTulo(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) {
+        käynnistäSiirtäväKomponentti(osionTunnus, komponentinTunnus, käyttäjäId, 40000);
+    }
+
+    public void käynnistäSiirtäväKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId, int määrä) {
         Osio osio = haeOsio(osionTunnus);
         Komponentti komponentti = osio.haeKomponentti(komponentinTunnus);
-        if (komponentti instanceof linjasto.komponentit.siirtävät.Siirtävä) {
-            Siirtävä komp = (Siirtävä) komponentti;
-            if (onSeuraavaOsio(osio) && onEdellinenOsio(osio)) {
-                komp.käynnistä(haeEdellinenOsio(osio), haeSeuraavaOsio(osio), käyttäjäId);
-            } else if (onSeuraavaOsio(osio)) {
-                komp.käynnistä(null, haeSeuraavaOsio(osio), käyttäjäId);
-            } else if (onEdellinenOsio(osio)) {
-                komp.käynnistä(haeEdellinenOsio(osio), null, käyttäjäId);
-            }
-        } else {
-            komponentti.käynnistä();
+        Siirtävä komp = (Siirtävä) komponentti;
+        if (onSeuraavaOsio(osio) && onEdellinenOsio(osio)) {
+            komp.käynnistä(haeEdellinenOsio(osio), haeSeuraavaOsio(osio), käyttäjäId, määrä);
+        } else if (onSeuraavaOsio(osio)) {
+            komp.käynnistä(null, haeSeuraavaOsio(osio), käyttäjäId, määrä);
+        } else if (onEdellinenOsio(osio)) {
+            komp.käynnistä(haeEdellinenOsio(osio), null, käyttäjäId, määrä);
         }
     }
 
     public boolean onkoKomponenttiKäynnissä(String osionTunnus, String komponentinTunnus) {
         return haeKomponentti(osionTunnus, komponentinTunnus)
                 .onkoKäynnissä();
+    }
+
+    public void käynnistäVarastoivaKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) {
+        haeKomponentti(osionTunnus, komponentinTunnus).käynnistä();
     }
 
     /**

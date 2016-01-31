@@ -17,11 +17,20 @@ public interface LinjastoInterface extends Remote {
 
     // Komponenttien hallinta
 
-    void käynnistäKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) throws RemoteException;
     boolean onkoKomponenttiKäynnissä(String osionTunnus, String komponentinTunnus) throws RemoteException;
+
+    //-- Tulo
+
+    void käynnistäTulo(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) throws RemoteException;
+
+    //-- Siirtävät
+
+    void käynnistäSiirtäväKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId, int määrä) throws RemoteException;
+
 
     //-- Varastoiva spesifit
 
+    void käynnistäVarastoivaKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) throws RemoteException;
     boolean varaaKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) throws RemoteException;
     boolean vapautaKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) throws RemoteException;
     boolean onkoKomponenttiVarattu(String osionTunnus, String komponentinTunnus) throws RemoteException;

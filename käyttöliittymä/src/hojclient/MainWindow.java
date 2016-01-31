@@ -1147,7 +1147,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void startSiloLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSiloLoadActionPerformed
         try {
-            linjasto.käynnistäKomponentti("Tulo", "TäytönRuuvikuljetin", käyttäjäId);
+            linjasto.käynnistäTulo("Tulo", "TäytönRuuvikuljetin", käyttäjäId);
         } catch (RemoteException e) {
             System.out.println(e);
         }
@@ -1187,7 +1187,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void startProcLoad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad1ActionPerformed
         // Mitä tehdään kun keittimen täytön ruuvikuljetin 1 käynnistetään
         try {
-            linjasto.käynnistäKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin1", käyttäjäId);
+            linjasto.käynnistäSiirtäväKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin1", käyttäjäId, Integer.parseInt(procLoadAmount1.getText()));
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1196,7 +1196,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void startProcLoad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad2ActionPerformed
         // Mitä tehdään kun keittimen täytön ruuvikuljetin 2 käynnistetään
         try {
-            linjasto.käynnistäKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin2", käyttäjäId);
+            linjasto.käynnistäSiirtäväKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin2", käyttäjäId, Integer.parseInt(procLoadAmount2.getText()));
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1270,7 +1270,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void startProc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc1ActionPerformed
         //  Mitä tehdään kun keitin1 käynnistetään?
         try {
-            linjasto.käynnistäKomponentti("Juomakeittimet", "Juomakeitin1", käyttäjäId);
+            linjasto.käynnistäVarastoivaKomponentti("Juomakeittimet", "Juomakeitin1", käyttäjäId);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1292,7 +1292,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void startProc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc2ActionPerformed
         // Mitä tehdään kun keitin2 käynnistetään?
         try {
-            linjasto.käynnistäKomponentti("Juomakeittimet", "Juomakeitin2", käyttäjäId);
+            linjasto.käynnistäVarastoivaKomponentti("Juomakeittimet", "Juomakeitin2", käyttäjäId);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1314,7 +1314,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void startProc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc3ActionPerformed
         // Mitä tehdään kun keitin3 käynnistetään?
         try {
-            linjasto.käynnistäKomponentti("Juomakeittimet", "Juomakeitin3", käyttäjäId);
+            linjasto.käynnistäVarastoivaKomponentti("Juomakeittimet", "Juomakeitin3", käyttäjäId);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1323,7 +1323,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void startPump1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startPump1ActionPerformed
         // Mitä tehdään kun pumppu1 käynnistetään?
         try {
-            linjasto.käynnistäKomponentti("PumputKypsytykseen", "PumppuKypsytykseen1", käyttäjäId);
+            linjasto.käynnistäVarastoivaKomponentti("PumputKypsytykseen", "PumppuKypsytykseen1", käyttäjäId);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1332,7 +1332,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void startPump2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startPump2ActionPerformed
         // Mitä tehdään kun pumppu2 käynnistetään?
         try {
-            linjasto.käynnistäKomponentti("PumputKypsytykseen", "PumppuKypsytykseen2", käyttäjäId);
+            linjasto.käynnistäVarastoivaKomponentti("PumputKypsytykseen", "PumppuKypsytykseen2", käyttäjäId);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1341,7 +1341,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void startBpump1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBpump1ActionPerformed
         // Mitä tehdään kun pumppu1 pullotukseen käynnistetään?
         try {
-            linjasto.käynnistäKomponentti("PumputPullotukseen", "PumppuPullotukseen1", käyttäjäId);
+            linjasto.käynnistäVarastoivaKomponentti("PumputPullotukseen", "PumppuPullotukseen1", käyttäjäId);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1350,7 +1350,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void startBpump2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBpump2ActionPerformed
         // Mitä tehdään kun pumppu2 pullotukseen käynnistetään?
         try {
-            linjasto.käynnistäKomponentti("PumputPullotukseen", "PumppuPullotukseen2", käyttäjäId);
+            linjasto.käynnistäVarastoivaKomponentti("PumputPullotukseen", "PumppuPullotukseen2", käyttäjäId);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
