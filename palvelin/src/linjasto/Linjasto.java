@@ -92,9 +92,14 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
                 .haeKomponentti(komponentinTunnus);
     }
 
-    public void käynnistäKomponentti(String osionTunnnus, String komponentinTunnus) {
-        haeKomponentti(osionTunnnus, komponentinTunnus)
-                .käynnistä();
+    public void käynnistäKomponentti(String osionTunnus, String komponentinTunnus) {
+        haeKomponentti(osionTunnus, komponentinTunnus)
+                .käynnistä(osionTunnus, komponentinTunnus);
+    }
+
+    public void varaaKomponentti(String osionTunnus, String komponentinTunnus) {
+        // TODO varaa-toiminto
+        haeKomponentti(osionTunnus, komponentinTunnus).varaa(osionTunnus, komponentinTunnus);
     }
 
     /**
