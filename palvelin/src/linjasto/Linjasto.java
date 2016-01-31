@@ -39,11 +39,29 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
     }
 
     /**
-     * TODO Sopimus joka sanoo että osiolla on oltava seuraava sio, ja että osion on löydyttävä osiot listasta
+     * TODO Sopimus joka sanoo että osiolla on oltava seuraava osio, ja että osion on löydyttävä osiot listasta
      */
     private Osio haeSeuraavaOsio(Osio osio) {
         int index = osiot.indexOf(osio) + 1;
         return osiot.get(index);
+    }
+
+    /**
+     * TODO Sopimus joka sanoo että osiolla on oltava edellinen osio, ja että osion on löydyttävä osiot listasta
+     */
+    private Osio haeEdellinenOsio(Osio osio) {
+        int index = osiot.indexOf(osio) - 1;
+        return osiot.get(index);
+    }
+
+    private boolean onSeuraavaOsio(Osio osio) {
+        int index = osiot.indexOf(osio) + 1;
+        return index < osiot.size();
+    }
+
+    private boolean onEdellinenOsio(Osio osio) {
+        int index = osiot.indexOf(osio);
+        return index != 0;
     }
 
     public UUID kirjauduSisään(String käyttäjäNimi) throws RemoteException {
@@ -106,7 +124,13 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         Komponentti komponentti = osio.haeKomponentti(komponentinTunnus);
         if (komponentti instanceof linjasto.komponentit.siirtävät.Siirtävä) {
             Siirtävä komp = (Siirtävä) komponentti;
-            komp.käynnistä(haeSeuraavaOsio(osio), käyttäjäId);
+            if (onSeuraavaOsio(osio) && onEdellinenOsio(osio)) {
+                komp.käynnistä(haeEdellinenOsio(osio), haeSeuraavaOsio(osio), käyttäjäId);
+            } else if (onSeuraavaOsio(osio)) {
+                komp.käynnistä(null, haeSeuraavaOsio(osio), käyttäjäId);
+            } else if (onEdellinenOsio(osio)) {
+                komp.käynnistä(haeEdellinenOsio(osio), null, käyttäjäId);
+            }
         } else {
             komponentti.käynnistä();
         }

@@ -42,7 +42,7 @@ public class Varastoiva extends Osio {
                 if (!komponentti.haeVarattu()) {
                     komponentit.add(komponentti);
                     komponentti.varaa(käyttäjäId);
-                } else if (komponentti.haeVarattu() && käyttäjäId.equals(komponentti.haeKäyttäjä())) {
+                } else if (käyttäjäId == komponentti.haeKäyttäjä()) {
                     komponentit.add(komponentti);
                 }
             }

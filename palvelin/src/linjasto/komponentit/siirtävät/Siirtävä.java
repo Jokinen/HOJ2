@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class Siirtävä extends Komponentti {
     protected final int VIRTAAMA;
+    protected Osio edellinenOsio;
     protected Osio seuraavaOsio;
     protected UUID käyttäjä;
 
@@ -21,8 +22,9 @@ public abstract class Siirtävä extends Komponentti {
         VIRTAAMA = v;
     }
 
-    public void käynnistä(Osio osio, UUID käyttäjäId) {
-        this.seuraavaOsio = osio;
+    public void käynnistä(Osio edellinenOsio, Osio seuraavaOsio, UUID käyttäjäId) {
+        this.edellinenOsio = edellinenOsio;
+        this.seuraavaOsio = seuraavaOsio;
         this.käyttäjä = käyttäjäId;
         super.käynnistä();
     }
