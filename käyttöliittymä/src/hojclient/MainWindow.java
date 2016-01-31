@@ -1298,14 +1298,21 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_procLoadAmount1ActionPerformed
 
     public void päivitäTiedot() {
+
+        // Tulon tilan päivitys
         try {
             if (linjasto.onkoKomponenttiKäynnissä("Tulo", "TäytönRuuvikuljetin")) {
                 siloLoadConvStatus.setText("Running");
-                startSiloLoad.setSelected(true);
             } else {
                 siloLoadConvStatus.setText("Off");
-                startSiloLoad.setSelected(false);
             }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        // Tulon start-napin päivitys
+        try {
+            startSiloLoad.setSelected(linjasto.onkoKomponenttiKäynnissä("Tulo", "TäytönRuuvikuljetin"));
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1320,7 +1327,7 @@ public class MainWindow extends javax.swing.JFrame {
             e.printStackTrace();
         }
 
-        // Siilojen tilavuuden päivitys
+        // Siilojen täyttöasteen päivitys
         try {
             silo1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Siilo", "Siilo1")));
             silo2Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Siilo", "Siilo2")));
@@ -1345,6 +1352,18 @@ public class MainWindow extends javax.swing.JFrame {
                 procLoadConvStatus2.setText("Off");
             }
 
+            // "Raaka-ainekuljettimet juomakeittimeen" start-napin päivitys
+            try {
+                startProcLoad1.setSelected(linjasto.onkoKomponenttiKäynnissä("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin1"));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                startProcLoad2.setSelected(linjasto.onkoKomponenttiKäynnissä("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin2"));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
 
             // Keitinten reserve-napin päivitys
             reserveProc1.setSelected(linjasto.onkoKomponenttiVarattu("Juomakeittimet", "Juomakeitin1"));
@@ -1402,6 +1421,19 @@ public class MainWindow extends javax.swing.JFrame {
                 pump2Status.setText("Off");
             }
 
+            // "Pumput kypsytyssäiliöihin" start-napin päivitys
+            try {
+                startPump1.setSelected(linjasto.onkoKomponenttiKäynnissä("PumputKypsytykseen", "PumputKypsytykseen1"));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                startPump2.setSelected(linjasto.onkoKomponenttiKäynnissä("PumputKypsytykseen", "PumputKypsytykseen2"));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
             // Kypsytyssäiliöiden reserve-napin päivitys
             try {
                 reserveTank1.setSelected(linjasto.onkoKomponenttiVarattu("Kypsytyssäiliö", "Kypsytyssäiliö1"));
@@ -1442,6 +1474,20 @@ public class MainWindow extends javax.swing.JFrame {
             } else {
                 bpump2Status.setText("Off");
             }
+
+            // "Pumput pullotukseen" start-napin päivitys
+            try {
+                startBpump1.setSelected(linjasto.onkoKomponenttiKäynnissä("PumputPullotukseen", "PumputPullotukseen1"));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                startBpump2.setSelected(linjasto.onkoKomponenttiKäynnissä("PumputPullotukseen", "PumputPullotukseen2"));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
         } catch (RemoteException e) {
             e.printStackTrace();
         }
