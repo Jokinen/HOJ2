@@ -254,6 +254,18 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         linjasto.osiot.Varastoiva kypsytys = new linjasto.osiot.Varastoiva("Kypsytyssäiliöt", kypsytyssäiliöKomponentit);
         osiot.add(kypsytys);
 
+        // Kypsytyssäiliöiden "käynnistys"
+        kypsytyssäiliö1.käynnistä();
+        kypsytyssäiliö2.käynnistä();
+        kypsytyssäiliö3.käynnistä();
+        kypsytyssäiliö4.käynnistä();
+        kypsytyssäiliö5.käynnistä();
+        kypsytyssäiliö6.käynnistä();
+        kypsytyssäiliö7.käynnistä();
+        kypsytyssäiliö8.käynnistä();
+        kypsytyssäiliö9.käynnistä();
+        kypsytyssäiliö10.käynnistä();
+
         // Pumput pullotukseen
         ArrayList<Komponentti> pullotusPumppuKomponentit = new ArrayList<Komponentti>();
 
