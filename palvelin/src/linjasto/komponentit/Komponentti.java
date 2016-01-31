@@ -9,7 +9,7 @@ public abstract class Komponentti implements Runnable {
     private final String TUNNUS;
     private boolean käynnissä = false;
 
-    public abstract void vastaanota(RaakaAine raakaAine, int määrä, Osio seuraavOsio) throws LiianSuuriMääräException;
+    public abstract void vastaanota(RaakaAine raakaAine, int määrä, Osio seuraavaOsio) throws LiianSuuriMääräException;
 
     public Komponentti(String t) {
         säie = new Thread(this);
@@ -22,6 +22,7 @@ public abstract class Komponentti implements Runnable {
 
     public void käynnistä() {
         säie.start();
+        run();
     }
 
     public void sammuta() {

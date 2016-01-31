@@ -13,9 +13,4 @@ public class RaakaAineSiilo extends Varastoiva {
     public RaakaAineSiilo(String tunnus) {
         super(tunnus, 10000);
     }
-
-    public void käynnistä() {
-        // TODO
-
-    }
 }
