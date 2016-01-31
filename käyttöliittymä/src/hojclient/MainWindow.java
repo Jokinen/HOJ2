@@ -1146,10 +1146,12 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void startSiloLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSiloLoadActionPerformed
-        try {
-            linjasto.käynnistäTulo("Tulo", "TäytönRuuvikuljetin", käyttäjäId);
-        } catch (RemoteException e) {
-            System.out.println(e);
+        if (signIn.isSelected()) {
+            try {
+                linjasto.käynnistäTulo("Tulo", "TäytönRuuvikuljetin", käyttäjäId);
+            } catch (RemoteException e) {
+                System.out.println(e);
+            }
         }
     }//GEN-LAST:event_startSiloLoadActionPerformed
 
@@ -1186,303 +1188,355 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void startProcLoad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad1ActionPerformed
         // Mitä tehdään kun keittimen täytön ruuvikuljetin 1 käynnistetään
-        try {
-            linjasto.käynnistäSiirtäväKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin1", käyttäjäId, Integer.parseInt(procLoadAmount1.getText()));
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        if (signIn.isSelected()) {
+            try {
+                linjasto.käynnistäSiirtäväKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin1", käyttäjäId, Integer.parseInt(procLoadAmount1.getText())));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_startProcLoad1ActionPerformed
 
     private void startProcLoad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad2ActionPerformed
         // Mitä tehdään kun keittimen täytön ruuvikuljetin 2 käynnistetään
-        try {
-            linjasto.käynnistäSiirtäväKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin2", käyttäjäId, Integer.parseInt(procLoadAmount2.getText()));
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        if (signIn.isSelected()) {
+            try {
+                linjasto.käynnistäSiirtäväKomponentti("KeittimenTäytönRuuvikuljetin", "KeittimenTäytönRuuvikuljetin2", käyttäjäId, Integer.parseInt(procLoadAmount2.getText())));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_startProcLoad2ActionPerformed
 
     private void reserveSilo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo1ActionPerformed
         // Mitä tehdään kun siilo1 varataan?
-        try {
-        	if (linjasto.onkoKomponenttiVarattu("Siilo", "Siilo1")) {
-        		linjasto.vapautaKomponentti("Siilo", "Siilo1", käyttäjäId);
-        	} else {
-            	linjasto.varaaKomponentti("Siilo", "Siilo1", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Siilo", "Siilo1")) {
+                    linjasto.vapautaKomponentti("Siilo", "Siilo1", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Siilo", "Siilo1", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveSilo1ActionPerformed
 
     private void reserveSilo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo2ActionPerformed
         // Mitä tehdään kun siilo2 varataan?
-        try {
-        	if (linjasto.onkoKomponenttiVarattu("Siilo", "Siilo2")) {
-        		linjasto.vapautaKomponentti("Siilo", "Siilo2", käyttäjäId);
-        	} else {
-            	linjasto.varaaKomponentti("Siilo", "Siilo2", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Siilo", "Siilo2")) {
+                    linjasto.vapautaKomponentti("Siilo", "Siilo2", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Siilo", "Siilo2", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveSilo2ActionPerformed
 
     private void reserveSilo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo3ActionPerformed
         // Mitä tehdään kun siilo3 varataan?
-        try {
-        	if (linjasto.onkoKomponenttiVarattu("Siilo", "Siilo3")) {
-        		linjasto.vapautaKomponentti("Siilo", "Siilo3", käyttäjäId);
-        	} else {
-            	linjasto.varaaKomponentti("Siilo", "Siilo3", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Siilo", "Siilo3")) {
+                    linjasto.vapautaKomponentti("Siilo", "Siilo3", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Siilo", "Siilo3", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveSilo3ActionPerformed
 
     private void reserveSilo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo4ActionPerformed
         // Mitä tehdään kun siilo4 varataan?
-        try {
-        	if (linjasto.onkoKomponenttiVarattu("Siilo", "Siilo4")) {
-        		linjasto.vapautaKomponentti("Siilo", "Siilo4", käyttäjäId);
-        	} else {
-            	linjasto.varaaKomponentti("Siilo", "Siilo4", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Siilo", "Siilo4")) {
+                    linjasto.vapautaKomponentti("Siilo", "Siilo4", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Siilo", "Siilo4", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveSilo4ActionPerformed
 
     private void reserveProc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveProc1ActionPerformed
         // Mitä tehdään kun keitin1 varataan?
-        try {
-            if (linjasto.onkoKomponenttiVarattu("Juomakeittimet", "Juomakeitin1")) {
-                linjasto.vapautaKomponentti("Juomakeittimet", "Juomakeitin1", käyttäjäId);
-            } else {
-                linjasto.varaaKomponentti("Juomakeittimet", "Juomakeitin1", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Juomakeittimet", "Juomakeitin1")) {
+                    linjasto.vapautaKomponentti("Juomakeittimet", "Juomakeitin1", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Juomakeittimet", "Juomakeitin1", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveProc1ActionPerformed
 
     private void startProc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc1ActionPerformed
         //  Mitä tehdään kun keitin1 käynnistetään?
-        try {
-            linjasto.käynnistäVarastoivaKomponentti("Juomakeittimet", "Juomakeitin1", käyttäjäId);
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        if (signIn.isSelected()) {
+            try {
+                linjasto.käynnistäVarastoivaKomponentti("Juomakeittimet", "Juomakeitin1", käyttäjäId);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_startProc1ActionPerformed
 
     private void reserveProc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveProc2ActionPerformed
         // Mitä tehdään kun keitin2 varataan?
-        try {
-            if (linjasto.onkoKomponenttiVarattu("Juomakeittimet", "Juomakeitin2")) {
-                linjasto.vapautaKomponentti("Juomakeittimet", "Juomakeitin2", käyttäjäId);
-            } else {
-                linjasto.varaaKomponentti("Juomakeittimet", "Juomakeitin2", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Juomakeittimet", "Juomakeitin2")) {
+                    linjasto.vapautaKomponentti("Juomakeittimet", "Juomakeitin2", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Juomakeittimet", "Juomakeitin2", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveProc2ActionPerformed
 
     private void startProc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc2ActionPerformed
         // Mitä tehdään kun keitin2 käynnistetään?
-        try {
-            linjasto.käynnistäVarastoivaKomponentti("Juomakeittimet", "Juomakeitin2", käyttäjäId);
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        if (signIn.isSelected()) {
+            try {
+                linjasto.käynnistäVarastoivaKomponentti("Juomakeittimet", "Juomakeitin2", käyttäjäId);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_startProc2ActionPerformed
 
     private void reserveProc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveProc3ActionPerformed
         // Mitä tehdään kun keitin3 varataan?
-        try {
-            if (linjasto.onkoKomponenttiVarattu("Juomakeittimet", "Juomakeitin3")) {
-                linjasto.vapautaKomponentti("Juomakeittimet", "Juomakeitin3", käyttäjäId);
-            } else {
-                linjasto.varaaKomponentti("Juomakeittimet", "Juomakeitin3", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Juomakeittimet", "Juomakeitin3")) {
+                    linjasto.vapautaKomponentti("Juomakeittimet", "Juomakeitin3", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Juomakeittimet", "Juomakeitin3", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveProc3ActionPerformed
 
     private void startProc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc3ActionPerformed
         // Mitä tehdään kun keitin3 käynnistetään?
-        try {
-            linjasto.käynnistäVarastoivaKomponentti("Juomakeittimet", "Juomakeitin3", käyttäjäId);
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        if (signIn.isSelected()) {
+            try {
+                linjasto.käynnistäVarastoivaKomponentti("Juomakeittimet", "Juomakeitin3", käyttäjäId);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_startProc3ActionPerformed
 
     private void startPump1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startPump1ActionPerformed
         // Mitä tehdään kun pumppu1 käynnistetään?
-        try {
-            linjasto.käynnistäVarastoivaKomponentti("PumputKypsytykseen", "PumppuKypsytykseen1", käyttäjäId);
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        if (signIn.isSelected()) {
+            try {
+                linjasto.käynnistäVarastoivaKomponentti("PumputKypsytykseen", "PumppuKypsytykseen1", käyttäjäId);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_startPump1ActionPerformed
 
     private void startPump2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startPump2ActionPerformed
         // Mitä tehdään kun pumppu2 käynnistetään?
-        try {
-            linjasto.käynnistäVarastoivaKomponentti("PumputKypsytykseen", "PumppuKypsytykseen2", käyttäjäId);
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        if (signIn.isSelected()) {
+            try {
+                linjasto.käynnistäVarastoivaKomponentti("PumputKypsytykseen", "PumppuKypsytykseen2", käyttäjäId);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_startPump2ActionPerformed
 
     private void startBpump1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBpump1ActionPerformed
         // Mitä tehdään kun pumppu1 pullotukseen käynnistetään?
-        try {
-            linjasto.käynnistäVarastoivaKomponentti("PumputPullotukseen", "PumppuPullotukseen1", käyttäjäId);
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        if (signIn.isSelected()) {
+            try {
+                linjasto.käynnistäVarastoivaKomponentti("PumputPullotukseen", "PumppuPullotukseen1", käyttäjäId);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_startBpump1ActionPerformed
 
     private void startBpump2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBpump2ActionPerformed
         // Mitä tehdään kun pumppu2 pullotukseen käynnistetään?
-        try {
-            linjasto.käynnistäVarastoivaKomponentti("PumputPullotukseen", "PumppuPullotukseen2", käyttäjäId);
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        if (signIn.isSelected()) {
+            try {
+                linjasto.käynnistäVarastoivaKomponentti("PumputPullotukseen", "PumppuPullotukseen2", käyttäjäId);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_startBpump2ActionPerformed
 
     private void reserveTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank1ActionPerformed
         // Mitä tehdään kun säiliö1 varataan?
-        try {
-            if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö1")) {
-                linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö1", käyttäjäId);
-            } else {
-                linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö1", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö1")) {
+                    linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö1", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö1", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveTank1ActionPerformed
 
     private void reserveTank2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank2ActionPerformed
         // Mitä tehdään kun säiliö2 varataan?
-        try {
-            if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö2")) {
-                linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö2", käyttäjäId);
-            } else {
-                linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö2", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö2")) {
+                    linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö2", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö2", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveTank2ActionPerformed
 
     private void reserveTank3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank3ActionPerformed
         // Mitä tehdään kun säiliö3 varataan?
-        try {
-            if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö3")) {
-                linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö3", käyttäjäId);
-            } else {
-                linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö3", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö3")) {
+                    linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö3", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö3", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveTank3ActionPerformed
 
     private void reserveTank4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank4ActionPerformed
         // Mitä tehdään kun säiliö4 varataan?
-        try {
-            if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö4")) {
-                linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö4", käyttäjäId);
-            } else {
-                linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö4", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö4")) {
+                    linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö4", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö4", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveTank4ActionPerformed
 
     private void reserveTank5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank5ActionPerformed
         // Mitä tehdään kun säiliö5 varataan?
-        try {
-            if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö5")) {
-                linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö5", käyttäjäId);
-            } else {
-                linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö5", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö5")) {
+                    linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö5", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö5", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveTank5ActionPerformed
 
     private void reserveTank6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank6ActionPerformed
         // Mitä tehdään kun säiliö6 varataan?
-        try {
-            if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö6")) {
-                linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö6", käyttäjäId);
-            } else {
-                linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö6", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö6")) {
+                    linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö6", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö6", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveTank6ActionPerformed
 
     private void reserveTank7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank7ActionPerformed
         // Mitä tehdään kun säiliö7 varataan?
-        try {
-            if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö7")) {
-                linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö7", käyttäjäId);
-            } else {
-                linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö7", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö7")) {
+                    linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö7", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö7", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveTank7ActionPerformed
 
     private void reserveTank8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank8ActionPerformed
         // Mitä tehdään kun säiliö8 varataan?
-        try {
-            if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö8")) {
-                linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö8", käyttäjäId);
-            } else {
-                linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö8", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö8")) {
+                    linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö8", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö8", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveTank8ActionPerformed
 
     private void reserveTank9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank9ActionPerformed
         // Mitä tehdään kun säiliö9 varataan?
-        try {
-            if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö9")) {
-                linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö9", käyttäjäId);
-            } else {
-                linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö9", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö9")) {
+                    linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö9", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö9", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveTank9ActionPerformed
 
     private void reserveTank10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank10ActionPerformed
         // Mitä tehdään kun säiliö10 varataan?
-        try {
-            if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö10")) {
-                linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö10", käyttäjäId);
-            } else {
-                linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö10", käyttäjäId);
+        if (signIn.isSelected()) {
+            try {
+                if (linjasto.onkoKomponenttiVarattu("Kypsytyssäiliöt", "Kypsytyssäiliö10")) {
+                    linjasto.vapautaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö10", käyttäjäId);
+                } else {
+                    linjasto.varaaKomponentti("Kypsytyssäiliöt", "Kypsytyssäiliö10", käyttäjäId);
+                }
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_reserveTank10ActionPerformed
 
