@@ -33,22 +33,16 @@ public abstract class Varastoiva extends Komponentti {
         maksimiKoko = m;
     }
 
-    public boolean onkoVapaa(String komponentinTunnus, UUID käyttäjäId) {
-        boolean onVapaaKysyjälle = false;
-        if ((täytetään || tyhjennetään) && komponentinTunnus.equals(this.komponentinTunnus)) {
-            onVapaaKysyjälle = true;
-        } else if (!täytetään && !tyhjennetään) {
-            onVapaaKysyjälle = true;
-        }
-        return varattu && käyttäjäId.equals(käyttäjä) && onVapaaKysyjälle;
-    }
-
     public boolean haeVarattu() {
         return varattu;
     }
 
     public UUID haeKäyttäjä() {
         return käyttäjä;
+    }
+
+    public String haeKomponentinTunnus() {
+        return komponentinTunnus;
     }
 
     // Palauttaa komponentin täyttöasteen
@@ -161,25 +155,34 @@ public abstract class Varastoiva extends Komponentti {
         return maksimiKoko - täyttöAste;
     }
 
-    public int tavaraaJäljellä() {
-        return täyttöAste;
+    public boolean onkoVapaa(String komponentinTunnus, UUID käyttäjäId) {
+        boolean onVapaaKysyjälle = false;
+        if ((täytetään || tyhjennetään) && komponentinTunnus.equals(this.komponentinTunnus)) {
+            onVapaaKysyjälle = true;
+        } else if (!täytetään && !tyhjennetään) {
+            onVapaaKysyjälle = true;
+        }
+        return varattu && käyttäjäId.equals(käyttäjä) && onVapaaKysyjälle;
     }
 
-    public void varaaTäyttö(String komponentinTunnus) {
+    public synchronized void varaaTäyttö(String komponentinTunnus) {
         if (!täytetään) {
+            System.out.println(super.haeTunnus() + " varattiin (täyttö) (" + komponentinTunnus + ")");
             täytetään = true;
             this.komponentinTunnus = komponentinTunnus;
         }
     }
 
-    public void varaaTyhjennys(String komponentinTunnus) {
+    public synchronized void varaaTyhjennys(String komponentinTunnus) {
         if (!tyhjennetään) {
+            System.out.println(super.haeTunnus() + " varattiin (tyhjennys) (" + komponentinTunnus + ")");
             tyhjennetään = true;
             this.komponentinTunnus = komponentinTunnus;
         }
     }
 
-    public void vapautaSiirrosta() {
+    public synchronized void vapautaSiirrosta() {
+        System.out.println(super.haeTunnus() + " vapautettiin (" + komponentinTunnus + ")");
         täytetään = false;
         tyhjennetään = false;
         komponentinTunnus = "";

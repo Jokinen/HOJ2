@@ -40,14 +40,14 @@ public abstract class Siirtävä extends Komponentti {
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         if (edellinenOsio == null && seuraavaOsio != null) {
             // Edellinen osio on null, niin silloin tämä kuljetin on aloittava kuljetin
             Varastoiva osio = (Varastoiva) this.seuraavaOsio;
             while (super.käynnissä) {
                 // Imitoidaan, että kuljetus kestää sekunnin
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(100);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -57,7 +57,7 @@ public abstract class Siirtävä extends Komponentti {
                 } else {
                     määrä = erä;
                 }
-                int siirrettyMäärä = osio.vastaanota(määrä, käyttäjä, super.haeTunnus());
+                int siirrettyMäärä = osio.vastaanota(määrä, erä, käyttäjä, super.haeTunnus());
 
                 erä = erä - siirrettyMäärä;
 
@@ -71,7 +71,7 @@ public abstract class Siirtävä extends Komponentti {
 
                 // Imitoidaan, että kuljetus kestää sekunnin
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(100);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -83,7 +83,7 @@ public abstract class Siirtävä extends Komponentti {
                     määrä = erä;
                 }
 
-                int haettuMäärä = edellinenOsio.siirrä(määrä, käyttäjä, super.haeTunnus());
+                int haettuMäärä = edellinenOsio.siirrä(määrä, erä, käyttäjä, super.haeTunnus());
 
                 erä = erä - haettuMäärä;
 
@@ -98,7 +98,7 @@ public abstract class Siirtävä extends Komponentti {
 
                 // Imitoidaan, että kuljetus kestää sekunnin
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(100);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -110,10 +110,10 @@ public abstract class Siirtävä extends Komponentti {
                     määrä = erä;
                 }
 
-                int haettuMäärä = edellinenOsio.siirrä(määrä, käyttäjä, super.haeTunnus());
+                int haettuMäärä = edellinenOsio.siirrä(määrä, erä, käyttäjä, super.haeTunnus());
                 int siirrettyMäärä = 0;
                 while (haettuMäärä != siirrettyMäärä) {
-                    siirrettyMäärä += seuraavaOsio.vastaanota(haettuMäärä, käyttäjä, super.haeTunnus());
+                    siirrettyMäärä += seuraavaOsio.vastaanota(haettuMäärä, erä, käyttäjä, super.haeTunnus());
                 }
 
                 erä = erä - siirrettyMäärä;

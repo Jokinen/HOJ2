@@ -44,13 +44,14 @@ public class Juomakeitin extends Varastoiva {
 
     @Override
     public int siirrä(int määrä) {
-        int juomaaAluksi = 0;
+        int siirretty = 0;
         if (keitetty) {
-            juomaa = juomaa - määrä;
+            juomaa -= määrä;
+            siirretty = määrä;
         } else {
             System.out.println("Juomakeittimestä yritettiin siirtää juomaa, mutta juomaa ei ole vielä keitetty.");
         }
-        return juomaaAluksi - juomaa;
+        return siirretty;
     }
 
     @Override
@@ -63,4 +64,5 @@ public class Juomakeitin extends Varastoiva {
         }
         return täyttöAste;
     }
+
 }

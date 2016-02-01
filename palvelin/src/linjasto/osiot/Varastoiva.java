@@ -24,7 +24,7 @@ public class Varastoiva extends Osio {
      *
      * @param määrä     vastaanotettavan RaakaAineen määrä
      */
-    public int vastaanota(int määrä, UUID käyttäjäId, String komponentinTunnus) {
+    public synchronized int vastaanota(int määrä, int kokonaisMäärä, UUID käyttäjäId, String komponentinTunnus) {
         int siirretty = 0;
 
         linjasto.komponentit.varastoivat.Varastoiva komponentti = haeVastaanottava(komponentinTunnus, käyttäjäId);
@@ -36,35 +36,45 @@ public class Varastoiva extends Osio {
             } else {
                 siirretty += komponentti.vastaanota(määrä);
             }
-            if (komponentti.onTäynnä()) {
+            if (komponentti.onTäynnä() || kokonaisMäärä - määrä <= 0) {
                 komponentti.vapautaSiirrosta();
             }
         }
         return siirretty;
     }
 
-    public int siirrä(int määrä, UUID käyttäjäId, String komponentinTunnus) {
+    public synchronized int siirrä(int määrä, int kokonaisMäärä, UUID käyttäjäId, String komponentinTunnus) {
         int siirretty = 0;
         linjasto.komponentit.varastoivat.Varastoiva komponentti = haeSiirtävä(komponentinTunnus, käyttäjäId);
         if (komponentti != null) {
             komponentti.varaaTyhjennys(komponentinTunnus);
-            if (komponentti.tavaraaJäljellä() < määrä) {
-                siirretty += komponentti.siirrä(komponentti.tilaaJäljellä());
+            if (komponentti.haeTäyttöaste() < määrä) {
+                siirretty += komponentti.siirrä(komponentti.haeTäyttöaste());
+                komponentti.vapautaSiirrosta();
             } else {
-                komponentti.siirrä(määrä);
-                siirretty += määrä;
+                siirretty += komponentti.siirrä(määrä);
             }
-            if (komponentti.onTyhjä()) {
+            if (komponentti.onTyhjä() || kokonaisMäärä - määrä <= 0) {
                 komponentti.vapautaSiirrosta();
             }
         }
         return siirretty;
     }
 
-    private linjasto.komponentit.varastoivat.Varastoiva haeVastaanottava(String komponentinTunnus, UUID käyttäjäId) {
+    private synchronized linjasto.komponentit.varastoivat.Varastoiva haeVastaanottava(String komponentinTunnus, UUID käyttäjäId) {
         ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVapaat(komponentinTunnus, käyttäjäId);
 
         linjasto.komponentit.varastoivat.Varastoiva komp = null;
+        for (linjasto.komponentit.varastoivat.Varastoiva komponentti : komponentit) {
+            if (komponentti.haeKomponentinTunnus().equals(komponentinTunnus)) {
+                komp = komponentti;
+                break;
+            }
+        }
+
+        if (komp != null)
+            return komp;
+
         for (linjasto.komponentit.varastoivat.Varastoiva komponentti : komponentit) {
             if (!komponentti.onTäynnä()) {
                 komp = komponentti;
@@ -74,12 +84,22 @@ public class Varastoiva extends Osio {
         return komp;
     }
 
-    private linjasto.komponentit.varastoivat.Varastoiva haeSiirtävä(String komponentinTunnus, UUID käyttäjäId) {
+    private synchronized linjasto.komponentit.varastoivat.Varastoiva haeSiirtävä(String komponentinTunnus, UUID käyttäjäId) {
         ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVapaat(komponentinTunnus, käyttäjäId);
 
         linjasto.komponentit.varastoivat.Varastoiva komp = null;
         for (linjasto.komponentit.varastoivat.Varastoiva komponentti : komponentit) {
-            if (!komponentti.onTyhjä()) {
+            if (komponentti.haeKomponentinTunnus().equals(komponentinTunnus)) {
+                komp = komponentti;
+                break;
+            }
+        }
+
+        if (komp != null)
+            return komp;
+
+        for (linjasto.komponentit.varastoivat.Varastoiva komponentti : komponentit) {
+            if (komponentti.haeTäyttöaste() > 0) {
                 komp = komponentti;
                 break;
             }
@@ -87,7 +107,7 @@ public class Varastoiva extends Osio {
         return komp;
     }
 
-    public int haeSiirettäväMäärä(String komponentinTunnus, UUID käyttäjäId) {
+    public synchronized int haeSiirettäväMäärä(String komponentinTunnus, UUID käyttäjäId) {
         ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVapaat(komponentinTunnus, käyttäjäId);
         int määrä = 0;
 
@@ -100,7 +120,7 @@ public class Varastoiva extends Osio {
         return määrä;
     }
 
-    private ArrayList<linjasto.komponentit.varastoivat.Varastoiva> haeVapaat(String komponentinTunnus, UUID käyttäjäId) {
+    private synchronized ArrayList<linjasto.komponentit.varastoivat.Varastoiva> haeVapaat(String komponentinTunnus, UUID käyttäjäId) {
         ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = new ArrayList<>();
         for (Komponentti komp : this.komponentit) {
             linjasto.komponentit.varastoivat.Varastoiva komponentti = (linjasto.komponentit.varastoivat.Varastoiva) komp;
