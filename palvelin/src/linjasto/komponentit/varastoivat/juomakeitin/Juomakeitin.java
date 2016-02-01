@@ -36,19 +36,31 @@ public class Juomakeitin extends Varastoiva {
 
             keitetty = true;
 
-            super.sammuta();
+            sammuta();
         } else {
-            System.out.print("Jo prosessoitua juomaa yritettiinprosessoida uudestaan");
+            System.out.println("Jo prosessoitua juomaa yritettiinprosessoida uudestaan");
         }
     }
 
+    @Override
     public int siirrä(int määrä) {
         int juomaaAluksi = 0;
         if (keitetty) {
             juomaa = juomaa - määrä;
         } else {
-            System.out.print("Juomakeittimestä yritettiin siirtää juomaa, mutta juomaa ei ole vielä keitetty.");
+            System.out.println("Juomakeittimestä yritettiin siirtää juomaa, mutta juomaa ei ole vielä keitetty.");
         }
         return juomaaAluksi - juomaa;
+    }
+
+    @Override
+    public int haeTäyttöaste() {
+        int täyttöAste;
+        if (!keitetty) {
+            täyttöAste = super.haeTäyttöaste();
+        } else {
+            täyttöAste = juomaa;
+        }
+        return täyttöAste;
     }
 }

@@ -123,6 +123,11 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         käynnistäSiirtäväKomponentti(osionTunnus, komponentinTunnus, käyttäjäId, 40000);
     }
 
+    public void käynnistäSiirtäväKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) {
+        Osio osio = haeOsio(osionTunnus);
+        linjasto.osiot.Varastoiva edellinenOsio = (linjasto.osiot.Varastoiva) haeEdellinenOsio(osio);
+        käynnistäSiirtäväKomponentti(osionTunnus, komponentinTunnus, käyttäjäId, edellinenOsio.haeSiirettäväMäärä(käyttäjäId));
+    }
     public void käynnistäSiirtäväKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId, int määrä) {
         Osio osio = haeOsio(osionTunnus);
         Komponentti komponentti = osio.haeKomponentti(komponentinTunnus);

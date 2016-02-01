@@ -1,16 +1,11 @@
 package linjasto.komponentit;
 
-import apumäärittelyt.RaakaAine;
-import linjasto.osiot.Osio;
-import omatVirheilmoitukset.LiianSuuriMääräException;
-
 import java.util.UUID;
 
 public abstract class Komponentti implements Runnable {
     protected Thread säie;
     private final String TUNNUS;
     protected volatile boolean käynnissä = false;
-
 
     public Komponentti(String t) {
         TUNNUS = t;
@@ -31,10 +26,11 @@ public abstract class Komponentti implements Runnable {
     }
 
     public void sammuta() {
-        käynnissä = false;
+        System.out.println(TUNNUS);käynnissä = false;
     }
 
     public boolean onkoKäynnissä() {
+        System.out.println(TUNNUS + ": " + käynnissä);
         return käynnissä;
     }
 

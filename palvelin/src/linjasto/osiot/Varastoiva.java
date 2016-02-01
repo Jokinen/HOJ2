@@ -31,10 +31,8 @@ public class Varastoiva extends Osio {
 
         if (komponentti != null) {
             if (komponentti.tilaaJäljellä() < määrä) {
-                System.out.println("Moor");
                 siirretty += komponentti.vastaanota(komponentti.tilaaJäljellä());
             } else {
-                System.out.println("Moor2");
                 siirretty += komponentti.vastaanota(määrä);
             }
         }
@@ -80,6 +78,19 @@ public class Varastoiva extends Osio {
             }
         }
         return komp;
+    }
+
+    public int haeSiirettäväMäärä(UUID käyttäjäId) {
+        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVaratut(käyttäjäId);
+        int määrä = 0;
+
+        for (linjasto.komponentit.varastoivat.Varastoiva komponentti : komponentit) {
+            if (!komponentti.onTyhjä()) {
+                määrä = komponentti.haeTäyttöaste();
+                break;
+            }
+        }
+        return määrä;
     }
 
     private ArrayList<linjasto.komponentit.varastoivat.Varastoiva> haeVaratut(UUID käyttäjäId) {

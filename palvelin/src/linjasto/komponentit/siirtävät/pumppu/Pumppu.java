@@ -21,24 +21,9 @@ import java.util.concurrent.TimeUnit;
  *       TODO Poista HUOM! ennen esittelyä
  */
 public class Pumppu extends Siirtävä {
-    private static final int VIRTAAMA = 500;    // litraa/sekunti
-    protected boolean pumppuKaynnissa;
 
     public Pumppu(String tunnus) {
         super(tunnus, 500);
     }
 
-    public void ime(int siirrettäväMäärä) {
-        if (siirrettäväMäärä > 500) {
-            // 500l siirron toteutus tähän
-            int jäljelläOlevaMäärä = siirrettäväMäärä - 500;
-            ime(jäljelläOlevaMäärä);
-        } else {
-            // siirron toteutus tähän
-        }
-    }
-
-    public boolean pumppuKaynnissa() {
-        return pumppuKaynnissa;
-    }
 }

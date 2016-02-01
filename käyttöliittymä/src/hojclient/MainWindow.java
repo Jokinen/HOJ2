@@ -1407,7 +1407,7 @@ public class MainWindow extends javax.swing.JFrame {
         // Mitä tehdään kun pumppu1 käynnistetään?
         if (signIn.isSelected()) {
             try {
-                linjasto.käynnistäVarastoivaKomponentti("PumputKypsytykseen", "PumppuKypsytykseen1", käyttäjäId);
+                linjasto.käynnistäSiirtäväKomponentti("PumputKypsytykseen", "PumppuKypsytykseen1", käyttäjäId);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -1420,7 +1420,7 @@ public class MainWindow extends javax.swing.JFrame {
         // Mitä tehdään kun pumppu2 käynnistetään?
         if (signIn.isSelected()) {
             try {
-                linjasto.käynnistäVarastoivaKomponentti("PumputKypsytykseen", "PumppuKypsytykseen2", käyttäjäId);
+                linjasto.käynnistäSiirtäväKomponentti("PumputKypsytykseen", "PumppuKypsytykseen2", käyttäjäId);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -1809,15 +1809,15 @@ public class MainWindow extends javax.swing.JFrame {
 
             // Kypsytyssäiliöiden tilavuuden päivitys
             tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö1")));
-            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö2")));
-            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö3")));
-            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö4")));
-            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö5")));
-            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö6")));
-            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö7")));
-            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö8")));
-            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö9")));
-            tank1Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö10")));
+            tank2Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö2")));
+            tank3Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö3")));
+            tank4Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö4")));
+            tank5Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö5")));
+            tank6Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö6")));
+            tank7Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö7")));
+            tank8Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö8")));
+            tank9Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö9")));
+            tank10Status.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Kypsytyssäiliöt", "Kypsytyssäiliö10")));
 
             // "Pumput pullotukseen" tilan päivitys
             if (linjasto.onkoKomponenttiKäynnissä("PumputPullotukseen", "PumppuPullotukseen1")) {
