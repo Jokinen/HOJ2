@@ -1749,20 +1749,26 @@ public class MainWindow extends javax.swing.JFrame {
             // Keitinten tilan päivitys
             if (linjasto.onkoKomponenttiKäynnissä("Juomakeittimet", "Juomakeitin1")) {
                 proc1Status.setText("Running");
+                startProc1.setSelected(true);
             } else {
                 proc1Status.setText("Off");
+                startProc1.setSelected(false);
             }
 
             if (linjasto.onkoKomponenttiKäynnissä("Juomakeittimet", "Juomakeitin2")) {
                 proc2Status.setText("Running");
+                startProc2.setSelected(true);
             } else {
                 proc2Status.setText("Off");
+                startProc2.setSelected(false);
             }
 
             if (linjasto.onkoKomponenttiKäynnissä("Juomakeittimet", "Juomakeitin3")) {
                 proc3Status.setText("Running");
+                startProc3.setSelected(true);
             } else {
                 proc3Status.setText("Off");
+                startProc3.setSelected(false);
             }
 
             // "Pumput kypsytyssäiliöihin" tilan päivitys

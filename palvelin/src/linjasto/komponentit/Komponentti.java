@@ -26,11 +26,10 @@ public abstract class Komponentti implements Runnable {
     }
 
     public void sammuta() {
-        System.out.println(TUNNUS);käynnissä = false;
+        käynnissä = false;
     }
 
     public boolean onkoKäynnissä() {
-        System.out.println(TUNNUS + ": " + käynnissä);
         return käynnissä;
     }
 
