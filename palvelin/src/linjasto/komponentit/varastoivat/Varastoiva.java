@@ -66,11 +66,12 @@ public abstract class Varastoiva extends Komponentti {
      *
      * @.postPrivate täyttöAste = täyttöAste + määrä
      */
-    public void vastaanota(int määrä) {
+    public synchronized int vastaanota(int määrä) {
         täyttöAste = täyttöAste + määrä;
+        return määrä;
     }
 
-    public int siirrä(int määrä) {
+    public synchronized int siirrä(int määrä) {
         täyttöAste = täyttöAste - määrä;
         return määrä;
     }
@@ -140,6 +141,10 @@ public abstract class Varastoiva extends Komponentti {
      *          RESULT < this.maksimiKoko
      */
     public int tilaaJäljellä() {
-        return 1;
+        return maksimiKoko - täyttöAste;
+    }
+
+    public int tavaraaJäljellä() {
+        return täyttöAste;
     }
 }

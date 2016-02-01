@@ -26,10 +26,17 @@ public class Varastoiva extends Osio {
      */
     public int vastaanota(int määrä, UUID käyttäjäId) {
         int siirretty = 0;
-        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVastaanottavat(määrä, käyttäjäId);
-        for (linjasto.komponentit.varastoivat.Varastoiva komponentti : komponentit) {
-            komponentti.vastaanota(määrä/komponentit.size());
-            siirretty = siirretty + määrä/komponentit.size();
+
+        linjasto.komponentit.varastoivat.Varastoiva komponentti = haeVastaanottava(määrä, käyttäjäId);
+
+        if (komponentti != null) {
+            if (komponentti.tilaaJäljellä() < määrä) {
+                System.out.println("Moor");
+                siirretty += komponentti.vastaanota(komponentti.tilaaJäljellä());
+            } else {
+                System.out.println("Moor2");
+                siirretty += komponentti.vastaanota(määrä);
+            }
         }
         return siirretty;
     }
@@ -38,10 +45,9 @@ public class Varastoiva extends Osio {
         int siirretty = 0;
         linjasto.komponentit.varastoivat.Varastoiva komponentti = haeSiirtävä(määrä, käyttäjäId);
         if (komponentti != null) {
-            if (komponentti.tilaaJäljellä() < määrä) {
+            if (komponentti.tavaraaJäljellä() < määrä) {
                 siirretty += komponentti.siirrä(komponentti.tilaaJäljellä());
-                määrä = määrä - komponentti.tilaaJäljellä();
-                siirretty += siirrä(määrä, käyttäjäId);
+                siirretty += siirrä(määrä - komponentti.tilaaJäljellä(), käyttäjäId);
             } else {
                 komponentti.siirrä(määrä);
                 siirretty += määrä;
@@ -50,18 +56,15 @@ public class Varastoiva extends Osio {
         return siirretty;
     }
 
-    private ArrayList<linjasto.komponentit.varastoivat.Varastoiva> haeVastaanottavat(int määrä, UUID käyttäjäId) {
+    private linjasto.komponentit.varastoivat.Varastoiva haeVastaanottava(int määrä, UUID käyttäjäId) {
         ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVaratut(käyttäjäId);
 
-        int määräYhdelle;
-        if (komponentit.size() > 0)
-            määräYhdelle = määrä / komponentit.size();
-        else
-            määräYhdelle = määrä;
-        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komp = new ArrayList<>();
+        linjasto.komponentit.varastoivat.Varastoiva komp = null;
         for (linjasto.komponentit.varastoivat.Varastoiva komponentti : komponentit) {
-            if (komponentti.onTilaa(määräYhdelle))
-                komp.add(komponentti);
+            if (!komponentti.onTäynnä()) {
+                komp = komponentti;
+                break;
+            }
         }
         return komp;
     }
