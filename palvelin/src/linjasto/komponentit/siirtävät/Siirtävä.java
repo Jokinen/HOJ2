@@ -10,8 +10,9 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Komponentti, joka siirtää.
+ * Komponentit, jotka siirtävät tavaraa, perivät tämän luokan.
  */
+
 public abstract class Siirtävä extends Komponentti {
     protected final int VIRTAAMA;
     protected Osio edellinenOsio;
@@ -24,6 +25,7 @@ public abstract class Siirtävä extends Komponentti {
         VIRTAAMA = v;
     }
 
+    // Siirron toteutus
     public void käynnistä(Osio edellinenOsio, Osio seuraavaOsio, UUID käyttäjäId, int määrä) {
         this.edellinenOsio = edellinenOsio;
         this.seuraavaOsio = seuraavaOsio;
@@ -32,6 +34,7 @@ public abstract class Siirtävä extends Komponentti {
         super.käynnistä();
     }
 
+    // Palauttaa komponentin virtauman
     public int haeVirtaama() {
         return VIRTAAMA;
     }

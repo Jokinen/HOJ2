@@ -2,6 +2,8 @@ package linjasto.komponentit;
 
 import java.util.UUID;
 
+// Siirtävä- ja Varastoiva-luokat perivät Komponentti-luokan
+
 public abstract class Komponentti implements Runnable {
     protected Thread säie;
     private final String TUNNUS;
@@ -15,6 +17,7 @@ public abstract class Komponentti implements Runnable {
         return TUNNUS;
     }
 
+    // Käynnistää komponentin
     public void käynnistä() {
         if (!käynnissä) {
             käynnissä = true;
@@ -25,14 +28,17 @@ public abstract class Komponentti implements Runnable {
         }
     }
 
+    // Komponentin sammuttaminen
     public void sammuta() {
         käynnissä = false;
     }
 
+    // Palauttaa tiedon siitä, onko jokin komponentti käynnissä
     public boolean onkoKäynnissä() {
         return käynnissä;
     }
 
+    // Vapauttaa komponentin
     public boolean vapauta(UUID käyttäjäId) {
         return true;
     }
