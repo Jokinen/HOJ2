@@ -4,10 +4,13 @@ import apumäärittelyt.RaakaAine;
 import linjasto.osiot.Osio;
 import omatVirheilmoitukset.LiianSuuriMääräException;
 
+import java.util.UUID;
+
 public abstract class Komponentti implements Runnable {
     protected Thread säie;
     private final String TUNNUS;
     protected volatile boolean käynnissä = false;
+
 
     public Komponentti(String t) {
         TUNNUS = t;
@@ -18,9 +21,13 @@ public abstract class Komponentti implements Runnable {
     }
 
     public void käynnistä() {
-        käynnissä = true;
-        säie = new Thread(this);
-        säie.start();
+        if (!käynnissä) {
+            käynnissä = true;
+            säie = new Thread(this);
+            säie.start();
+        } else {
+            System.err.println("Komponenttia '" + TUNNUS + "' yritettiin käynnistää uudelleen kun se oli vielä käynnissä.");
+        }
     }
 
     public void sammuta() {
@@ -29,6 +36,10 @@ public abstract class Komponentti implements Runnable {
 
     public boolean onkoKäynnissä() {
         return käynnissä;
+    }
+
+    public boolean vapauta(UUID käyttäjäId) {
+        return true;
     }
 
     public void run() {

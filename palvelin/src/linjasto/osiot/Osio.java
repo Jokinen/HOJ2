@@ -1,11 +1,9 @@
 package linjasto.osiot;
 
-import apumäärittelyt.RaakaAine;
 import linjasto.komponentit.Komponentti;
 
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Luokka joka simuloi yhtä linjaston askelta.
@@ -56,6 +54,13 @@ public abstract class Osio {
                 palautettavaKomponentti = komponentti;
         }
         return palautettavaKomponentti;
+    }
+
+    public void valmis(String komponentinTunnus, UUID käyttäjäId) {
+        linjasto.komponentit.varastoivat.Varastoiva komponentti = (linjasto.komponentit.varastoivat.Varastoiva) haeKomponentti(komponentinTunnus);
+        if (komponentti.haeVarattu() && komponentti.haeKäyttäjä().equals(käyttäjäId)) {
+            komponentti.vapauta(käyttäjäId);
+        }
     }
 
 }

@@ -14,12 +14,15 @@ import java.util.UUID;
  * pois.
  */
 public abstract class Varastoiva extends Komponentti {
-    private final int maksimiKoko;   // kiloa
+    private int maksimiKoko;   // kiloa
     private boolean täytetään = false;
     private boolean tyhjennetään = false;
     private int täyttöAste;
     private RaakaAine raakaAine;
+
+    // Komponentin varaamista koskevat
     private boolean varattu = false;
+    private String komponentinTunnus = "";
     private UUID käyttäjä;
 
     public Varastoiva(String t, int m) {
@@ -33,6 +36,23 @@ public abstract class Varastoiva extends Komponentti {
 
     public UUID haeKäyttäjä() {
         return käyttäjä;
+    }
+
+
+    public int haeTäyttöaste() {
+        return täyttöAste;
+    }
+
+    public void asetaTäyttöaste(int täyttöAste) {
+        this.täyttöAste = täyttöAste;
+    }
+
+    public int haeMaksimiKoko() {
+        return maksimiKoko;
+    }
+
+    public void asetaMaksimiKoko(int maksimiKoko) {
+        this.maksimiKoko = maksimiKoko;
     }
 
     public void käynnistä(UUID käyttäjäId) {}
@@ -50,8 +70,9 @@ public abstract class Varastoiva extends Komponentti {
         täyttöAste = täyttöAste + määrä;
     }
 
-    public void siirrä(int määrä) {
+    public int siirrä(int määrä) {
         täyttöAste = täyttöAste - määrä;
+        return määrä;
     }
 
     public boolean varaa(UUID käyttäjäId) {
@@ -66,6 +87,12 @@ public abstract class Varastoiva extends Komponentti {
         return bol;
     }
 
+    public boolean varaa(UUID käyttäjäId, String komponentinTunnus) {
+        this.komponentinTunnus = komponentinTunnus;
+        return varaa(käyttäjäId);
+    }
+
+    @Override
     public boolean vapauta(UUID käyttäjäId) {
         boolean bol = true;
         if (varattu && käyttäjäId.equals(this.käyttäjä)) {
@@ -76,10 +103,6 @@ public abstract class Varastoiva extends Komponentti {
             System.err.println("Komponentti '" + super.haeTunnus() + "' yritettiin vapauttaa, mutta vapautus epäonnistui.");
         }
         return bol;
-    }
-
-    public int haeTäyttöaste() {
-        return täyttöAste;
     }
 
     /**

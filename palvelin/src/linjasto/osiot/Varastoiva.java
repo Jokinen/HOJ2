@@ -39,8 +39,7 @@ public class Varastoiva extends Osio {
         linjasto.komponentit.varastoivat.Varastoiva komponentti = haeSiirtävä(määrä, käyttäjäId);
         if (komponentti != null) {
             if (komponentti.tilaaJäljellä() < määrä) {
-                komponentti.siirrä(komponentti.tilaaJäljellä());
-                siirretty += komponentti.tilaaJäljellä();
+                siirretty += komponentti.siirrä(komponentti.tilaaJäljellä());
                 määrä = määrä - komponentti.tilaaJäljellä();
                 siirretty += siirrä(määrä, käyttäjäId);
             } else {
@@ -52,7 +51,7 @@ public class Varastoiva extends Osio {
     }
 
     private ArrayList<linjasto.komponentit.varastoivat.Varastoiva> haeVastaanottavat(int määrä, UUID käyttäjäId) {
-        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVaratut(määrä, käyttäjäId);
+        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVaratut(käyttäjäId);
 
         int määräYhdelle;
         if (komponentit.size() > 0)
@@ -68,7 +67,7 @@ public class Varastoiva extends Osio {
     }
 
     private linjasto.komponentit.varastoivat.Varastoiva haeSiirtävä(int määrä, UUID käyttäjäId) {
-        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVaratut(määrä, käyttäjäId);
+        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVaratut(käyttäjäId);
 
         linjasto.komponentit.varastoivat.Varastoiva komp = null;
         for (linjasto.komponentit.varastoivat.Varastoiva komponentti : komponentit) {
@@ -80,7 +79,7 @@ public class Varastoiva extends Osio {
         return komp;
     }
 
-    private ArrayList<linjasto.komponentit.varastoivat.Varastoiva> haeVaratut(int määrä, UUID käyttäjäId) {
+    private ArrayList<linjasto.komponentit.varastoivat.Varastoiva> haeVaratut(UUID käyttäjäId) {
         ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = new ArrayList<>();
         for (Komponentti komp : this.komponentit) {
             linjasto.komponentit.varastoivat.Varastoiva komponentti = (linjasto.komponentit.varastoivat.Varastoiva) komp;
@@ -89,14 +88,5 @@ public class Varastoiva extends Osio {
             }
         }
         return komponentit;
-    }
-
-    public void valmis(UUID käyttäjäId) {
-        for (Komponentti komp : komponentit) {
-            linjasto.komponentit.varastoivat.Varastoiva komponentti = (linjasto.komponentit.varastoivat.Varastoiva) komp;
-            if (komponentti.haeVarattu() && komponentti.haeKäyttäjä().equals(käyttäjäId)) {
-                komponentti.vapauta(käyttäjäId);
-            }
-        }
     }
 }

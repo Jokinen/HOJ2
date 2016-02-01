@@ -40,7 +40,6 @@ public class Ruuvikuljetin extends Siirtävä {
                 int siirrettyMäärä = osio.vastaanota(määrä, super.käyttäjä);
                 super.erä = super.erä - siirrettyMäärä;
                 if (super.erä == 0) {
-                    osio.valmis(käyttäjä);
                     super.sammuta();
                 }
             }
@@ -64,13 +63,14 @@ public class Ruuvikuljetin extends Siirtävä {
                 }
 
                 int haettuMäärä = edellinenOsio.siirrä(määrä, super.käyttäjä);
-                int siirrettyMäärä = edellinenOsio.vastaanota(haettuMäärä, super.käyttäjä);
+                int siirrettyMäärä = 0;
+                while (haettuMäärä != siirrettyMäärä) {
+                    siirrettyMäärä += seuraavaOsio.vastaanota(haettuMäärä, super.käyttäjä);
+                }
 
                 super.erä = super.erä - siirrettyMäärä;
 
                 if (super.erä == 0) {
-                    edellinenOsio.valmis(käyttäjä);
-                    seuraavaOsio.valmis(käyttäjä);
                     super.sammuta();
                 }
             }
