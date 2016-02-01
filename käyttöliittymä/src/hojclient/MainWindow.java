@@ -1433,7 +1433,7 @@ public class MainWindow extends javax.swing.JFrame {
         // Mitä tehdään kun pumppu1 pullotukseen käynnistetään?
         if (signIn.isSelected()) {
             try {
-                linjasto.käynnistäVarastoivaKomponentti("PumputPullotukseen", "PumppuPullotukseen1", käyttäjäId);
+                linjasto.käynnistäSiirtäväKomponentti("PumputPullotukseen", "PumppuPullotukseen1", käyttäjäId);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -1446,7 +1446,7 @@ public class MainWindow extends javax.swing.JFrame {
         // Mitä tehdään kun pumppu2 pullotukseen käynnistetään?
         if (signIn.isSelected()) {
             try {
-                linjasto.käynnistäVarastoivaKomponentti("PumputPullotukseen", "PumppuPullotukseen2", käyttäjäId);
+                linjasto.käynnistäSiirtäväKomponentti("PumputPullotukseen", "PumppuPullotukseen2", käyttäjäId);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -1832,7 +1832,7 @@ public class MainWindow extends javax.swing.JFrame {
                 bpump1Status.setText("Off");
             }
 
-            if (linjasto.onkoKomponenttiKäynnissä("PumputPullotukseen", "PumppuPullotukseen1")) {
+            if (linjasto.onkoKomponenttiKäynnissä("PumputPullotukseen", "PumppuPullotukseen2")) {
                 bpump2Status.setText("Running");
             } else {
                 bpump2Status.setText("Off");

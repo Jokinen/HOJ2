@@ -38,7 +38,7 @@ public abstract class Siirtävä extends Komponentti {
 
     @Override
     public void run() {
-        if (edellinenOsio == null) {
+        if (edellinenOsio == null && seuraavaOsio != null) {
             // Edellinen osio on null, niin silloin tämä kuljetin on aloittava kuljetin
             Varastoiva osio = (Varastoiva) this.seuraavaOsio;
             while (super.käynnissä) {
@@ -55,7 +55,35 @@ public abstract class Siirtävä extends Komponentti {
                     määrä = erä;
                 }
                 int siirrettyMäärä = osio.vastaanota(määrä, käyttäjä);
+
                 erä = erä - siirrettyMäärä;
+
+                if (erä == 0) {
+                    super.sammuta();
+                }
+            }
+        } else if (edellinenOsio != null && seuraavaOsio == null) {
+            Varastoiva edellinenOsio = (Varastoiva) this.edellinenOsio;
+            while (käynnissä) {
+
+                // Imitoidaan, että kuljetus kestää sekunnin
+                try {
+                    Thread.sleep(10);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                int määrä = 0;
+                if (erä >= VIRTAAMA) {
+                    määrä = VIRTAAMA;
+                } else {
+                    määrä = erä;
+                }
+
+                int haettuMäärä = edellinenOsio.siirrä(määrä, käyttäjä);
+
+                erä = erä - haettuMäärä;
+
                 if (erä == 0) {
                     super.sammuta();
                 }
