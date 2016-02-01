@@ -15,19 +15,30 @@ import java.util.UUID;
  */
 public abstract class Varastoiva extends Komponentti {
     private int maksimiKoko;   // kiloa
-    private boolean täytetään = false;
-    private boolean tyhjennetään = false;
     private int täyttöAste;
     private RaakaAine raakaAine;
 
     // Komponentin varaamista koskevat
     private boolean varattu = false;
-    private String komponentinTunnus = "";
     private UUID käyttäjä;
+    protected boolean täytetään = false;
+    protected boolean tyhjennetään = false;
+    private String komponentinTunnus = "";
+
 
     public Varastoiva(String t, int m) {
         super(t);
         maksimiKoko = m;
+    }
+
+    public boolean onkoVapaa(String komponentinTunnus, UUID käyttäjäId) {
+        boolean onVapaaKysyjälle = false;
+        if ((täytetään || tyhjennetään) && komponentinTunnus.equals(this.komponentinTunnus)) {
+            onVapaaKysyjälle = true;
+        } else if (!täytetään && !tyhjennetään) {
+            onVapaaKysyjälle = true;
+        }
+        return varattu && käyttäjäId.equals(käyttäjä) && onVapaaKysyjälle;
     }
 
     public boolean haeVarattu() {
@@ -146,5 +157,25 @@ public abstract class Varastoiva extends Komponentti {
 
     public int tavaraaJäljellä() {
         return täyttöAste;
+    }
+
+    public void varaaTäyttö(String komponentinTunnus) {
+        if (!täytetään) {
+            täytetään = true;
+            this.komponentinTunnus = komponentinTunnus;
+        }
+    }
+
+    public void varaaTyhjennys(String komponentinTunnus) {
+        if (!tyhjennetään) {
+            tyhjennetään = true;
+            this.komponentinTunnus = komponentinTunnus;
+        }
+    }
+
+    public void vapautaSiirrosta() {
+        täytetään = false;
+        tyhjennetään = false;
+        komponentinTunnus = "";
     }
 }

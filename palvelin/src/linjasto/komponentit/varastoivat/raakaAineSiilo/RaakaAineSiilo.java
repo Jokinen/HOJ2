@@ -1,6 +1,5 @@
 package linjasto.komponentit.varastoivat.raakaAineSiilo;
 
-import linjasto.komponentit.Komponentti;
 import linjasto.komponentit.varastoivat.Varastoiva;
 
 /**

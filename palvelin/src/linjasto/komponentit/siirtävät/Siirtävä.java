@@ -54,7 +54,7 @@ public abstract class Siirtävä extends Komponentti {
                 } else {
                     määrä = erä;
                 }
-                int siirrettyMäärä = osio.vastaanota(määrä, käyttäjä);
+                int siirrettyMäärä = osio.vastaanota(määrä, käyttäjä, super.haeTunnus());
 
                 erä = erä - siirrettyMäärä;
 
@@ -80,7 +80,7 @@ public abstract class Siirtävä extends Komponentti {
                     määrä = erä;
                 }
 
-                int haettuMäärä = edellinenOsio.siirrä(määrä, käyttäjä);
+                int haettuMäärä = edellinenOsio.siirrä(määrä, käyttäjä, super.haeTunnus());
 
                 erä = erä - haettuMäärä;
 
@@ -88,7 +88,7 @@ public abstract class Siirtävä extends Komponentti {
                     super.sammuta();
                 }
             }
-        } else {
+        } else if (edellinenOsio != null) {
             Varastoiva edellinenOsio = (Varastoiva) this.edellinenOsio;
             Varastoiva seuraavaOsio = (Varastoiva) this.seuraavaOsio;
             while (käynnissä) {
@@ -107,10 +107,10 @@ public abstract class Siirtävä extends Komponentti {
                     määrä = erä;
                 }
 
-                int haettuMäärä = edellinenOsio.siirrä(määrä, käyttäjä);
+                int haettuMäärä = edellinenOsio.siirrä(määrä, käyttäjä, super.haeTunnus());
                 int siirrettyMäärä = 0;
                 while (haettuMäärä != siirrettyMäärä) {
-                    siirrettyMäärä += seuraavaOsio.vastaanota(haettuMäärä, käyttäjä);
+                    siirrettyMäärä += seuraavaOsio.vastaanota(haettuMäärä, käyttäjä, super.haeTunnus());
                 }
 
                 erä = erä - siirrettyMäärä;

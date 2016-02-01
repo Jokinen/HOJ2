@@ -24,38 +24,45 @@ public class Varastoiva extends Osio {
      *
      * @param määrä     vastaanotettavan RaakaAineen määrä
      */
-    public int vastaanota(int määrä, UUID käyttäjäId) {
+    public int vastaanota(int määrä, UUID käyttäjäId, String komponentinTunnus) {
         int siirretty = 0;
 
-        linjasto.komponentit.varastoivat.Varastoiva komponentti = haeVastaanottava(määrä, käyttäjäId);
-
+        linjasto.komponentit.varastoivat.Varastoiva komponentti = haeVastaanottava(komponentinTunnus, käyttäjäId);
         if (komponentti != null) {
+            komponentti.varaaTäyttö(komponentinTunnus);
             if (komponentti.tilaaJäljellä() < määrä) {
                 siirretty += komponentti.vastaanota(komponentti.tilaaJäljellä());
+                komponentti.vapautaSiirrosta();
             } else {
                 siirretty += komponentti.vastaanota(määrä);
+            }
+            if (komponentti.onTäynnä()) {
+                komponentti.vapautaSiirrosta();
             }
         }
         return siirretty;
     }
 
-    public int siirrä(int määrä, UUID käyttäjäId) {
+    public int siirrä(int määrä, UUID käyttäjäId, String komponentinTunnus) {
         int siirretty = 0;
-        linjasto.komponentit.varastoivat.Varastoiva komponentti = haeSiirtävä(määrä, käyttäjäId);
+        linjasto.komponentit.varastoivat.Varastoiva komponentti = haeSiirtävä(komponentinTunnus, käyttäjäId);
         if (komponentti != null) {
+            komponentti.varaaTyhjennys(komponentinTunnus);
             if (komponentti.tavaraaJäljellä() < määrä) {
                 siirretty += komponentti.siirrä(komponentti.tilaaJäljellä());
-                siirretty += siirrä(määrä - komponentti.tilaaJäljellä(), käyttäjäId);
             } else {
                 komponentti.siirrä(määrä);
                 siirretty += määrä;
             }
+            if (komponentti.onTyhjä()) {
+                komponentti.vapautaSiirrosta();
+            }
         }
         return siirretty;
     }
 
-    private linjasto.komponentit.varastoivat.Varastoiva haeVastaanottava(int määrä, UUID käyttäjäId) {
-        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVaratut(käyttäjäId);
+    private linjasto.komponentit.varastoivat.Varastoiva haeVastaanottava(String komponentinTunnus, UUID käyttäjäId) {
+        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVapaat(komponentinTunnus, käyttäjäId);
 
         linjasto.komponentit.varastoivat.Varastoiva komp = null;
         for (linjasto.komponentit.varastoivat.Varastoiva komponentti : komponentit) {
@@ -67,8 +74,8 @@ public class Varastoiva extends Osio {
         return komp;
     }
 
-    private linjasto.komponentit.varastoivat.Varastoiva haeSiirtävä(int määrä, UUID käyttäjäId) {
-        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVaratut(käyttäjäId);
+    private linjasto.komponentit.varastoivat.Varastoiva haeSiirtävä(String komponentinTunnus, UUID käyttäjäId) {
+        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVapaat(komponentinTunnus, käyttäjäId);
 
         linjasto.komponentit.varastoivat.Varastoiva komp = null;
         for (linjasto.komponentit.varastoivat.Varastoiva komponentti : komponentit) {
@@ -80,8 +87,8 @@ public class Varastoiva extends Osio {
         return komp;
     }
 
-    public int haeSiirettäväMäärä(UUID käyttäjäId) {
-        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVaratut(käyttäjäId);
+    public int haeSiirettäväMäärä(String komponentinTunnus, UUID käyttäjäId) {
+        ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = haeVapaat(komponentinTunnus, käyttäjäId);
         int määrä = 0;
 
         for (linjasto.komponentit.varastoivat.Varastoiva komponentti : komponentit) {
@@ -93,14 +100,15 @@ public class Varastoiva extends Osio {
         return määrä;
     }
 
-    private ArrayList<linjasto.komponentit.varastoivat.Varastoiva> haeVaratut(UUID käyttäjäId) {
+    private ArrayList<linjasto.komponentit.varastoivat.Varastoiva> haeVapaat(String komponentinTunnus, UUID käyttäjäId) {
         ArrayList<linjasto.komponentit.varastoivat.Varastoiva> komponentit = new ArrayList<>();
         for (Komponentti komp : this.komponentit) {
             linjasto.komponentit.varastoivat.Varastoiva komponentti = (linjasto.komponentit.varastoivat.Varastoiva) komp;
-            if (komponentti.haeVarattu() && käyttäjäId.equals(komponentti.haeKäyttäjä())) {
+            if (komponentti.onkoVapaa(komponentinTunnus, käyttäjäId)) {
                 komponentit.add(komponentti);
             }
         }
         return komponentit;
     }
+
 }
