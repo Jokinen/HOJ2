@@ -1183,6 +1183,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 System.out.println(e);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_startSiloLoadActionPerformed
 
@@ -1225,6 +1227,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_startProcLoad1ActionPerformed
 
@@ -1236,6 +1240,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_startProcLoad2ActionPerformed
 
@@ -1251,6 +1257,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveSilo1ActionPerformed
 
@@ -1266,6 +1274,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveSilo2ActionPerformed
 
@@ -1281,6 +1291,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveSilo3ActionPerformed
 
@@ -1296,6 +1308,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveSilo4ActionPerformed
 
@@ -1311,6 +1325,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveProc1ActionPerformed
 
@@ -1322,6 +1338,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_startProc1ActionPerformed
 
@@ -1337,6 +1355,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveProc2ActionPerformed
 
@@ -1348,6 +1368,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_startProc2ActionPerformed
 
@@ -1363,6 +1385,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveProc3ActionPerformed
 
@@ -1374,6 +1398,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_startProc3ActionPerformed
 
@@ -1385,6 +1411,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_startPump1ActionPerformed
 
@@ -1396,6 +1424,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_startPump2ActionPerformed
 
@@ -1407,6 +1437,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_startBpump1ActionPerformed
 
@@ -1418,6 +1450,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_startBpump2ActionPerformed
 
@@ -1433,6 +1467,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveTank1ActionPerformed
 
@@ -1448,6 +1484,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveTank2ActionPerformed
 
@@ -1463,6 +1501,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveTank3ActionPerformed
 
@@ -1478,6 +1518,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveTank4ActionPerformed
 
@@ -1493,6 +1535,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveTank5ActionPerformed
 
@@ -1508,6 +1552,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveTank6ActionPerformed
 
@@ -1523,6 +1569,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveTank7ActionPerformed
 
@@ -1538,6 +1586,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveTank8ActionPerformed
 
@@ -1553,6 +1603,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveTank9ActionPerformed
 
@@ -1568,6 +1620,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Kirjaudu ensin sisään!", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reserveTank10ActionPerformed
 
