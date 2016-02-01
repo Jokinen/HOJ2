@@ -10,6 +10,7 @@ import linjasto.komponentit.Komponentti;
 import linjasto.osiot.Osio;
 import linjasto.osiot.Siirtävä;
 
+import javax.swing.*;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -144,6 +145,9 @@ public class MainWindow extends javax.swing.JFrame {
         procLoadLabel2 = new javax.swing.JLabel();
         procLoadAmount1 = new javax.swing.JTextField();
         procLoadAmount2 = new javax.swing.JTextField();
+        proc1Täyttöaste = new javax.swing.JLabel();
+        proc2Täyttöaste = new javax.swing.JLabel();
+        proc3Täyttöaste = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -630,6 +634,12 @@ public class MainWindow extends javax.swing.JFrame {
         proc1Status.setMinimumSize(new java.awt.Dimension(100, 20));
         proc1Status.setPreferredSize(new java.awt.Dimension(100, 20));
 
+        proc1Täyttöaste.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        proc1Täyttöaste.setText("0");
+        proc1Täyttöaste.setMaximumSize(new java.awt.Dimension(100, 200));
+        proc1Täyttöaste.setMinimumSize(new java.awt.Dimension(100, 20));
+        proc1Täyttöaste.setPreferredSize(new java.awt.Dimension(100, 20));
+
         proc1Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         proc1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hojclient/icons/conveyor.jpg"))); // NOI18N
         proc1Label.setText("Processor 1");
@@ -678,11 +688,23 @@ public class MainWindow extends javax.swing.JFrame {
         proc2Status.setMinimumSize(new java.awt.Dimension(100, 20));
         proc2Status.setPreferredSize(new java.awt.Dimension(100, 20));
 
+        proc2Täyttöaste.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        proc2Täyttöaste.setText("0");
+        proc2Täyttöaste.setMaximumSize(new java.awt.Dimension(100, 200));
+        proc2Täyttöaste.setMinimumSize(new java.awt.Dimension(100, 20));
+        proc2Täyttöaste.setPreferredSize(new java.awt.Dimension(100, 20));
+
         proc3Status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         proc3Status.setText("Running");
         proc3Status.setMaximumSize(new java.awt.Dimension(100, 200));
         proc3Status.setMinimumSize(new java.awt.Dimension(100, 20));
         proc3Status.setPreferredSize(new java.awt.Dimension(100, 20));
+
+        proc3Täyttöaste.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        proc3Täyttöaste.setText("0");
+        proc3Täyttöaste.setMaximumSize(new java.awt.Dimension(100, 200));
+        proc3Täyttöaste.setMinimumSize(new java.awt.Dimension(100, 20));
+        proc3Täyttöaste.setPreferredSize(new java.awt.Dimension(100, 20));
 
         startProc3.setText("Start");
         startProc3.addActionListener(new java.awt.event.ActionListener() {
@@ -720,6 +742,9 @@ public class MainWindow extends javax.swing.JFrame {
             procPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(procPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                 .addComponent(proc1Status, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(proc1Täyttöaste, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(proc2Täyttöaste, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(proc3Täyttöaste, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(proc1Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(startProc1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(proc2Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -745,6 +770,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(proc1Status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(proc1Täyttöaste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reserveProc1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(startProc1)
@@ -755,6 +782,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(proc2Status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(proc2Täyttöaste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reserveProc2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(startProc2)
@@ -764,6 +793,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(proc3User, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(proc3Status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(proc3Täyttöaste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reserveProc3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1791,12 +1822,15 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel proc1Label;
     private javax.swing.JLabel proc1Status;
     private javax.swing.JLabel proc1User;
+    private javax.swing.JLabel proc1Täyttöaste;
     private javax.swing.JLabel proc2Label;
     private javax.swing.JLabel proc2Status;
     private javax.swing.JLabel proc2User;
+    private javax.swing.JLabel proc2Täyttöaste;
     private javax.swing.JLabel proc3Label;
     private javax.swing.JLabel proc3Status;
     private javax.swing.JLabel proc3User;
+    private javax.swing.JLabel proc3Täyttöaste;
     private javax.swing.JTextField procLoadAmount1;
     private javax.swing.JTextField procLoadAmount2;
     private javax.swing.JLabel procLoadConvStatus2;
