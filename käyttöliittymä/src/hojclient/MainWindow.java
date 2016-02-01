@@ -1581,6 +1581,27 @@ public class MainWindow extends javax.swing.JFrame {
 
     public void päivitäTiedot() {
 
+        // 1. keittimen täyttöasteen päivitys
+        try {
+            proc1Täyttöaste.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Juomakeittimet", "Juomakeitin1")));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        // 2. keittimen täyttöasteen päivitys
+        try {
+            proc2Täyttöaste.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Juomakeittimet", "Juomakeitin2")));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        // 3. keittimen täyttöasteen päivitys
+        try {
+            proc3Täyttöaste.setText(Integer.toString(linjasto.haeKomponentinTäyttöaste("Juomakeittimet", "Juomakeitin3")));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
         // Tulon tilan päivitys
         try {
             if (linjasto.onkoKomponenttiKäynnissä("Tulo", "TäytönRuuvikuljetin")) {
