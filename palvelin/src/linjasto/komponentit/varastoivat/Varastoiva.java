@@ -12,6 +12,8 @@ import java.util.UUID;
  * Varastoiviin komponentteihin jää vastaanoton jälkeen raaka-ainetta, joten niille
  * on toteutettava siirrä-metodi, jonka avulla säiliöstä saa sirrettyä sen sisältöä
  * pois.
+ *
+ * Komponentit, jotka varastoivat tavaraa, perivät tämän luokan.
  */
 public abstract class Varastoiva extends Komponentti {
     private int maksimiKoko;   // kiloa
@@ -49,23 +51,27 @@ public abstract class Varastoiva extends Komponentti {
         return käyttäjä;
     }
 
-
+    // Palauttaa komponentin täyttöasteen
     public int haeTäyttöaste() {
         return täyttöAste;
     }
 
+    // Asettaa komponentin täyttöasteen
     public void asetaTäyttöaste(int täyttöAste) {
         this.täyttöAste = täyttöAste;
     }
 
+    // Palauttaa komponentin maksimikoon
     public int haeMaksimiKoko() {
         return maksimiKoko;
     }
 
+    // Asettaa komponentin maksimikoon
     public void asetaMaksimiKoko(int maksimiKoko) {
         this.maksimiKoko = maksimiKoko;
     }
 
+    // Käynnistää komponentin tietyn käyttäjän käskystä
     public void käynnistä(UUID käyttäjäId) {}
 
     /**

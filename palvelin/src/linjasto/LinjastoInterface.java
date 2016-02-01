@@ -5,8 +5,6 @@ import java.rmi.RemoteException;
 import java.util.UUID;
 
 public interface LinjastoInterface extends Remote {
-    void testiMetodi() throws RemoteException;
-
 
     // Käyttäjän hallinta
 
@@ -37,7 +35,7 @@ public interface LinjastoInterface extends Remote {
     boolean onkoKomponenttiVarattu(String osionTunnus, String komponentinTunnus) throws RemoteException;
     int haeKomponentinTäyttöaste(String osionTunnus, String komponentinTunnus) throws RemoteException;
 
-    //---- Juomakeitin spesifi
+    //--- Juomakeitin spesifi
 
     String kukaOnVarannutKomponentin(String osionTunnus, String komponentinTunnus) throws RemoteException;
 }

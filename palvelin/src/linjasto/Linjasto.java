@@ -34,10 +34,6 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
         rakennaLinjasto();
     }
 
-    public void testiMetodi() throws RemoteException {
-        System.out.println("Pöö");
-    }
-
     /**
      * TODO Sopimus joka sanoo että osiolla on oltava seuraava osio, ja että osion on löydyttävä osiot listasta
      */
