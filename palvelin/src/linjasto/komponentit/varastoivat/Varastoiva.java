@@ -33,6 +33,10 @@ public abstract class Varastoiva extends Komponentti {
         maksimiKoko = m;
     }
 
+    public RaakaAine haeRaakaAine() {
+        return raakaAine;
+    }
+
     public boolean haeVarattu() {
         return varattu;
     }
@@ -77,13 +81,19 @@ public abstract class Varastoiva extends Komponentti {
      *
      * @.postPrivate täyttöAste = täyttöAste + määrä
      */
-    public synchronized int vastaanota(int määrä) {
+    public synchronized int vastaanota(int määrä, RaakaAine raakaAine) {
+        if (this.raakaAine == null) {
+            this.raakaAine = raakaAine;
+        }
         täyttöAste = täyttöAste + määrä;
         return määrä;
     }
 
-    public synchronized int siirrä(int määrä) {
+    public synchronized int siirrä(int määrä, RaakaAine raakaAine) {
         täyttöAste = täyttöAste - määrä;
+        if (täyttöAste == 0) {
+            this.raakaAine = null;
+        }
         return määrä;
     }
 
@@ -155,14 +165,22 @@ public abstract class Varastoiva extends Komponentti {
         return maksimiKoko - täyttöAste;
     }
 
-    public boolean onkoVapaa(String komponentinTunnus, UUID käyttäjäId) {
+    public boolean onkoVapaa(String komponentinTunnus, UUID käyttäjäId, RaakaAine raakaAine) {
         boolean onVapaaKysyjälle = false;
         if ((täytetään || tyhjennetään) && komponentinTunnus.equals(this.komponentinTunnus)) {
             onVapaaKysyjälle = true;
         } else if (!täytetään && !tyhjennetään) {
             onVapaaKysyjälle = true;
         }
-        return varattu && käyttäjäId.equals(käyttäjä) && onVapaaKysyjälle;
+
+        boolean onVapaaRaakaAineelle = false;
+        if (this.raakaAine != null && raakaAine.haeNimi().equals(this.raakaAine.haeNimi())) {
+            onVapaaRaakaAineelle = true;
+        } else if (this.raakaAine == null) {
+            onVapaaRaakaAineelle = true;
+        }
+
+        return varattu && käyttäjäId.equals(käyttäjä) && onVapaaKysyjälle && onVapaaRaakaAineelle;
     }
 
     public synchronized void varaaTäyttö(String komponentinTunnus) {

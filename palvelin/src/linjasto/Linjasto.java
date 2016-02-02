@@ -1,5 +1,6 @@
 package linjasto;
 
+import apumäärittelyt.RaakaAine;
 import linjasto.komponentit.Komponentti;
 import linjasto.komponentit.siirtävät.Siirtävä;
 import linjasto.komponentit.siirtävät.pumppu.Pumppu;
@@ -120,20 +121,35 @@ public class Linjasto extends UnicastRemoteObject implements LinjastoInterface {
     }
 
     public void käynnistäSiirtäväKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) {
-        Osio osio = haeOsio(osionTunnus);
-        linjasto.osiot.Varastoiva edellinenOsio = (linjasto.osiot.Varastoiva) haeEdellinenOsio(osio);
-        käynnistäSiirtäväKomponentti(osionTunnus, komponentinTunnus, käyttäjäId, edellinenOsio.haeSiirettäväMäärä(komponentinTunnus, käyttäjäId));
+        try {
+            RaakaAine raakaAine = new RaakaAine();
+            Osio osio = haeOsio(osionTunnus);
+            linjasto.osiot.Varastoiva edellinenOsio = (linjasto.osiot.Varastoiva) haeEdellinenOsio(osio);
+            käynnistäSiirtäväKomponentti(osionTunnus,
+                                        komponentinTunnus,
+                                        käyttäjäId, edellinenOsio.haeSiirettäväMäärä(komponentinTunnus,
+                                        käyttäjäId,
+                                        raakaAine));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
     public void käynnistäSiirtäväKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId, int määrä) {
-        Osio osio = haeOsio(osionTunnus);
-        Komponentti komponentti = osio.haeKomponentti(komponentinTunnus);
-        Siirtävä komp = (Siirtävä) komponentti;
-        if (onSeuraavaOsio(osio) && onEdellinenOsio(osio)) {
-            komp.käynnistä(haeEdellinenOsio(osio), haeSeuraavaOsio(osio), käyttäjäId, määrä);
-        } else if (onSeuraavaOsio(osio)) {
-            komp.käynnistä(null, haeSeuraavaOsio(osio), käyttäjäId, määrä);
-        } else if (onEdellinenOsio(osio)) {
-            komp.käynnistä(haeEdellinenOsio(osio), null, käyttäjäId, määrä);
+        try {
+            RaakaAine raakaAine = new RaakaAine();
+            Osio osio = haeOsio(osionTunnus);
+            Komponentti komponentti = osio.haeKomponentti(komponentinTunnus);
+            Siirtävä komp = (Siirtävä) komponentti;
+            if (onSeuraavaOsio(osio) && onEdellinenOsio(osio)) {
+                komp.käynnistä(haeEdellinenOsio(osio), haeSeuraavaOsio(osio), käyttäjäId, määrä, raakaAine);
+            } else if (onSeuraavaOsio(osio)) {
+                komp.käynnistä(null, haeSeuraavaOsio(osio), käyttäjäId, määrä, raakaAine);
+            } else if (onEdellinenOsio(osio)) {
+                komp.käynnistä(haeEdellinenOsio(osio), null, käyttäjäId, määrä, raakaAine);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

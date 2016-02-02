@@ -19,6 +19,7 @@ public abstract class Siirtävä extends Komponentti {
     protected Osio seuraavaOsio;
     protected UUID käyttäjä;
     protected int erä;
+    protected RaakaAine raakaAine;
 
     public Siirtävä(String tunnus, int v) {
         super(tunnus);
@@ -26,11 +27,12 @@ public abstract class Siirtävä extends Komponentti {
     }
 
     // Siirron toteutus
-    public void käynnistä(Osio edellinenOsio, Osio seuraavaOsio, UUID käyttäjäId, int määrä) {
+    public void käynnistä(Osio edellinenOsio, Osio seuraavaOsio, UUID käyttäjäId, int määrä, RaakaAine raakaAine) {
         this.edellinenOsio = edellinenOsio;
         this.seuraavaOsio = seuraavaOsio;
         this.käyttäjä = käyttäjäId;
         this.erä = määrä;
+        this.raakaAine = raakaAine;
         super.käynnistä();
     }
 
@@ -57,7 +59,7 @@ public abstract class Siirtävä extends Komponentti {
                 } else {
                     määrä = erä;
                 }
-                int siirrettyMäärä = osio.vastaanota(määrä, erä, käyttäjä, super.haeTunnus());
+                int siirrettyMäärä = osio.vastaanota(määrä, erä, käyttäjä, super.haeTunnus(), this.raakaAine);
 
                 erä = erä - siirrettyMäärä;
 
@@ -83,7 +85,7 @@ public abstract class Siirtävä extends Komponentti {
                     määrä = erä;
                 }
 
-                int haettuMäärä = edellinenOsio.siirrä(määrä, erä, käyttäjä, super.haeTunnus());
+                int haettuMäärä = edellinenOsio.siirrä(määrä, erä, käyttäjä, super.haeTunnus(), this.raakaAine);
 
                 erä = erä - haettuMäärä;
 
@@ -110,10 +112,10 @@ public abstract class Siirtävä extends Komponentti {
                     määrä = erä;
                 }
 
-                int haettuMäärä = edellinenOsio.siirrä(määrä, erä, käyttäjä, super.haeTunnus());
+                int haettuMäärä = edellinenOsio.siirrä(määrä, erä, käyttäjä, super.haeTunnus(), this.raakaAine);
                 int siirrettyMäärä = 0;
                 while (haettuMäärä != siirrettyMäärä) {
-                    siirrettyMäärä += seuraavaOsio.vastaanota(haettuMäärä, erä, käyttäjä, super.haeTunnus());
+                    siirrettyMäärä += seuraavaOsio.vastaanota(haettuMäärä, erä, käyttäjä, super.haeTunnus(), this.raakaAine);
                 }
 
                 erä = erä - siirrettyMäärä;

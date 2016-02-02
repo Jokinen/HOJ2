@@ -1,5 +1,6 @@
 package linjasto.komponentit.varastoivat.juomakeitin;
 
+import apumäärittelyt.RaakaAine;
 import linjasto.komponentit.varastoivat.Varastoiva;
 
 /**
@@ -16,6 +17,7 @@ public class Juomakeitin extends Varastoiva {
     private int vettä = 10000;
     private boolean keitetty = false;
     private int juomaa = 0;
+    private String juomanNimi;
 
     public Juomakeitin(String tunnus) {
         super(tunnus, 2000);
@@ -23,7 +25,7 @@ public class Juomakeitin extends Varastoiva {
 
     @Override
     public void run() {
-        if (!keitetty) {
+        if (!keitetty && super.haeTäyttöaste() > 0 && super.haeVarattu()) {
             // Imitoidaan, että kuljetus kestää 20 sekuntia
             try {
                 Thread.sleep(2000);
@@ -33,23 +35,46 @@ public class Juomakeitin extends Varastoiva {
 
             // Juoma on valmis!
             this.juomaa = super.haeTäyttöaste() + vettä;
+            juomanNimi = super.haeRaakaAine().haeJuomanNimi();
 
             keitetty = true;
 
+        } else if (keitetty) {
+            System.err.println("Juomakeitin '" + super.haeTunnus() + "' yritettiin käynnistää, vaikka se sisältää jo prosessoitua juomaa.");
             sammuta();
-        } else {
-            System.out.println("Jo prosessoitua juomaa yritettiinprosessoida uudestaan");
+        } else if (super.haeTäyttöaste() <= 0) {
+            System.err.println("Juomakeitin '" + super.haeTunnus() + "' yritettiin käynnistää, vaikka sille ei ole siirretty lainkaan raaka-ainetta.");
+        } else if (!super.haeVarattu()) {
+            System.err.println("Juomakeitin '" + super.haeTunnus() + "' yritettiin käynnistää varaamattomana.");
         }
+        sammuta();
     }
 
     @Override
-    public int siirrä(int määrä) {
+    public int siirrä(int määrä, RaakaAine raakaAine) {
         int siirretty = 0;
         if (keitetty) {
             juomaa -= määrä;
             siirretty = määrä;
+
+            if (juomaa == 0) {
+                super.asetaTäyttöaste(0);
+                keitetty = false;
+                juomanNimi = "";
+            }
         } else {
-            System.out.println("Juomakeittimestä yritettiin siirtää juomaa, mutta juomaa ei ole vielä keitetty.");
+            System.err.println("Juomakeittimestä yritettiin siirtää juomaa, mutta juomaa ei ole vielä keitetty.");
+        }
+        return siirretty;
+    }
+
+    @Override
+    public int vastaanota(int määrä, RaakaAine raakaAine) {
+        int siirretty = 0;
+        if (!keitetty) {
+            siirretty += super.vastaanota(määrä, raakaAine);
+        } else {
+            System.err.println("Juomakeittimestä yritettiin siirtää raaka-ainetta, kun siellä oli jo juomaa.");
         }
         return siirretty;
     }
