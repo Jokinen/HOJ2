@@ -1,14 +1,10 @@
-package hojclient;
-
-import javax.swing.*;
-
 /**
  * Kutsuu JFramesta metodia, jota JFrame käyttää hakeakseen palvelimelta
  * tuoreet tiedot.
  */
-public class Päivittäjä implements Runnable {
-    private Thread säie;
-    private MainWindow ikkuna;
+class Päivittäjä implements Runnable {
+    private final Thread säie;
+    private final MainWindow ikkuna;
     private boolean käynnissä = false;
 
     public Päivittäjä(MainWindow m) {
@@ -33,7 +29,4 @@ public class Päivittäjä implements Runnable {
         }
     }
 
-    public void sulje() {
-        käynnissä = false;
-    }
 }

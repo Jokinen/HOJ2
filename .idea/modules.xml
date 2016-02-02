@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HOJ2.iml" filepath="$PROJECT_DIR$/HOJ2.iml" />
       <module fileurl="file://$PROJECT_DIR$/käyttöliittymä/käyttöliittymä.iml" filepath="$PROJECT_DIR$/käyttöliittymä/käyttöliittymä.iml" />
+      <module fileurl="file://$PROJECT_DIR$/linjasto/linjasto.iml" filepath="$PROJECT_DIR$/linjasto/linjasto.iml" />
       <module fileurl="file://$PROJECT_DIR$/palvelin/palvelin.iml" filepath="$PROJECT_DIR$/palvelin/palvelin.iml" />
     </modules>
   </component>
