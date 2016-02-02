@@ -1,6 +1,6 @@
-package linjasto.osiot;
+package osiot;
 
-import linjasto.komponentit.Komponentti;
+import komponentit.Komponentti;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -24,7 +24,7 @@ public abstract class Osio {
     private final String TUNNUS;
     protected final ArrayList<Komponentti> komponentit;
 
-    public Osio(String tunnus, ArrayList<Komponentti> k) {
+    Osio(String tunnus, ArrayList<Komponentti> k) {
         this.TUNNUS = tunnus;
         komponentit = k;
     }
@@ -54,13 +54,6 @@ public abstract class Osio {
                 palautettavaKomponentti = komponentti;
         }
         return palautettavaKomponentti;
-    }
-
-    public void valmis(String komponentinTunnus, UUID käyttäjäId) {
-        linjasto.komponentit.varastoivat.Varastoiva komponentti = (linjasto.komponentit.varastoivat.Varastoiva) haeKomponentti(komponentinTunnus);
-        if (komponentti.haeVarattu() && komponentti.haeKäyttäjä().equals(käyttäjäId)) {
-            komponentti.vapauta(käyttäjäId);
-        }
     }
 
 }

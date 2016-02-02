@@ -1,10 +1,7 @@
-package linjasto.komponentit.varastoivat;
+package komponentit.varastoivat;
 
-import apumäärittelyt.RaakaAine;
-import linjasto.komponentit.Komponentti;
-import linjasto.osiot.Osio;
-import linjasto.Linjasto;
-import omatVirheilmoitukset.LiianSuuriMääräException;
+import apuluokat.RaakaAine;
+import komponentit.Komponentti;
 
 import java.util.UUID;
 
@@ -59,19 +56,6 @@ public abstract class Varastoiva extends Komponentti {
         this.täyttöAste = täyttöAste;
     }
 
-    // Palauttaa komponentin maksimikoon
-    public int haeMaksimiKoko() {
-        return maksimiKoko;
-    }
-
-    // Asettaa komponentin maksimikoon
-    public void asetaMaksimiKoko(int maksimiKoko) {
-        this.maksimiKoko = maksimiKoko;
-    }
-
-    // Käynnistää komponentin tietyn käyttäjän käskystä
-    public void käynnistä(UUID käyttäjäId) {}
-
     /**
      * Lisää Varastoiva-komponenttin raaka-ainetta jonkin määrän.
      *
@@ -109,12 +93,6 @@ public abstract class Varastoiva extends Komponentti {
         return bol;
     }
 
-    public boolean varaa(UUID käyttäjäId, String komponentinTunnus) {
-        this.komponentinTunnus = komponentinTunnus;
-        return varaa(käyttäjäId);
-    }
-
-    @Override
     public boolean vapauta(UUID käyttäjäId) {
         boolean bol = true;
         if (varattu && käyttäjäId.equals(this.käyttäjä)) {
@@ -149,10 +127,6 @@ public abstract class Varastoiva extends Komponentti {
      */
     public boolean onTyhjä() {
         return täyttöAste == 0;
-    }
-
-    public boolean onTilaa(int määrä) {
-        return (täyttöAste + määrä) <= maksimiKoko;
     }
 
     /**

@@ -1,10 +1,8 @@
-package linjasto;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.UUID;
 
-public interface LinjastoInterface extends Remote {
+interface LinjastoInterface extends Remote {
 
     // Käyttäjän hallinta
 
@@ -29,7 +27,7 @@ public interface LinjastoInterface extends Remote {
 
     //-- Varastoiva spesifit
 
-    void käynnistäVarastoivaKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) throws RemoteException;
+    void käynnistäVarastoivaKomponentti(String osionTunnus, String komponentinTunnus) throws RemoteException;
     boolean varaaKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) throws RemoteException;
     boolean vapautaKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) throws RemoteException;
     boolean onkoKomponenttiVarattu(String osionTunnus, String komponentinTunnus) throws RemoteException;

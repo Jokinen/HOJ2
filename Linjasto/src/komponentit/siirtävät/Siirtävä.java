@@ -1,25 +1,23 @@
-package linjasto.komponentit.siirtävät;
+package komponentit.siirtävät;
 
-import apumäärittelyt.RaakaAine;
-import linjasto.komponentit.Komponentti;
-import linjasto.osiot.Osio;
-import linjasto.osiot.Varastoiva;
-import omatVirheilmoitukset.LiianSuuriMääräException;
+import apuluokat.RaakaAine;
+import komponentit.Komponentti;
+import osiot.Osio;
+import osiot.Varastoiva;
 
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Komponentit, jotka siirtävät tavaraa, perivät tämän luokan.
  */
 
 public abstract class Siirtävä extends Komponentti {
-    protected final int VIRTAAMA;
-    protected Osio edellinenOsio;
-    protected Osio seuraavaOsio;
-    protected UUID käyttäjä;
-    protected int erä;
-    protected RaakaAine raakaAine;
+    private final int VIRTAAMA;
+    private Osio edellinenOsio;
+    private Osio seuraavaOsio;
+    private UUID käyttäjä;
+    private int erä;
+    private RaakaAine raakaAine;
 
     public Siirtävä(String tunnus, int v) {
         super(tunnus);
@@ -36,11 +34,6 @@ public abstract class Siirtävä extends Komponentti {
         super.käynnistä();
     }
 
-    // Palauttaa komponentin virtauman
-    public int haeVirtaama() {
-        return VIRTAAMA;
-    }
-
     @Override
     public synchronized void run() {
         if (edellinenOsio == null && seuraavaOsio != null) {
@@ -53,7 +46,7 @@ public abstract class Siirtävä extends Komponentti {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                int määrä = 0;
+                int määrä;
                 if (erä >= VIRTAAMA) {
                     määrä = VIRTAAMA;
                 } else {
@@ -78,7 +71,7 @@ public abstract class Siirtävä extends Komponentti {
                     e.printStackTrace();
                 }
 
-                int määrä = 0;
+                int määrä;
                 if (erä >= VIRTAAMA) {
                     määrä = VIRTAAMA;
                 } else {
@@ -105,7 +98,7 @@ public abstract class Siirtävä extends Komponentti {
                     e.printStackTrace();
                 }
 
-                int määrä = 0;
+                int määrä;
                 if (erä >= VIRTAAMA) {
                     määrä = VIRTAAMA;
                 } else {
