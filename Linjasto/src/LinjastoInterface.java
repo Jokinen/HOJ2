@@ -24,7 +24,6 @@ interface LinjastoInterface extends Remote {
     void käynnistäSiirtäväKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId) throws RemoteException;
     void käynnistäSiirtäväKomponentti(String osionTunnus, String komponentinTunnus, UUID käyttäjäId, int määrä) throws RemoteException;
 
-
     //-- Varastoiva spesifit
 
     void käynnistäVarastoivaKomponentti(String osionTunnus, String komponentinTunnus) throws RemoteException;
